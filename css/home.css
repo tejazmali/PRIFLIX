@@ -4,6 +4,10 @@ body {
   color: #fff;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures body takes up full viewport height */
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 header {
@@ -12,9 +16,10 @@ header {
   padding: 15px;
   text-align: left;
   border-bottom: #f53030 solid;
-  img {
-    width: 100px !important;
-  }
+}
+
+header img {
+  width: 100px !important;
 }
 
 h1 {
@@ -29,6 +34,8 @@ h1 {
   gap: 15px;
   justify-content: flex-start; /* Align thumbnails to the left */
   padding: 20px;
+  box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+  flex: 1; /* Allows the grid to stretch and push footer down */
 }
 
 .thumbnail {
@@ -38,8 +45,6 @@ h1 {
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
   object-fit: cover;
-
-  
 }
 
 .thumbnail:hover {
@@ -52,14 +57,13 @@ footer {
   border-top: #f53030 solid;
   color: #fff;
   text-align: center;
-  padding: 10px;
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  a {
-    color: #f53030;
-    text-decoration: none;
-  }
+
+  width: 100%; /* Ensure footer spans full width */
+}
+
+footer a {
+  color: #f53030;
+  text-decoration: none;
 }
 
 /* Media Queries for Responsive Design */
@@ -87,7 +91,5 @@ footer {
     width: 150px;
     height: auto;
     margin-left: 10px;
-   
-  
   }
 }
