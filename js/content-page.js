@@ -10,6 +10,9 @@ const FOLDER_ID = getMetaTagContent("folder-id");
 
 console.log(API_KEY, FOLDER_ID); // You can check if they are loaded correctly
 
+let episodes = []; // To store fetched episodes
+let currentEpisodeIndex = 0; // To track the currently playing episode
+
 // Function to fetch and sort files from Google Drive folder
 async function fetchEpisodes() {
   const response = await fetch(
@@ -17,14 +20,14 @@ async function fetchEpisodes() {
   );
   const data = await response.json();
 
-  // Sort files numerically based on their names in descending order (reverse)
+  // Sort files numerically based on their names in descending order
   const sortedFiles = data.files.sort((a, b) => {
     const numA = parseInt(a.name.match(/\d+/)) || 0; // Extract number from name or default to 0
     const numB = parseInt(b.name.match(/\d+/)) || 0;
     return numB - numA; // Descending order
   });
 
-  // Map sorted files to simplified episode names, reversed order
+  // Map sorted files to simplified episode names
   return sortedFiles.map((file, index) => ({
     title: `Episode ${sortedFiles.length - index}`, // Assign "Episode 1" to the last file, etc.
     link: `https://drive.google.com/file/d/${file.id}/preview`,
@@ -33,10 +36,10 @@ async function fetchEpisodes() {
 
 // Function to generate the episode list
 async function generateEpisodeList() {
-  const episodes = await fetchEpisodes();
+  episodes = await fetchEpisodes(); // Fetch and store episodes
   const episodeListContainer = document.getElementById("episode-list");
 
-  // Reverse the order of episodes
+  // Reverse the order of episodes for display
   const reversedEpisodes = episodes.reverse();
 
   reversedEpisodes.forEach((episode) => {
@@ -88,9 +91,24 @@ function playEpisode(title, url, episodeElement) {
   const playedEpisodeName = document.getElementById("played-episode-name");
   playedEpisodeName.innerHTML = `<span>${title}</span>`;
 
+  // Update the current episode index
+  currentEpisodeIndex = episodes.findIndex((ep) => ep.title === title);
+
   // Scroll to the video player
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
+// Handle the "Next" button functionality
+document.querySelector(".next-btn").addEventListener("click", () => {
+  if (currentEpisodeIndex + 1 < episodes.length) {
+    const nextEpisode = episodes[currentEpisodeIndex + 1];
+    const episodeElements = document.querySelectorAll(".episode");
+    const nextEpisodeElement = episodeElements[currentEpisodeIndex + 1];
+    playEpisode(nextEpisode.title, nextEpisode.link, nextEpisodeElement);
+  } else {
+    alert("No more episodes to play!");
+  }
+});
 
 // Call the function to generate the episodes
 generateEpisodeList();
