@@ -2,24 +2,24 @@
 <html lang="en">
 
 <head>
-  <meta name="google-site-verification" content="J51TCtyYzza0m-GDzCJUnKRyn61OtV7l_uNQJaGDx-k" />
-  <meta charset="UTF-8" />
+  <!-- SEO and Verification -->
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="J51TCtyYzza0m-GDzCJUnKRyn61OtV7l_uNQJaGDx-k">
   <title>Priflix</title>
-  <meta name="description"
-    content="Priflix is a private Netflix-like website designed by Tejas Mali, offering a personalized streaming experience with a variety of content.">
+  <meta name="description" content="Priflix is a private Netflix-like website designed by Tejas Mali, offering a personalized streaming experience with a variety of content.">
   <meta name="author" content="Tejas Mali">
   <meta name="keywords" content="private Netflix, streaming, movies, episodes, Priflix, Tejas Mali">
   <meta name="robots" content="index, follow">
+
+  <!-- Favicon and Stylesheets -->
+  <link rel="shortcut icon" href="logo.jpg" type="image/x-icon">
   <link rel="stylesheet" href="/css/home.css">
   <link rel="stylesheet" href="/css/loader.css">
-  <link rel="shortcut icon" href="logo.jpg" type="image/x-icon">
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#000000">
 
-</head>
-
-<body>
+  <!-- Disable Tap Highlight and Outline -->
   <style>
     * {
       -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
@@ -27,32 +27,42 @@
       outline: none !important;
     }
   </style>
+</head>
+
+<body>
+  <!-- Loader Overlay -->
   <div class="loader-overlay">
     <div class="loader"></div>
   </div>
+
+  <!-- Header -->
   <header>
-    <img class="logo" onclick="window.location.href='/'" src="/Logo.png"></img>
+    <img class="logo" src="/Logo.png" alt="Priflix Logo" onclick="window.location.href='/'">
   </header>
 
-  <div class="movie-grid">
-    <img src="/tumbnail/deathnote.png" alt="Death Note" class="thumbnail"
-      onclick="window.location.href='/Content/Anime/deathnote.html'" />
-    <img src="/tumbnail/Shinchan_2004_film_poster.jpg" alt="Shinchan" class="thumbnail"
-      onclick="window.location.href='/Content/cartoon Movie/shinchan.html'" />
-    <img src="/tumbnail/Squid Game S2.jpg" alt="Squid Game S2" class="thumbnail"
-      onclick="window.location.href='/Content/series/Squid Game S2.html'" />
-  </div>
+  <!-- Movie Grid -->
+  <main id="content" style="display: none;">
+    <div class="movie-grid">
+      <img src="/tumbnail/deathnote.png" alt="Death Note" class="thumbnail" onclick="window.location.href='/Content/Anime/deathnote.html'">
+      <img src="/tumbnail/Shinchan_2004_film_poster.jpg" alt="Shinchan" class="thumbnail" onclick="window.location.href='/Content/cartoon Movie/shinchan.html'">
+      <img src="/tumbnail/Squid Game S2.jpg" alt="Squid Game S2" class="thumbnail" onclick="window.location.href='/Content/series/Squid Game S2.html'">
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>Designed by <a href="https://tejasmali.vercel.app" target="_blank" rel="noopener noreferrer">Tejas Mali</a></p>
+  </footer>
+
+  <!-- Scripts -->
   <script>
+    // Loader and Content Display
     window.addEventListener("load", () => {
       document.body.classList.add("loaded");
       document.getElementById("content").style.display = "block";
     });
-  </script>
 
-  <footer>
-    <p>Designed by <a href="https://tejasmali.vercel.app"> Tejas Mali </a></p>
-  </footer>
-  <script>
+    // Register Service Worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/service-worker.js')
