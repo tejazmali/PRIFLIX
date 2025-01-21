@@ -1,0 +1,79 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    background-color: #121212;
+    color: #f53030;
+    padding: 15px;
+    text-align: left;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 32px; /* Increased font size */
+    cursor: pointer;
+  }
+
+  .movie-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start; /* Align thumbnails to the left */
+    padding: 20px;
+  }
+
+  .thumbnail {
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    object-fit: cover;
+  }
+
+  .thumbnail:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  footer {
+    background-color: #121212;
+    color: #e0e0e0;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
+
+  /* Media Queries for Responsive Design */
+  @media screen and (max-width: 768px) {
+    .movie-grid {
+      justify-content: flex-start; /* Ensure thumbnails align to left */
+    }
+
+    .thumbnail {
+      width: 150px;
+      height: 225px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    header {
+      padding: 10px;
+    }
+
+    h1 {
+      font-size: 24px; /* Slightly reduced header size for small screens */
+    }
+
+    .thumbnail {
+      width: 120px;
+      height: 180px;
+    }
+  }
