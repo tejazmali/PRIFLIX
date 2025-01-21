@@ -40,6 +40,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   width: 100%;
+
   overflow-x: hidden; /* Prevent horizontal scroll within player container */
 }
 
@@ -49,6 +50,7 @@ h1 {
   height: 360px;
   background-color: black;
   position: relative;
+
   overflow: hidden; /* Prevent overflow */
 }
 
@@ -69,13 +71,12 @@ h1 {
   background-color: #2c2c2c;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s; /* Added transition for smooth effect */
+  transition: background-color 0.3s;
   gap: 12px;
 }
 
 .episode:hover {
   background-color: #4b4b4b;
-  animation: move-up 0.3s ease-in-out; /* Apply move-up animation on hover */
 }
 
 .episode i {
@@ -98,13 +99,14 @@ h1 {
   margin-left: 10px;
   margin-bottom: -1px;
   font-size: 1.3em;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #fff;
+  font-family:saira 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color:#fff;
 }
 
 /* Footer */
 footer {
   background-color: #000000;
+
   color: #fff;
   text-align: center;
   margin-top: 200px;
@@ -112,17 +114,29 @@ footer {
   width: 100%;
   bottom: 0;
   border-top: #f53030 solid;
-
+  a {
+    color: #f53030;
+    margin-right: 20px;
+    text-decoration: none;
+  }
 }
+@media screen and (max-width: 480px) {
+  header {
+    padding: 10px;
+  }
 
-footer a {
-  color: #f53030;
-  margin-right: 20px;
-  text-decoration: none;
+  h1 {
+    font-size: 24px; /* Slightly reduced header size for small screens */
+  }
 }
-
 /* Responsive Design */
-@media (max-width: 1200px) {
+@media (min-width: 1200px) {
+  .player {
+    height: 480px;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
   .player {
     height: 420px;
   }
@@ -161,68 +175,37 @@ footer a {
   .content-name {
     font-size: 1.3em; /* Adjusted content name size */
   }
-  
-  h1 {
-    font-size: 24px; /* Slightly reduced header size for small screens */
-  }
+}
+.back-btn-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
 
-  .back-btn-container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-  }
+.back-btn {
+  display: inline-flex;
+  align-items: center;
 
-  .back-btn {
-    background-color: transparent;
-    color: #f53030;
-    border: none;
-    padding: 10px 15px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    gap: 8px;
-  }
+  background-color: transparent;
+  color: #f53030;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
 
-  .back-btn:hover {
-    transform: scale(1.05);
-  }
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  gap: 8px;
+}
 
-  /* Episode name below the player */
-  .played-episode-name {
-    margin-top: 7px;
-    margin-left: 10px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: #fff;
-    border-radius: 5px;
-    font-size: 15px;
-    font-weight: 300;
-    text-align: left; /* Center the episode name */
-    max-width: 80%; /* Optional: You can adjust the width */
-    margin-right: auto;
-  }
+.back-btn i {
+  font-size: 16px;
+}
 
-  .next-btn {
-    background-color: #f53030;
-    color: #fff;
-    border: none;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 20px;
-    margin-left: auto;
-    transition: background-color 0.3s, transform 0.2s;
-    margin-top: 18px;
-  }
-
-  .next-btn:hover {
-    background-color: #f53030;
-    transform: scale(1.05);
-  }
+.back-btn:hover {
+  transform: scale(1.05);
 }
 
 /* Add hover move animation to the episode */
@@ -236,4 +219,55 @@ footer a {
   100% {
     transform: translateY(0);
   }
+}
+
+.episode {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background-color: #2c2c2c;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* Added transition for smooth effect */
+  gap: 12px;
+}
+
+.episode:hover {
+  background-color: #4b4b4b;
+  animation: move-up 0.3s ease-in-out; /* Apply move-up animation on hover */
+}
+/* Episode name below the player */
+.played-episode-name {
+  margin-top: 7px;
+  margin-left: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 300;
+  text-align: left; /* Center the episode name */
+  max-width: 80%; /* Optional: You can adjust the width */
+
+  margin-right: auto;
+}
+.next-btn {
+  background-color: #f53030;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 20px;
+  margin-left: auto;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 18px;
+
+  text-align: left; /* Center the episode name */
+}
+
+.next-btn:hover {
+  background-color:#f53030;
+  transform: scale(1.05);
 }
