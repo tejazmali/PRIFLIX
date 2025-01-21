@@ -59,6 +59,12 @@ footer {
   text-align: center;
 
   width: 100%; /* Ensure footer spans full width */
+  p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px; /* Increased font size for smaller screens */
+    line-height: 1.5;
+  }
 }
 
 footer a {

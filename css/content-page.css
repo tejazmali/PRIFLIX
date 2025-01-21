@@ -119,6 +119,12 @@ footer {
     margin-right: 20px;
     text-decoration: none;
   }
+  p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px; /* Increased font size for smaller screens */
+    line-height: 1.5;
+  }
 }
 @media screen and (max-width: 480px) {
   header {
