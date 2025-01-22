@@ -18,13 +18,12 @@ header {
   padding: 15px;
   text-align: left;
   border-bottom: #f53030 solid;
-
-  img {
-    width: 100px !important;
-  }
 }
 
-/* Scrollbar thumb on hover */
+header img {
+  width: 100px !important;
+}
+
 body::-webkit-scrollbar-thumb:hover {
   background-color: #e5533e;
 }
@@ -32,7 +31,6 @@ body::-webkit-scrollbar-thumb:hover {
 h1 {
   margin: 0;
   font-size: 32px;
-  /* Increased font size */
   cursor: pointer;
 }
 
@@ -43,9 +41,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   width: 100%;
-
   overflow-x: hidden;
-  /* Prevent horizontal scroll within player container */
 }
 
 .player {
@@ -54,9 +50,7 @@ h1 {
   height: 360px;
   background-color: black;
   position: relative;
-
   overflow: hidden;
-  /* Prevent overflow */
 }
 
 /* Episode List */
@@ -67,7 +61,6 @@ h1 {
   gap: 12px;
   width: 98%;
   overflow-x: hidden;
-  /* Prevent horizontal scroll in the episode list */
 }
 
 .episode {
@@ -87,13 +80,11 @@ h1 {
 
 .episode i {
   font-size: 1.5em;
-  /* Icon size */
   color: #f53030;
 }
 
 .episode .episode-title {
   flex-grow: 1;
-  /* Allow title to take available space */
   font-size: 1.2em;
   color: #fff;
 }
@@ -107,35 +98,32 @@ h1 {
   margin-left: 10px;
   margin-bottom: -1px;
   font-size: 1.3em;
-  font-family: saira 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: saira, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #fff;
 }
 
 /* Footer */
 footer {
   background-color: #000000;
-
   color: #fff;
   text-align: center;
-
-  position: fixed;
+  padding: 8px;
+  margin-top: auto; /* Ensures footer stays at the bottom */
   width: 100%;
-  bottom: 0;
   border-top: #f53030 solid;
+}
 
-  a {
-    color: #f53030;
-    margin-right: 20px;
-    text-decoration: none;
-  }
+footer a {
+  color: #f53030;
+  margin-right: 20px;
+  text-decoration: none;
+}
 
-  p {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    /* Increased font size for smaller screens */
-    line-height: 1.5;
-  }
+footer p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 @media screen and (max-width: 480px) {
@@ -145,11 +133,9 @@ footer {
 
   h1 {
     font-size: 24px;
-    /* Slightly reduced header size for small screens */
   }
 }
 
-/* Responsive Design */
 @media (min-width: 1200px) {
   .player {
     height: 480px;
@@ -178,14 +164,12 @@ footer {
 
   .episode i {
     font-size: 1.2em;
-    /* Reduced icon size on mobile */
   }
 
   footer {
     padding: 8px;
   }
 
-  /* Fullscreen button adjustments for mobile */
   .fullscreen-btn {
     bottom: 5px;
     right: 5px;
@@ -195,7 +179,6 @@ footer {
 
   .content-name {
     font-size: 1.3em;
-    /* Adjusted content name size */
   }
 }
 
@@ -210,14 +193,12 @@ footer {
 .back-btn {
   display: inline-flex;
   align-items: center;
-
   background-color: transparent;
   color: #f53030;
   border: none;
   padding: 10px 15px;
   font-size: 14px;
   font-weight: bold;
-
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
   gap: 8px;
@@ -231,17 +212,13 @@ footer {
   transform: scale(1.05);
 }
 
-/* Add hover move animation to the episode */
 @keyframes move-up {
   0% {
     transform: translateY(0);
   }
-
   50% {
     transform: translateY(-5px);
-    /* Moves the item up slightly */
   }
-
   100% {
     transform: translateY(0);
   }
@@ -255,17 +232,14 @@ footer {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
-  /* Added transition for smooth effect */
   gap: 12px;
 }
 
 .episode:hover {
   background-color: #4b4b4b;
   animation: move-up 0.3s ease-in-out;
-  /* Apply move-up animation on hover */
 }
 
-/* Episode name below the player */
 .played-episode-name {
   margin-top: 7px;
   margin-left: 10px;
@@ -275,10 +249,7 @@ footer {
   font-size: 15px;
   font-weight: 300;
   text-align: left;
-  /* Center the episode name */
   max-width: 80%;
-  /* Optional: You can adjust the width */
-
   margin-right: auto;
 }
 
@@ -295,9 +266,6 @@ footer {
   margin-left: auto;
   transition: background-color 0.3s, transform 0.2s;
   margin-top: 18px;
-
-  text-align: left;
-  /* Center the episode name */
 }
 
 .next-btn:hover {
