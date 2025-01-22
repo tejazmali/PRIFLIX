@@ -109,6 +109,7 @@ footer {
   text-align: center;
   padding: 8px;
   margin-top: auto; /* Ensures footer stays at the bottom */
+margin-top: 50px;
   width: 100%;
   border-top: #f53030 solid;
 }
