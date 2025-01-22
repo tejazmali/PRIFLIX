@@ -99,3 +99,71 @@ footer a {
     margin-left: 10px;
   }
 }
+
+
+
+
+
+
+
+
+.install-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  background-color:#f53030;
+  border: none;
+font-family:Verdana, Geneva, Tahoma, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.install-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.install-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.install-btn .install-icon {
+  animation: pulse 1.5s infinite;
+  fill: white;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.install-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.install-btn:hover::after {
+  opacity: 0.5;
+  transform: translate(-50%, -50%) scale(1.5);
+}
