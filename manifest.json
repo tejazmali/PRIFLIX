@@ -13,9 +13,9 @@
         "type": "image/png"
       },
       {
-        "src": "/Logo.png",
+        "src": "/Logo.jpg",
         "sizes": "512x512",
-        "type": "image/png"
+        "type": "image/jpg"
       }
     ]
   }
