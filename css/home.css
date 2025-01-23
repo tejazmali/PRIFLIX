@@ -164,7 +164,7 @@ footer a {
   position: absolute;
   top: -2px;
   left: -2px;
-  background-size: 600%;
+  background-size: 500%;
   z-index: -1;
   width: calc(100% + 4px);
   height: calc(100% + 4px);
