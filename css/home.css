@@ -152,8 +152,14 @@ footer a {
   content: "";
   background: linear-gradient(
     45deg,
-    #FF0000, #FF7300, #FFFB00, #48FF00,
-    #00FFD5, #002BFF, #FF00C8, #FF0000
+    #ff0000,
+    #600000,
+    #ff0000,
+    #600000,
+    #ff0000,
+    #600000,
+    #ff0000,
+    #600000
   );
   position: absolute;
   top: -2px;
