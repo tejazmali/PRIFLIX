@@ -4,7 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Shin-chan: Fierceness That Invites Storm! - Priflix</title>
+  <meta name="title" content="Shin-chan: Fierceness That Invites Storm!">
+
+  <title>{title} - Priflix</title>
   <link rel="stylesheet" href="/css/content-page.css" />
   <link rel="stylesheet" href="/css/loader.css">
   <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon">
@@ -24,10 +26,7 @@
   <div class="loader-overlay">
     <div class="loader"></div>
   </div>
-  <header>
-    <img class="logo" onclick="window.location.href='/'" src="/Logo.png"></img>
-
-  </header>
+     <div id="header"></div>
 
   <!-- Back to Home Button -->
   <div class="back-btn-container">
@@ -36,7 +35,7 @@
     </button>
   </div>
 
-  <h2 class="content-name">Shin-chan: Fierceness That Invites Storm!</h2>
+  <h2 class="content-name">{title}</h2>
   <div class="played-episode-name" id="played-episode-name"></div>
   <div class="player-container">
     <div class="player" id="video-player">
@@ -51,11 +50,9 @@
     <div class="episode-list" id="episode-list"></div>
   </div>
 
-  <footer>
-    <p>Designed by <a href="https://tejasmali.vercel.app"> Tejas Mali </a></p>
-  </footer>
+      <div id="footer"></div>
 
-  <script src="/js/content-page.js"></script>
+  <script src="/js/script.js"></script><script src="/js/content-page.js"></script>
   <script>
     window.addEventListener("load", () => {
       document.body.classList.add("loaded");

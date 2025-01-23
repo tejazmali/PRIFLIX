@@ -2,23 +2,21 @@
 <html lang="en">
 
 <head>
-
   <meta name="google-site-verification" content="J51TCtyYzza0m-GDzCJUnKRyn61OtV7l_uNQJaGDx-k" />
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Priflix</title>
   <meta name="description"
-    content="Priflix is a private Netflix-like website designed by Tejas Mali, offering a personalized streaming experience with a variety of content.">
-  <meta name="author" content="Tejas Mali">
-  <meta name="keywords" content="private Netflix, streaming, movies, episodes, Priflix, Tejas Mali">
-  <meta name="robots" content="index, follow">
-  <link rel="stylesheet" href="/css/home.css">
-  <link rel="stylesheet" href="/css/loader.css">
-  <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#000000">
+    content="Priflix is a private Netflix-like website designed by Tejas Mali, offering a personalized streaming experience with a variety of content." />
+  <meta name="author" content="Tejas Mali" />
+  <meta name="keywords" content="private Netflix, streaming, movies, episodes, Priflix, Tejas Mali" />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="/css/home.css" />
+  <link rel="stylesheet" href="/css/loader.css" />
+  <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#000000" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
 </head>
 
 <body>
@@ -32,50 +30,91 @@
   <div class="loader-overlay">
     <div class="loader"></div>
   </div>
-  <header>
-    <img class="logo" onclick="window.location.href='/'" src="/Logo.png"></img>
-     <button id="install-button" style="display: none;" class="install-btn">
-    <i class="fa-solid fa-download"></i>
- 
-  </button>
-  </header>
-  
+  <div id="header"></div>
 
-  <div class="movie-grid">
-    <img src="https://m.media-amazon.com/images/I/71t976RemQL._SY741_.jpg" alt="Death Note" class="thumbnail"
-      onclick="window.location.href='/Content/Anime/deathnote.html'" />
-    <img src="/tumbnail/Shinchan_2004_film_poster.jpg" alt="Shinchan" class="thumbnail"
-      onclick="window.location.href='/Content/cartoon Movie/shinchan.html'" />
-    <img src="/tumbnail/Squid Game S2.jpg" alt="Squid Game S2" class="thumbnail"
-      onclick="window.location.href='/Content/series/Squid Game S2.html'" />
-      <img src="https://m.media-amazon.com/images/M/MV5BMDBlYzU2OGMtOGJjNi00ZGZjLWIwNjMtYzdiZjkwYWNjZDljXkEyXkFqcGc@._V1_UX196_CR0,0,196,290_.jpg" alt="Ice Age (2002)" class="thumbnail"
-      onclick="window.location.href='/Content/cartoon Movie/iceage.html'" />
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPHPtkULHawc4SKnEfe8HXB7paRV-6qHlmDn5VW8jqS8CbgJGj" alt="Ice Age The Meltdown 2006" class="thumbnail"
-      onclick="window.location.href='/Content/cartoon Movie/Ice Age The Meltdown 2006.html'" />
-      <img src="https://image.tmdb.org/t/p/w185/20mOwAAPwZ1vLQkw0fvuQHiG7bO.jpg" alt="Alice in Borderland S1" class="thumbnail"
-      onclick="window.location.href='/Content/series/alice in borderland S1.html'" />
-      <img src="https://resizing.flixster.com/iw61bxJK82kASSZHOIcvExNv9U8=/206x305/v2/https://resizing.flixster.com/e3DSHvzpwuVbey4dzY0lXeRHuFg=/ems.cHJkLWVtcy1hc3NldHMvdHZzZWFzb24vNzA0MTlkNjctYjRhNC00ZTYxLWFiMzItZDkyZTA2YWI4MzFmLmpwZw==" alt="Alice in Borderland S2" class="thumbnail"
-      onclick="window.location.href='/Content/series/alice in borderland S2.html'" />
-  </div>
+  <!-- Movie Grid Placeholder -->
+  <div class="movie-grid" id="movie-grid"></div>
+
   <script>
+    // Define all content dynamically
+    const contentData = [
+      {
+        title: "Death Note",
+        image: "https://m.media-amazon.com/images/I/71t976RemQL._SY741_.jpg",
+        link: "/Content/Anime/deathnote.html",
+      },
+      {
+        title: "Shinchan",
+        image: "https://www.animenewsnetwork.com/images/encyc/A4384-10.jpg",
+        link: "/Content/cartoon Movie/shinchan.html",
+      },
+      {
+        title: "Squid Game S2",
+        image:
+          "https://static.wikia.nocookie.net/thesquidgame/images/7/7d/GdWDj4ZaoAEgw26.jpg/revision/latest/scale-to-width-down/1000?cb=20241214072040",
+        link: "/Content/series/Squid Game S2.html",
+      },
+      {
+        title: "Ice Age (2002)",
+        image:
+          "https://m.media-amazon.com/images/M/MV5BMDBlYzU2OGMtOGJjNi00ZGZjLWIwNjMtYzdiZjkwYWNjZDljXkEyXkFqcGc@._V1_UX196_CR0,0,196,290_.jpg",
+        link: "/Content/cartoon Movie/iceage.html",
+      },
+      {
+        title: "Ice Age: The Meltdown (2006)",
+        image:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPHPtkULHawc4SKnEfe8HXB7paRV-6qHlmDn5VW8jqS8CbgJGj",
+        link: "/Content/cartoon Movie/Ice Age The Meltdown 2006.html",
+      },
+      {
+        title: "Alice in Borderland S1",
+        image:
+          "https://image.tmdb.org/t/p/w185/20mOwAAPwZ1vLQkw0fvuQHiG7bO.jpg",
+        link: "/Content/series/alice in borderland S1.html",
+      },
+      {
+        title: "Alice in Borderland S2",
+        image:
+          "https://resizing.flixster.com/iw61bxJK82kASSZHOIcvExNv9U8=/206x305/v2/https://resizing.flixster.com/e3DSHvzpwuVbey4dzY0lXeRHuFg=/ems.cHJkLWVtcy1hc3NldHMvdHZzZWFzb24vNzA0MTlkNjctYjRhNC00ZTYxLWFiMzItZDkyZTA2YWI4MzFmLmpwZw==",
+        link: "/Content/series/alice in borderland S2.html",
+      },
+    ];
+
+    // Function to dynamically generate movie grid
+    function generateMovieGrid() {
+      const movieGrid = document.getElementById("movie-grid");
+      contentData.forEach((content) => {
+        const movieThumbnail = document.createElement("img");
+        movieThumbnail.src = content.image;
+        movieThumbnail.alt = content.title;
+        movieThumbnail.className = "thumbnail";
+        movieThumbnail.onclick = () => (window.location.href = content.link);
+
+        movieGrid.appendChild(movieThumbnail);
+      });
+    }
+
+    // Load the movie grid dynamically
     window.addEventListener("load", () => {
       document.body.classList.add("loaded");
-      document.getElementById("content").style.display = "block";
+      generateMovieGrid();
     });
   </script>
 
-  <footer>
-    <p>Designed by <a href="https://tejasmali.vercel.app"> Tejas Mali </a></p>
-  </footer>
+  <script src="/js/script.js"></script>
+
+  <div id="footer"></div>
   <script>
-    if ('serviceWorker' in navigator) {
+    if ("serviceWorker" in navigator) {
       navigator.serviceWorker
-        .register('/service-worker.js')
-        .then(() => console.log('Service Worker registered successfully.'))
-        .catch((error) => console.error('Service Worker registration failed:', error));
+        .register("/service-worker.js")
+        .then(() => console.log("Service Worker registered successfully."))
+        .catch((error) =>
+          console.error("Service Worker registration failed:", error)
+        );
     }
   </script>
-  <script src="/pwa-app request.js"></script>
+  <script src="js/pwa-app request.js"></script>
 </body>
 
 </html>

@@ -1,68 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="api-key" content="AIzaSyBf4Mr5frgj7ez_9YfiotsJkAXnkz-p558" />
-    <meta name="folder-id" content="1u-aXxKfynonGqoWlElE7x8MAiZjG-q1T" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-   
-    <title>Death Note - Priflix</title>
-    <link rel="stylesheet" href="/css/content-page.css" />
-    <link rel="stylesheet" href="/css/loader.css" />
-    <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
-    <!-- Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-  </head>
-  <body>
-    <style>
-      * {
-        -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
-        -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
-        outline: none !important;
-      }
-    </style>
-    <div class="loader-overlay">
-      <div class="loader"></div>
-    </div>
-    <header>
-      <img class="logo" onclick="window.location.href='/'"src="/Logo.png"></img>
 
-    </header>
+<head>
+  <meta charset="UTF-8" />
 
-    <!-- Back to Home Button -->
-    <div class="back-btn-container">
-      <button class="back-btn" onclick="goToHome()">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-    </div>
+  <meta name="api-key" content="AIzaSyBf4Mr5frgj7ez_9YfiotsJkAXnkz-p558" />
+  <meta name="folder-id" content="1u-aXxKfynonGqoWlElE7x8MAiZjG-q1T" />
+  <meta name="title" content="Death Note">
 
-    <h2 class="content-name">Death Note</h2>
-    <div class="played-episode-name" id="played-episode-name"></div>
-    <div class="player-container">
-      <div class="player" id="video-player"></div>
-      <div></div>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-      <button class="next-btn"><i class="fa-solid fa-arrow-right"></i></button>
+  <title>{title} - Priflix</title>
+  <link rel="stylesheet" href="/css/content-page.css" />
+  <link rel="stylesheet" href="/css/loader.css" />
+  <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
 
-      <div class="episode-list" id="episode-list"></div>
-    </div>
+<body>
+  <style>
+    * {
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+      -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
+      outline: none !important;
+    }
+  </style>
+  <div class="loader-overlay">
+    <div class="loader"></div>
+  </div>
+  <div id="header"></div>
 
-    <footer>
-      <p>Designed by <a href="https://tejasmali.vercel.app"> Tejas Mali </a></p>
-    </footer>
+  <!-- Back to Home Button -->
+  <div class="back-btn-container">
+    <button class="back-btn" onclick="goToHome()">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  </div>
 
-    <script src="/js/content-page.js"></script>
-    <script>
-      window.addEventListener("load", () => {
-        document.body.classList.add("loaded");
-        document.getElementById("content").style.display = "block";
-      });
-    </script>
-  </body>
+  <h2 class="content-name">{title}</h2>
+  <div class="played-episode-name" id="played-episode-name"></div>
+  <div class="player-container">
+    <div class="player" id="video-player"></div>
+    <div></div>
+
+    <button class="next-btn"><i class="fa-solid fa-arrow-right"></i></button>
+
+    <div class="episode-list" id="episode-list"></div>
+  </div>
+
+  <div id="footer"></div>
+
+  <script src="/js/script.js"></script>
+  <script src="/js/content-page.js"></script>
+
+  <script>
+    window.addEventListener("load", () => {
+      document.body.classList.add("loaded");
+      document.getElementById("content").style.display = "block";
+    });
+  </script>
+</body>
+
 </html>

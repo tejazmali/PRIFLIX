@@ -8,8 +8,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overflow-x: hidden;
-  /* Prevent horizontal scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 header {
@@ -42,6 +41,7 @@ h1 {
   align-items: center;
   width: 100%;
   overflow-x: hidden;
+  flex-grow: 1; /* Ensures the player container expands to fill available space */
 }
 
 .player {
@@ -110,7 +110,6 @@ footer {
   text-align: center;
   padding: 8px;
   margin-top: auto; /* Ensures footer stays at the bottom */
-
   width: 100%;
   border-top: #f53030 solid;
 }
@@ -128,6 +127,7 @@ footer p {
   line-height: 1.5;
 }
 
+/* Responsive Design */
 @media screen and (max-width: 480px) {
   header {
     padding: 10px;

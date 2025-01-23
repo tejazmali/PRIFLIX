@@ -3,10 +3,13 @@
 
 <head>
   <meta charset="UTF-8" />
+
   <meta name="api-key" content="AIzaSyBf4Mr5frgj7ez_9YfiotsJkAXnkz-p558">
   <meta name="folder-id" content="1sb-6eFryvMf9mh7tNko_ZzIPuc4q0hUI">
+  <meta name="title" content="Squid Game S2">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Squid Game S2 - Priflix</title>
+  <title>{title} - Priflix</title>
   <link rel="stylesheet" href="/css/content-page.css" />
   <link rel="stylesheet" href="/css/loader.css">
   <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon">
@@ -26,10 +29,7 @@
   <div class="loader-overlay">
     <div class="loader"></div>
   </div>
-  <header>
-    <img class="logo" onclick="window.location.href='/'" src="/Logo.png"></img>
-
-  </header>
+     <div id="header"></div>
 
   <!-- Back to Home Button -->
   <div class="back-btn-container">
@@ -38,7 +38,7 @@
     </button>
   </div>
 
-  <h2 class="content-name">Squid Game S2</h2>
+  <h2 class="content-name">{title}</h2>
   <div class="played-episode-name" id="played-episode-name"></div>
   <div class="player-container">
     <div class="player" id="video-player"></div>
@@ -53,11 +53,9 @@
     <div class="episode-list" id="episode-list"></div>
   </div>
 
-  <footer>
-    <p>Designed by <a href="https://tejasmali.vercel.app"> Tejas Mali </a></p>
-  </footer>
+      <div id="footer"></div>
 
-  <script src="/js/content-page.js"></script>
+  <script src="/js/script.js"></script><script src="/js/content-page.js"></script>
   <script>
     window.addEventListener("load", () => {
       document.body.classList.add("loaded");
