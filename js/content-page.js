@@ -25,11 +25,10 @@ document.querySelectorAll("*").forEach((el) => {
 let episodes = []; // Store fetched episodes
 let currentEpisodeIndex = 0; // Track the currently playing episode
 
-// Function to fetch and sort files from Google Drive folder
 async function fetchEpisodes() {
   try {
     const response = await fetch(
-      `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents&key=${API_KEY}&fields=files(name,id)`
+      `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+name+contains+'E'&key=${API_KEY}&fields=files(name,id)`
     );
 
     if (!response.ok) {
@@ -38,22 +37,28 @@ async function fetchEpisodes() {
 
     const data = await response.json();
 
-    // Sort files numerically based on their names in descending order
+    // Sort files numerically based on the episode number (E1, E2, etc.)
     const sortedFiles = data.files.sort((a, b) => {
-      const numA = parseInt(a.name.match(/\d+/)) || 0;
-      const numB = parseInt(b.name.match(/\d+/)) || 0;
-      return numB - numA;
+      const numA = parseInt(a.name.match(/E(\d+)/)?.[1]) || 0; // Extract episode number
+      const numB = parseInt(b.name.match(/E(\d+)/)?.[1]) || 0;
+      return numA - numB; // Sort in ascending order
     });
 
-    return sortedFiles.map((file, index) => ({
-      title: `Episode ${sortedFiles.length - index}`, // Assign "Episode 1" to the last file
+    // Assign episode numbers based on the sorted order (before reversing)
+    const episodesWithTitles = sortedFiles.map((file, index) => ({
+      title: `Episode ${index + 1}`, // Assign episode numbers in sorted order
       link: `https://drive.google.com/file/d/${file.id}/preview`,
     }));
+
+    // Reverse the list for display order
+    return episodesWithTitles.reverse(); // Reverse for the intended order of display
   } catch (error) {
     console.error("Failed to fetch episodes:", error.message);
     return [];
   }
 }
+
+
 
 // Function to generate the episode list
 async function generateEpisodeList() {
