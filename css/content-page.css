@@ -26,6 +26,9 @@ main {
   flex: 1;
 }
 
+
+
+
 /* Top container: fixed video player */
 
 /* Player Container */
@@ -37,30 +40,46 @@ main {
   width: 100%;
   overflow-x: hidden;
   flex: 1; /* Ensures the player container expands to fill available space */
+  position: relative;
+  z-index: 10; /* Ensure player is above content */
+  
+ 
 }
 
+
 @media (max-width: 600px) {
+  .player-container {
+    height: calc(100vh - 70vh);
+    
+   
+  }
   .top-container {
     position: fixed;
     top: 1;
     width: 100%;
     z-index: 100;
     background-color: #000;
+    
+    
   }
 
   .bottom-container {
     margin-top: 31vh; /* Adjust for fixed video player height */
-  }.content-name{
-  margin-top: 40px ;
-}
-}
+  }
 
+  .content-info{
+    margin-bottom: 30px;
+  }
+
+  .content-name {
+    margin-top: 20px;
+  }
+}
 
 @media (min-width: 600px) {
   .content-name{
       margin-top: -5px;
   }
-
 }
 
 .content-info {
@@ -135,7 +154,6 @@ main {
   font-family: saira, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #fff;
   text-align: left;
-  
 }
 
 /* Responsive Design */
