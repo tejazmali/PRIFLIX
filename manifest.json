@@ -20,12 +20,12 @@
       "type": "image/jpeg"
     },
     {
-      "src": "/logo-256x256.png",
+      "src": "/logo.png",
       "sizes": "256x256",
       "type": "image/png"
     },
     {
-      "src": "/logo-384x384.png",
+      "src": "/logo.png",
       "sizes": "384x384",
       "type": "image/png"
     }
