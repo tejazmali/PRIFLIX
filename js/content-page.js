@@ -134,9 +134,7 @@ document.querySelector(".next-btn").addEventListener("click", () => {
 });
 
 // Function to navigate to the home page
-function goToHome() {
-  window.location.href = "/";
-}
+
 
 // Initialize the episode list
 generateEpisodeList();
