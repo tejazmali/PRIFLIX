@@ -1,29 +1,79 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <header>
   <img class="logo" onclick="window.location.href='/'" src="/Logo.png"></img>
   <button id="install-button" style="display: none;" class="install-btn">
       <i class="fa-solid fa-download"></i>
   </button>
+  <button onclick="window.location.href='/'" class="home-btn">
+    <i class="fa-solid fa-home"></i>
+  </button>
   
 </header>
 
 <style>
+  
 header {
   background-color: #000000;
-  color: #f53030;
+  color: #DC1A28;
   padding: 15px;
   text-align: left;
-  border-bottom: #f53030 solid;
+  border-bottom: #DC1A28 solid;
   display: flex;
   justify-content: space-between;
   position: fixed; /* Keep header fixed at the top */
   top: 0; /* Ensure it stays at the top */
   width: 100%; /* Ensure it stretches across the page */
   z-index: 1000; /* Ensure it stays on top of other content */
+  
 
 }
 
 header img {
   width: 100px !important;
+}
+/* General button styling */
+.home-btn {
+  background: linear-gradient(135deg, #000000, #000000); /* Black gradient background */
+  color: #ffffff; /* White icon color */
+  border: none; /* No border */
+  border-radius: 50px; /* Rounded edges for a pill shape */
+  padding: 10px 20px; /* Adjust padding for proportions */
+  display: inline-flex; /* Center the icon */
+  align-items: center; /* Vertically center icon */
+  justify-content: center; /* Horizontally center icon */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4); /* Subtle shadow for depth */
+  transition: background 0.4s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transitions for background and other properties */
+  margin-right: 40px; /* Add spacing between buttons */
+  text-decoration: none; /* Remove underline (if used with links) */
+}
+
+/* Hover effect */
+.home-btn:hover {
+  background: linear-gradient(135deg, #DC1A28, #DC1A28); /* Red gradient on hover */
+  color: #ffffff; /* Keep icon white */
+  transform: translateY(-3px); /* Subtle lift effect */
+  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.5); /* Slightly larger shadow */
+}
+
+/* Active/pressed state */
+.home-btn:active {
+  transform: translateY(0); /* Remove hover lift */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Minimized shadow */
+}
+
+/* Icon styling */
+.home-btn i {
+  font-size: 24px; /* Larger icon size */
+}
+
+/* Optional: Add text next to the icon (if needed) */
+.home-btn span {
+  margin-left: 10px; /* Space between icon and text */
+  font-size: 16px; /* Readable text size */
+  font-weight: bold; /* Bold text */
+  color: inherit; /* Inherit color from the button */
 }
 
 
