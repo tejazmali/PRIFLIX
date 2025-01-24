@@ -1,7 +1,7 @@
 /* General Body and Header Styles */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0a0a0a;
+  background: linear-gradient(to bottom right, #121212, #0a0a0a); 
   color: #fff;
   margin: 0;
   padding: 0;
@@ -9,18 +9,6 @@ body {
   flex-direction: column;
   min-height: 100vh;
   overflow-x: hidden; /* Prevent horizontal scrolling */
-}
-
-header {
-  background-color: #000000;
-  color: #f53030;
-  padding: 15px;
-  text-align: left;
-  border-bottom: #f53030 solid;
-}
-
-header img {
-  width: 100px !important;
 }
 
 body::-webkit-scrollbar-thumb:hover {
@@ -33,6 +21,13 @@ h1 {
   cursor: pointer;
 }
 
+main {
+  margin-top: 50px;
+  flex: 1;
+}
+
+/* Top container: fixed video player */
+
 /* Player Container */
 .player-container {
   margin-top: 20px;
@@ -41,16 +36,48 @@ h1 {
   align-items: center;
   width: 100%;
   overflow-x: hidden;
-  flex-grow: 1; /* Ensures the player container expands to fill available space */
+  flex: 1; /* Ensures the player container expands to fill available space */
+}
+
+@media (max-width: 600px) {
+  .top-container {
+    position: fixed;
+    top: 1;
+    width: 100%;
+    z-index: 100;
+    background-color: #000;
+  }
+
+  .bottom-container {
+    margin-top: 31vh; /* Adjust for fixed video player height */
+  }.content-name{
+  margin-top: 40px ;
+}
+}
+
+
+@media (min-width: 600px) {
+  .content-name{
+      margin-top: -5px;
+  }
+
+}
+
+.content-info {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .player {
-  border: #f53030 solid 0.2px;
+  border-bottom: #f53030 solid 0.2px;
   width: 100%;
-  height: 360px;
+  height: 360px; 
   background-color: black;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* This adds the bottom shadow */
 }
 
 /* Episode List */
@@ -62,6 +89,10 @@ h1 {
   width: 98%;
   overflow-x: hidden;
   margin-bottom: 50px;
+
+  /* Center the container horizontally */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .episode {
@@ -71,12 +102,14 @@ h1 {
   background-color: #2c2c2c;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s; 
   gap: 12px;
 }
 
 .episode:hover {
   background-color: #4b4b4b;
+  transform: translateY(-3px); 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .episode i {
@@ -101,30 +134,8 @@ h1 {
   font-size: 1.3em;
   font-family: saira, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #fff;
-}
-
-/* Footer */
-footer {
-  background-color: #000000;
-  color: #fff;
-  text-align: center;
-  padding: 8px;
-  margin-top: auto; /* Ensures footer stays at the bottom */
-  width: 100%;
-  border-top: #f53030 solid;
-}
-
-footer a {
-  color: #f53030;
-  margin-right: 20px;
-  text-decoration: none;
-}
-
-footer p {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 14px;
-  line-height: 1.5;
+  text-align: left;
+  
 }
 
 /* Responsive Design */
@@ -210,10 +221,6 @@ footer p {
   font-size: 16px;
 }
 
-.back-btn:hover {
-  transform: scale(1.05);
-}
-
 @keyframes move-up {
   0% {
     transform: translateY(0);
@@ -267,10 +274,23 @@ footer p {
   margin-right: 20px;
   margin-left: auto;
   transition: background-color 0.3s, transform 0.2s;
-  margin-top: 18px;
+  margin-top: -40px;
 }
 
 .next-btn:hover {
   background-color: #f53030;
   transform: scale(1.05);
+}
+
+/* Add a simple progress bar */
+.player {
+  position: relative;
+}
+
+.player::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50%; /* Adjust based on video progress */
 }

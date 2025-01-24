@@ -14,9 +14,5 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("footer").innerHTML = data;
     });
 
-  fetch("/study material/faq-note.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.getElementById("faq-note").innerHTML = data;
-    });
+ 
 });

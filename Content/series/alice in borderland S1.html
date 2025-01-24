@@ -29,33 +29,37 @@
   <div class="loader-overlay">
     <div class="loader"></div>
   </div>
-     <div id="header"></div>
-
-  <!-- Back to Home Button -->
-  <div class="back-btn-container">
-    <button class="back-btn" onclick="goToHome()">
-      <i class="fas fa-chevron-left"></i>
-    </button>
-  </div>
-
-  <h2 class="content-name">{title}</h2>
-  <div class="played-episode-name" id="played-episode-name"></div>
-  <div class="player-container">
-    <div class="player" id="video-player"></div>
-    <div>
-      
+  <div id="header"></div>
+  <main>
+    <div class="top-container">
+      <!-- <div class="back-btn-container">
+        <button class="back-btn" onclick="goToHome()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </div> -->
+     
+      <div class="player-container">
+        <div class="player" id="video-player"></div>
+      </div>
     </div>
 
+    <div class="bottom-container">
+      <div class="content-info"><h2 class="content-name">{title}</h2>
+      <div class="played-episode-name" id="played-episode-name"></div>
+       <button class="next-btn">
+      <i class="fa-solid fa-arrow-right"></i>
+    </button></div>
+      
 
-    <button class="next-btn"><i class="fa-solid fa-arrow-right"></i></button>
-
+    <div class="episode-list" id="episode-list"></div></div>
    
-    <div class="episode-list" id="episode-list"></div>
-  </div>
 
-      <div id="footer"></div>
+  </main>
 
-  <script src="/js/script.js"></script><script src="/js/content-page.js"></script>
+  <div id="footer"></div>
+
+  <script src="/js/script.js"></script>
+  <script src="/js/content-page.js"></script>
   <script>
     window.addEventListener("load", () => {
       document.body.classList.add("loaded");

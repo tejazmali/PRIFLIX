@@ -4,18 +4,17 @@
 <head>
   <meta charset="UTF-8" />
 
-  <meta name="api-key" content="AIzaSyBf4Mr5frgj7ez_9YfiotsJkAXnkz-p558">
-  <meta name="folder-id" content="1sb-6eFryvMf9mh7tNko_ZzIPuc4q0hUI">
-  <meta name="title" content="Squid Game S2">
+  <meta name="api-key" content="AIzaSyBf4Mr5frgj7ez_9YfiotsJkAXnkz-p558" />
+  <meta name="folder-id" content="1sb-6eFryvMf9mh7tNko_ZzIPuc4q0hUI" />
+  <meta name="title" content="Squid Game S2" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>{title} - Priflix</title>
   <link rel="stylesheet" href="/css/content-page.css" />
-  <link rel="stylesheet" href="/css/loader.css">
-  <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon">
+  <link rel="stylesheet" href="/css/loader.css" />
+  <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
 </head>
 
 <body>
@@ -29,33 +28,36 @@
   <div class="loader-overlay">
     <div class="loader"></div>
   </div>
-     <div id="header"></div>
-
-  <!-- Back to Home Button -->
-  <div class="back-btn-container">
-    <button class="back-btn" onclick="goToHome()">
-      <i class="fas fa-chevron-left"></i>
-    </button>
-  </div>
-
-  <h2 class="content-name">{title}</h2>
-  <div class="played-episode-name" id="played-episode-name"></div>
-  <div class="player-container">
-    <div class="player" id="video-player"></div>
-    <div>
-      
+  <div id="header"></div>
+  <main>
+    <div class="top-container">
+      <!-- <div class="back-btn-container">
+        <button class="back-btn" onclick="goToHome()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </div> -->
+     
+      <div class="player-container">
+        <div class="player" id="video-player"></div>
+      </div>
     </div>
 
+    <div class="bottom-container">
+      <div class="content-info"><h2 class="content-name">{title}</h2>
+      <div class="played-episode-name" id="played-episode-name"></div>
+       <button class="next-btn">
+      <i class="fa-solid fa-arrow-right"></i>
+    </button></div>
+      
 
-    <button class="next-btn"><i class="fa-solid fa-arrow-right"></i></button>
-
+    <div class="episode-list" id="episode-list"></div></div>
    
-    <div class="episode-list" id="episode-list"></div>
-  </div>
 
-      <div id="footer"></div>
+  </main>
+  <div id="footer"></div>
 
-  <script src="/js/script.js"></script><script src="/js/content-page.js"></script>
+  <script src="/js/script.js"></script>
+  <script src="/js/content-page.js"></script>
   <script>
     window.addEventListener("load", () => {
       document.body.classList.add("loaded");

@@ -1,3 +1,38 @@
 <footer>
-  <p>Designed by <a href="https://tejasmali.vercel.app"> Tejas Mali </a></p>
+  <p>Designed by <a href="https://tejasmali.vercel.app" target="_blank" rel="noopener noreferrer">Tejas Mali</a></p>
 </footer>
+
+<style>
+  /* Make the footer always stick to the bottom */
+  body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes at least the full height of the viewport */
+  }
+
+  footer {
+    background-color: #000000;
+    border-top: 3px solid #f53030; /* Add thickness to the border */
+    color: #fff;
+    text-align: center;
+    padding: 10px 0; /* Add vertical padding for better spacing */
+    width: 100%; /* Ensure footer spans full width */
+    margin-top: auto; /* Push footer to the bottom */
+  }
+
+  footer p {
+    margin: 0;
+    font-size: 14px; /* Adjust font size for readability */
+    line-height: 1.5;
+  }
+
+  footer a {
+    color: #f53030;
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline; /* Add hover effect for better user experience */
+  }
+</style>

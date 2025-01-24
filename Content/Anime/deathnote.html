@@ -6,7 +6,7 @@
 
   <meta name="api-key" content="AIzaSyBf4Mr5frgj7ez_9YfiotsJkAXnkz-p558" />
   <meta name="folder-id" content="1u-aXxKfynonGqoWlElE7x8MAiZjG-q1T" />
-  <meta name="title" content="Death Note">
+  <meta name="title" content="Death Note" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -31,23 +31,31 @@
   </div>
   <div id="header"></div>
 
-  <!-- Back to Home Button -->
-  <div class="back-btn-container">
-    <button class="back-btn" onclick="goToHome()">
-      <i class="fas fa-chevron-left"></i>
-    </button>
-  </div>
+  <main>
+    <div class="top-container">
+      <!-- <div class="back-btn-container">
+        <button class="back-btn" onclick="goToHome()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </div> -->
+     
+      <div class="player-container">
+        <div class="player" id="video-player"></div>
+      </div>
+    </div>
 
-  <h2 class="content-name">{title}</h2>
-  <div class="played-episode-name" id="played-episode-name"></div>
-  <div class="player-container">
-    <div class="player" id="video-player"></div>
-    <div></div>
+    <div class="bottom-container">
+      <div class="content-info"><h2 class="content-name">{title}</h2>
+      <div class="played-episode-name" id="played-episode-name"></div>
+       <button class="next-btn">
+      <i class="fa-solid fa-arrow-right"></i>
+    </button></div>
+      
 
-    <button class="next-btn"><i class="fa-solid fa-arrow-right"></i></button>
+    <div class="episode-list" id="episode-list"></div></div>
+   
 
-    <div class="episode-list" id="episode-list"></div>
-  </div>
+  </main>
 
   <div id="footer"></div>
 
