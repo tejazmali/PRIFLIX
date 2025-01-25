@@ -5,12 +5,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(
-    20,
-    20,
-    20,
-    0.926
-  ); /* Slightly transparent dark background */
+  background-color: rgba(0, 0, 0, 0.8); /* Slightly transparent dark background */
   display: flex;
   justify-content: center;
   align-items: center;
