@@ -3,8 +3,12 @@
 
 <head>
   <meta charset="UTF-8" />
+
+  <meta name="api-key" content="AIzaSyBf4Mr5frgj7ez_9YfiotsJkAXnkz-p558" />
+  <meta name="folder-id" content="1mpncw0YC5VqZfMrONJgN0q4U-0o4JZSB" />
+  <meta name="title" content="Attack on Titan S03" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="title" content="Ice Age (2002)" />
 
   <title>{title} - Priflix</title>
   <link rel="stylesheet" href="/css/content-page.css" />
@@ -26,34 +30,34 @@
     <div class="loader"></div>
   </div>
   <div id="header"></div>
+
   <main>
     <div class="top-container">
    
      
       <div class="player-container">
-        <div class="player" id="video-player"><iframe width="100%" height="100%" src="https://archive.org/embed/ice-age-2002-2160p" frameborder="0" allowfullscreen></iframe></div>
+        <div class="player" id="video-player"></div>
       </div>
     </div>
 
     <div class="bottom-container">
       <div class="content-info"><h2 class="content-name">{title}</h2>
-        <div class="episode-list" id="episode-list"></div>
-     
+      <div class="played-episode-name" id="played-episode-name"></div>
+       <button class="next-btn">
+      <i class="fa-solid fa-arrow-right"></i>
     </button></div>
       
 
-  
+    <div class="episode-list" id="episode-list"></div></div>
    
 
   </main>
-
-
-
 
   <div id="footer"></div>
 
   <script src="/js/script.js"></script>
   <script src="/js/content-page.js"></script>
+
   <script>
     window.addEventListener("load", () => {
       document.body.classList.add("loaded");
