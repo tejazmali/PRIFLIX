@@ -37,16 +37,39 @@ async function fetchEpisodes() {
 
     const data = await response.json();
 
-    // Sort files numerically based on the episode number (E1, E2, etc.)
-    const sortedFiles = data.files.sort((a, b) => {
-      const numA = parseInt(a.name.match(/E(\d+)/)?.[1]) || 0; // Extract episode number
-      const numB = parseInt(b.name.match(/E(\d+)/)?.[1]) || 0;
-      return numA - numB; // Sort in ascending order
-    });
+    if (!data.files || data.files.length === 0) {
+      console.warn("No files found in the folder.");
+      return [];
+    }
+
+    // Log filenames for debugging purposes
+    console.log("Fetched files:", data.files.map(file => file.name));
+
+    // Sort files numerically based on the episode number
+    const sortedFiles = data.files
+      .map(file => {
+        // Extract episode number using regex
+        const match = file.name.match(/(?:S\d+\s)?E(\d+)/i); // Matches "E03" or "S01 E03"
+        const episodeNumber = match ? parseInt(match[1]) : null; // Extract episode number or null if not found
+        return {
+          ...file,
+          episodeNumber,
+        };
+      })
+      .filter(file => file.episodeNumber !== null) // Filter out files without a valid episode number
+      .sort((a, b) => a.episodeNumber - b.episodeNumber); // Sort by episode number
+
+    if (sortedFiles.length === 0) {
+      console.warn("No valid episodes found after processing.");
+      return [];
+    }
+
+    // Log sorted order for debugging
+    console.log("Sorted files:", sortedFiles.map(file => file.name));
 
     // Assign episode numbers based on the sorted order (before reversing)
     const episodesWithTitles = sortedFiles.map((file, index) => ({
-      title: `Episode ${index + 1}`, // Assign episode numbers in sorted order
+      title: `Episode ${file.episodeNumber}`, // Use the actual episode number
       link: `https://drive.google.com/file/d/${file.id}/preview`,
     }));
 
