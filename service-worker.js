@@ -13,7 +13,10 @@ const FILES_TO_CACHE = [
   "/js/pwa-app request.js",
   "/js/script.js",
   "js/lottie.js",
-  "/Animation - 1737890084161.json"
+  "/Animation - 1737890084161.json",
+  "/Logo.png",
+  "/logo.jpg"
+
 ];
 
 // Cache only external image URLs that are not available locally
