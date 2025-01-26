@@ -16,7 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
  
 });
-
+window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
+  document.getElementById("content").style.display = "block";
+});
 window.addEventListener("load", () => {
   document.body.classList.add("loaded");
   document.getElementById("content").style.display = "block";
