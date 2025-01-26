@@ -19,6 +19,6 @@
       "sizes": "512x512",
       "type": "image/jpeg"
     }
-   
-  ]
+  ],
+  "offline_page": "/offline.html" 
 }
