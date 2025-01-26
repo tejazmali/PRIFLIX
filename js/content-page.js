@@ -103,7 +103,7 @@ async function generateEpisodeList() {
     episodeElement.classList.add("episode");
 
     episodeElement.innerHTML = `
-      <i class="fas fa-play play-icon"></i>
+      <i class="fas fa-circle-play play-icon"></i>
       <span class="episode-title">${episode.title}</span>
       <i class="fas fa-chevron-right"></i>
     `;
@@ -124,14 +124,14 @@ function playEpisode(title, url, episodeElement) {
   const allEpisodes = document.querySelectorAll(".episode");
   allEpisodes.forEach((episode) => {
     const playIcon = episode.querySelector(".play-icon");
-    playIcon.classList.remove("fa-pause");
-    playIcon.classList.add("fa-play");
+    playIcon.classList.remove("fa-circle-pause");
+    playIcon.classList.add("fa-circle-play");
   });
 
   // Set the play icon to pause for the selected episode
   const playIcon = episodeElement.querySelector(".play-icon");
-  playIcon.classList.remove("fa-play");
-  playIcon.classList.add("fa-pause");
+  playIcon.classList.remove("fa-circle-play");
+  playIcon.classList.add("fa-circle-pause");
 
   // Play the video in the player
   const player = document.getElementById("video-player");

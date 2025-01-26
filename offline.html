@@ -10,8 +10,17 @@
   <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
 
   <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=play_circle" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+
+  <!-- Google Fonts for Netflix-like font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+
   <script src="/js/lottie.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -21,17 +30,32 @@
       -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
       outline: none !important;
     }
+     
+    
 
     .animation-container {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      text-align: center;
+    }
+
+    #no-internet-heading {
+      font-size: 2.5rem; /* Larger font size */
+      font-family: "Oswald",serif;
+      font-weight: 500; /* Bold font weight */
+      font-optical-sizing: outo;
+      color: #DC1A28; /* Netflix red */
+      margin-bottom: 20px;
+      text-transform: uppercase; /* Netflix-style all caps */
     }
 
     #lottie-animation {
       width: 300px;
       height: 300px;
+     
     }
   </style>
 
@@ -42,7 +66,11 @@
   <div id="header"></div>
 
   <main>
+    <h2></h2>
     <div class="animation-container">
+      <!-- No Internet Heading -->
+      <div id="no-internet-heading">No Internet !</div>
+
       <!-- The Lottie animation container -->
       <div id="lottie-animation"></div>
     </div>
