@@ -26,7 +26,8 @@
       outline: none !important;
     }
   </style>
-  <div class="loader-overlay">
+   <div class="loader-overlay">
+    <div class="progress-bar"></div>
     <div class="loader"></div>
   </div>
   <div id="header"></div>
@@ -56,12 +57,7 @@
 
   <script src="/js/script.js"></script>
   <script src="/js/content-page.js"></script>
-  <script>
-    window.addEventListener("load", () => {
-      document.body.classList.add("loaded");
-      document.getElementById("content").style.display = "block";
-    });
-  </script>
+ 
 </body>
 
 </html>
