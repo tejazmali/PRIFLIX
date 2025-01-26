@@ -288,7 +288,7 @@ main {
   border: none;
   padding: 2px 24px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: bold;
   border-radius: 60px;
   cursor: pointer;
   
@@ -309,7 +309,7 @@ margin-left: 6.8px;
 
 .material-symbols-outlined {
   font-size: 16px; /* Icon size */
- 
-  margin-bottom: px;
+ margin-right: 5px;
+  margin-bottom: 2px;
   
 }
