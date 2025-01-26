@@ -279,3 +279,37 @@ main {
   width: 50%; /* Adjust based on video progress */
 }
 
+/* download btn */
+
+
+.download-btn {
+  background-color: #2c2c2c;
+  color: #fff;
+  border: none;
+  padding: 2px 24px;
+  font-size: 13px;
+  font-weight: 200;
+  border-radius: 60px;
+  cursor: pointer;
+  
+  margin-right: auto;
+  margin-top: 20px;
+  display: flex; /* Use Flexbox for alignment */
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  text-align: center;
+margin-left: 10px;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+.download-btn:hover {
+  background-color: #3e3e3e; /* Hover effect with a lighter shade */
+  transform: scale(1.05);
+}
+
+.material-symbols-outlined {
+  font-size: 16px; /* Icon size */
+ 
+  margin-bottom: px;
+  
+}
