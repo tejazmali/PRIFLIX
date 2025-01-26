@@ -16,21 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
  
 });
-   document.addEventListener('DOMContentLoaded', function() {
-  const progressBar = document.querySelector('.progress-bar span');
-  let progress = 0;
 
-  const interval = setInterval(function() {
-    progress += 5; // Increase the progress by 5% every 100ms
-    progressBar.style.width = `${progress}%`;
-
-    if (progress >= 100) {
-      clearInterval(interval);
-      document.body.classList.add('loaded'); // Content is loaded, hide the loader
-    }
-  }, 100);
-});
 window.addEventListener("load", () => {
   document.body.classList.add("loaded");
   document.getElementById("content").style.display = "block";
+  const progressBar = document.querySelector(".progress-bar");
+  progressBar.style.width = "100%"; // Set width to 100% after content is loaded
 });

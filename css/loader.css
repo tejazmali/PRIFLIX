@@ -26,19 +26,42 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 0%; /* Start at 0% width */
   height: 4px; /* Thin progress bar */
   background-color: #DC1A28;
   z-index: 10000; /* Above the overlay */
+  animation: progressAnimation 3s linear forwards; /* Animation for loading */
 }
 
-.progress-bar span {
-  display: block;
-  height: 100%;
-  width: 0;
-  background-color: #DC1A28; /* Red color for the progress */
-  transition: width 0.3s ease;
+@keyframes progressAnimation {
+  0% {
+    width: 0%;
+  }
+  90% {
+    width: 90%; /* Progress bar at 90% during loading */
+  }
+  100% {
+    width: 100%; /* Final progress at 100% when loaded */
+    opacity: 0; /* Fade out the progress bar */
+    transition: opacity 0.5s ease-out; /* Smooth fade-out effect */
+  }
 }
+
+.loaded .progress-bar {
+  animation: progressBarFadeOut 0.5s forwards; /* Fade out after content is loaded */
+}
+
+@keyframes progressBarFadeOut {
+  0% {
+    width: 100%;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 0; /* Hide the progress bar */
+  }
+}
+
 
 /* Loader styles */
 .loader {
