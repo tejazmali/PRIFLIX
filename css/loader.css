@@ -27,16 +27,16 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px;
+  height: 4px; /* Thin progress bar */
   background-color: #DC1A28;
-  z-index: 10000;
+  z-index: 10000; /* Above the overlay */
 }
 
 .progress-bar span {
   display: block;
   height: 100%;
   width: 0;
-  background-color: #DC1A28;
+  background-color: #DC1A28; /* Red color for the progress */
   transition: width 0.3s ease;
 }
 
