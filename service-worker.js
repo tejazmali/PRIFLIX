@@ -1,5 +1,5 @@
 const CACHE_NAME = "priflix-cache-v1";
-const OFFLINE_URL = "/offline.html";
+const OFFLINE_URL = "/index.html";
 
 // Files to cache (HTML, CSS, JS)
 const FILES_TO_CACHE = [
