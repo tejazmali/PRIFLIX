@@ -1,45 +1,31 @@
 const CACHE_NAME = "priflix-cache-v1";
-const OFFLINE_URL = "/index.html";
+const OFFLINE_URL = "/offline.html";
 
-// Files to cache (HTML, CSS, JS)
+// Files to cache (HTML, CSS, JS for offline page)
 const FILES_TO_CACHE = [
-  "/index.html",
   "/offline.html",
-  "/header.html",
-  "/footer.html",
-  "/css/home.css",
-  "/css/loader.css",
   "/css/content-page.css",
-  "/js/pwa-app request.js",
+  "/css/loader.css",
+  "/logo.jpg",  // Favicon
   "/js/script.js",
+  "/js/content-page.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css",  // Font Awesome CDN
+  "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js",  // Lottie player CDN
+  "https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" // Lottie player module
 ];
 
-// List of images to cache from the provided data
-const IMAGES_TO_CACHE = [
-  "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FAgaD7s1vgIf4Soi3flAKN6Bte6u.jpg",
-  "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F19REaSRoNcO0KgMmrGUWtfpRKZY.jpg",
-  "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fynow2o9v0G341PLv1chCRDufCgc.jpg",
-  "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsfbSjGlLHsvFQrMUSNR9RrwZgV1.jpg",
-  "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FtCZFfYTIwrR7n94J6G14Y4hAFU6.jpg",
-  "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FnfpPzlKiqkIGpI8HXpsrU6vnNdp.jpg",
-  "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsXZhtWLo3fecavpDuOyJiayjt32.jpg",
-  "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fe%2Fgracenote%2Fe24be4e62720ebe500a7e7a3cf1a65cf.jpg",
-  "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F1%2Fgracenote%2F1fe9f7ac98263ff48063ed05767ac60e.jpg",
-  "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsGwYqVqheXuevFOBC0BFhFvDU9T.jpg",
-  "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fs3ZAS0AGLQ668sFveVFinAd2zVy.jpg",
-  "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FfiimZ9Xt5cPTPHNrbS4QautBXpU.jpg"
-];
-
+// Install event: Cache offline page and its resources
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log("Caching essential files and images...");
-      return cache.addAll(FILES_TO_CACHE.concat(IMAGES_TO_CACHE)); // Cache HTML, CSS, JS files and images
+      console.log("Caching essential files for offline...");
+      return cache.addAll(FILES_TO_CACHE);
     })
   );
   self.skipWaiting();
 });
 
+// Activate event: Remove old caches
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -56,44 +42,32 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
+// Fetch event: Serve cached resources or offline page when needed
 self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
 
-  // Handle navigation requests (e.g., clicking a link)
-  if (event.request.mode === "navigate") {
+  // If the user is requesting the offline.html page, serve it from the cache
+  if (event.request.url.includes(OFFLINE_URL)) {
     event.respondWith(
-      fetch(event.request).catch(() => {
-        console.log("No internet, showing offline page...");
-        return caches.match(OFFLINE_URL);
+      caches.match(OFFLINE_URL).then((cachedResponse) => {
+        return cachedResponse || fetch(OFFLINE_URL); // Serve from cache or fetch if not cached
       })
     );
     return;
   }
 
-  // Cache image files if not already cached
-  if (event.request.url.match(/\.(jpg|jpeg|png|gif|webp|svg)$/)) {
-    event.respondWith(
-      caches.match(event.request).then((response) => {
-        return response || fetch(event.request).then((networkResponse) => {
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, networkResponse.clone());
-            return networkResponse;
-          });
-        });
-      })
-    );
-    return;
-  }
-
-  // Cache other requests (for uncached files and offline fallback)
+  // If the request is for a resource (CSS, JS, images, etc.)
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) {
-        return response;
+    caches.match(event.request).then((cachedResponse) => {
+      // If the resource is cached, serve it
+      if (cachedResponse) {
+        return cachedResponse;
       }
 
+      // Otherwise, fetch the resource from the network
       return fetch(event.request).catch(() => {
-        if (requestUrl.origin === location.origin) {
+        // If the network is not available, serve the offline page
+        if (event.request.mode === "navigate") {
           return caches.match(OFFLINE_URL);
         }
       });
