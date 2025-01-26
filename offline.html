@@ -8,9 +8,10 @@
   <link rel="stylesheet" href="/css/content-page.css" />
   <link rel="stylesheet" href="/css/loader.css" />
   <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
+
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="/js/lottie.js"></script>
 </head>
 
 <body>
@@ -27,6 +28,11 @@
       align-items: center;
       height: 100vh;
     }
+
+    #lottie-animation {
+      width: 300px;
+      height: 300px;
+    }
   </style>
 
   <div class="loader-overlay">
@@ -37,15 +43,24 @@
 
   <main>
     <div class="animation-container">
-        <dotlottie-player src="https://lottie.host/093524ee-3327-467e-bb3c-8eac099180a9/VZhMosPdUc.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+      <!-- The Lottie animation container -->
+      <div id="lottie-animation"></div>
     </div>
   </main>
 
   <div id="footer"></div>
 
+  <script>
+    // Initialize the Lottie animation
+    lottie.loadAnimation({
+      container: document.getElementById('lottie-animation'), // The ID of the container
+      renderer: 'svg', // Renderer type: 'svg', 'canvas', or 'html'
+      loop: true,      // Loop the animation
+      autoplay: true,  // Start playing automatically
+      path: '/Animation - 1737890084161.json' // Path to the Lottie JSON file
+    });
+  </script>
   <script src="/js/script.js"></script>
-  <script src="/js/content-page.js"></script>
-  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 </body>
 
 </html>

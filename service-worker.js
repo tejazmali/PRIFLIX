@@ -1,31 +1,32 @@
 const CACHE_NAME = "priflix-cache-v1";
 const OFFLINE_URL = "/offline.html";
 
-// Files to cache (HTML, CSS, JS for offline page)
+// Files to cache (HTML, CSS, JS)
 const FILES_TO_CACHE = [
+  "/index.html",
   "/offline.html",
-  "/css/content-page.css",
+  "/header.html",
+  "/footer.html",
+  "/css/home.css",
   "/css/loader.css",
-  "/logo.jpg",  // Favicon
+  "/css/content-page.css",
+  "/js/pwa-app request.js",
   "/js/script.js",
-  "/js/content-page.js",
-  "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css",  // Font Awesome CDN
-  "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js",  // Lottie player CDN
-  "https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" // Lottie player module
+  "js/lottie.js",
+  "/Animation - 1737890084161.json"
 ];
 
-// Install event: Cache offline page and its resources
+// Cache only external image URLs that are not available locally
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log("Caching essential files for offline...");
-      return cache.addAll(FILES_TO_CACHE);
+      console.log("Caching essential files...");
+      return cache.addAll(FILES_TO_CACHE); // Cache HTML, CSS, JS files
     })
   );
   self.skipWaiting();
 });
 
-// Activate event: Remove old caches
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -42,32 +43,51 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Fetch event: Serve cached resources or offline page when needed
+// Fetch event to handle external images and all other requests
 self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
 
-  // If the user is requesting the offline.html page, serve it from the cache
-  if (event.request.url.includes(OFFLINE_URL)) {
+  // Check if the request is for an external image (not from the local domain)
+  if (event.request.url.match(/\.(jpg|jpeg|png|gif|webp|svg|js)$/) && requestUrl.origin !== location.origin) {
     event.respondWith(
-      caches.match(OFFLINE_URL).then((cachedResponse) => {
-        return cachedResponse || fetch(OFFLINE_URL); // Serve from cache or fetch if not cached
+      caches.match(event.request).then((cachedResponse) => {
+        // If the image is already cached, return it
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        // Otherwise, fetch the image from the network and cache it
+        return fetch(event.request).then((networkResponse) => {
+          return caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, networkResponse.clone()); // Cache the fetched image
+            return networkResponse;
+          });
+        });
       })
     );
     return;
   }
 
-  // If the request is for a resource (CSS, JS, images, etc.)
+  // Handle navigation requests (e.g., clicking a link)
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request).catch(() => {
+        console.log("No internet, showing offline page...");
+        return caches.match(OFFLINE_URL);
+      })
+    );
+    return;
+  }
+
+  // Cache other requests (for uncached files and offline fallback)
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      // If the resource is cached, serve it
-      if (cachedResponse) {
-        return cachedResponse;
+    caches.match(event.request).then((response) => {
+      if (response) {
+        return response;
       }
 
-      // Otherwise, fetch the resource from the network
       return fetch(event.request).catch(() => {
-        // If the network is not available, serve the offline page
-        if (event.request.mode === "navigate") {
+        if (requestUrl.origin === location.origin) {
           return caches.match(OFFLINE_URL);
         }
       });
