@@ -39,7 +39,6 @@ header img {
   color: #ffffff; /* White icon color */
   border: none; /* No border */
   border-radius: 50px; /* Rounded edges for a pill shape */
-  
   padding: 10px 20px; /* Adjust padding for proportions */
   display: inline-flex; /* Center the icon */
   align-items: center; /* Vertically center icon */
@@ -47,27 +46,19 @@ header img {
   cursor: pointer; /* Pointer cursor on hover */
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4); /* Subtle shadow for depth */
   transition: background 0.4s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transitions for background and other properties */
-  margin-right: 40px; /* Add spacing between buttons */
+  margin-right: 34.5px; /* Add spacing between buttons */
   text-decoration: none; /* Remove underline (if used with links) */
 }
 
 /* Hover effect */
 .home-btn:hover {
-  background: linear-gradient(135deg, #9e131c, #bb1621); /* Red gradient on hover */
-  transition: 0.3s ease-in-out;
-  color: #ffffff; /* Keep icon white */
-  transform: translateY(-3px); /* Subtle lift effect */
-  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.5); /* Slightly larger shadow */
-
-
+  background-color: #DC1A28;
+  transform: scale(1.05);
 }
 
 /* Active/pressed state */
 .home-btn:active {
-
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Minimized shadow */
-
-  
 }
 
 /* Icon styling */
@@ -95,17 +86,15 @@ header img {
   position: relative;
   z-index: 0;
   border-radius: 50px;
-
   transition: all 0.3s ease;
   margin-right: 40px;
-
 }
+
 @media screen and (max-width: 768px){
   .install-btn{  
     font-size: 13px;
     padding: 5px 16px;
   }
-
 }
 
 .install-btn::after {
