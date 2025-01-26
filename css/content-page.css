@@ -24,9 +24,11 @@ main {
   flex: 1;
 }
 
-
-
-
+@media(max-width:600px){
+  header{
+    position: relative !important;
+  }
+}
 /* Top container: fixed video player */
 
 /* Player Container */
@@ -52,17 +54,18 @@ main {
    
   }
   .top-container {
-    position: fixed;
-    top: 1;
+    position: sticky;
+    top: 0;
     width: 100%;
     z-index: 100;
     background-color: #000;
+    margin-top: -66.7px;
     
     
   }
 
   .bottom-container {
-    margin-top: 31vh; /* Adjust for fixed video player height */
+    margin-top: -30px; /* Adjust for fixed video player height */
   }
 
   .content-info{
@@ -75,6 +78,8 @@ main {
 }
 
 @media (min-width: 600px) {
+
+
   .content-name{
       margin-top: -5px;
   }

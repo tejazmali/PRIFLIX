@@ -1,53 +1,54 @@
-const CACHE_NAME = "priflix-cache-v1";
-const OFFLINE_URL = "/offline.html";
+// Set cache version for your app
+const CACHE_VERSION = 'v2'; // Update this version when you make changes
+const CACHE_NAME = `priflix-cache-${CACHE_VERSION}`;
+const OFFLINE_URL = '/offline.html';
 
 // Files to cache (HTML, CSS, JS)
-const FILES_TO_CACHE = [
-  "/index.html",
-  "/offline.html",
-  "/header.html",
-  "/footer.html",
-  "/css/home.css",
-  "/css/loader.css",
-  "/css/content-page.css",
-  "/js/pwa-app request.js",
-  "/js/script.js",
-  "js/lottie.js",
-  "/Animation - 1737890084161.json",
-  "/Logo.png",
-  "/logo.jpg"
-
+const FILES_TO_CACHE = [ 
+  '/index.html',
+  '/offline.html',
+  '/header.html',
+  '/footer.html',
+  '/css/home.css',
+  '/css/loader.css',
+  '/js/script.js',
+  '/js/lottie.js',
+  '/Animation - 1737890084161.json',
+  '/Logo.png',
+  '/logo.jpg',
 ];
 
-// Cache only external image URLs that are not available locally
-self.addEventListener("install", (event) => {
+// Install event: Caches essential files
+self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log("Caching essential files...");
+      console.log('Caching essential files...');
       return cache.addAll(FILES_TO_CACHE); // Cache HTML, CSS, JS files
     })
   );
-  self.skipWaiting();
+  self.skipWaiting(); // Activate the service worker as soon as it's installed
 });
 
-self.addEventListener("activate", (event) => {
+// Activate event: Deletes old caches when a new version is activated
+self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) {
-            console.log("Deleting old cache:", cache);
+          // Delete old caches that do not match the new cache version
+          if (!cache.includes(CACHE_VERSION)) {
+            console.log('Deleting old cache:', cache);
             return caches.delete(cache);
           }
         })
       );
     })
   );
-  self.clients.claim();
+  self.clients.claim(); // Take control of the clients (open pages)
 });
 
-// Fetch event to handle external images and all other requests
-self.addEventListener("fetch", (event) => {
+// Fetch event: Handles requests and cache updates
+self.addEventListener('fetch', (event) => {
   const requestUrl = new URL(event.request.url);
 
   // Check if the request is for an external image (not from the local domain)
@@ -72,11 +73,11 @@ self.addEventListener("fetch", (event) => {
   }
 
   // Handle navigation requests (e.g., clicking a link)
-  if (event.request.mode === "navigate") {
+  if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request).catch(() => {
-        console.log("No internet, showing offline page...");
-        return caches.match(OFFLINE_URL);
+        console.log('No internet, showing offline page...');
+        return caches.match(OFFLINE_URL); // Fallback to offline page
       })
     );
     return;
@@ -91,7 +92,7 @@ self.addEventListener("fetch", (event) => {
 
       return fetch(event.request).catch(() => {
         if (requestUrl.origin === location.origin) {
-          return caches.match(OFFLINE_URL);
+          return caches.match(OFFLINE_URL); // Fallback to offline page
         }
       });
     })
