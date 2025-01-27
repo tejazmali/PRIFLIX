@@ -15,7 +15,9 @@
   <link rel="stylesheet" href="/css/loader.css" />
   <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
   <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=play_circle" />
+ <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
 </head>
@@ -36,23 +38,31 @@
 
   <main>
     <div class="top-container">
-   
-     
+
       <div class="player-container">
         <div class="player" id="video-player"></div>
       </div>
     </div>
 
     <div class="bottom-container">
-      <div class="content-info"><h2 class="content-name">{title}</h2>
-      <div class="played-episode-name" id="played-episode-name"></div>
-       <button class="next-btn">
-      <i class="fa-solid fa-arrow-right"></i>
-    </button></div>
-      
 
-    <div class="episode-list" id="episode-list"></div></div>
-   
+      <div class="content-info">
+        <h2 class="content-name">{title}</h2>
+        <div class="played-episode-name" id="played-episode-name"></div>
+        <button class="next-btn">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <!-- Download Button with Link -->
+        <a id="download-link" class="download-btn" target="_blank">
+          <span class="material-symbols-outlined">
+            download
+          </span>
+          <p id="download">Download</p>
+        </a>
+      </div>
+
+      <div class="episode-list" id="episode-list"></div>
+    </div>
 
   </main>
 

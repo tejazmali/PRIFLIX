@@ -1,63 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="api-key" content="AIzaSyBf4Mr5frgj7ez_9YfiotsJkAXnkz-p558" />
+  <meta name="folder-id" content="1PuT1fk7CtI3kyvwKxiPasRsPSrdIYj_0" />
+    <meta name="title" content="Ice Age (2002)" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="title" content="Ice Age (2002)" />
+    <title>{title} - Priflix</title>
+    <link rel="stylesheet" href="/css/content-page.css" />
+    <link rel="stylesheet" href="/css/loader.css" />
+    <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
+    <!-- Font Awesome for icons -->
+   <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
-  <title>{title} - Priflix</title>
-  <link rel="stylesheet" href="/css/content-page.css" />
-  <link rel="stylesheet" href="/css/loader.css" />
-  <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=play_circle" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
-</head>
-
-<body>
-  <style>
-    * {
-      -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
-      -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
-      outline: none !important;
-    }
-  </style>
- <div class="loader-overlay">
-  <div class="progress-bar"></div>
-  <div class="loader"></div>
-</div>
-  <div id="header"></div>
-  <main>
-    <div class="top-container">
-   
-     
-      <div class="player-container">
-        <div class="player" id="video-player"><iframe width="100%" height="100%" src="https://archive.org/embed/ice-age-2002-2160p" frameborder="0" allowfullscreen></iframe></div>
-      </div>
+  <body>
+    <style>
+      * {
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+        -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
+        outline: none !important;
+      }
+    </style>
+    <div class="loader-overlay">
+      <div class="progress-bar"></div>
+      <div class="loader"></div>
     </div>
+</div>
 
-    <div class="bottom-container">
-      <div class="content-info"><h2 class="content-name">{title}</h2>
-        <div class="episode-list" id="episode-list"></div>
-     
-    </button></div>
-      
-
+    <div id="header"></div>
+    <main>
+      <div class="top-container">
   
-   
+        <div class="player-container">
+          <div class="player" id="video-player"></div>
+        </div>
+      </div>
+  
+      <div class="bottom-container">
+  
+        <div class="content-info">
+          <h2 class="content-name">{title}</h2>
+     
+          <button class="next-btn" style="display: none;">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <!-- Download Button with Link -->
+          <a id="download-link" class="download-btn" target="_blank">
+            <span class="material-symbols-outlined">
+              download
+            </span>
+            <p id="download">Download</p>
+          </a>
+        </div>
+  
+        <div class="episode-list" id="episode-list" style="visibility: hidden;"></div>
+      </div>
+  
+    </main>
+  
+  
+    <!-- Back to Home Button -->
 
-  </main>
+    <div id="footer"></div>
 
-
-
-
-  <div id="footer"></div>
-
-  <script src="/js/script.js"></script>
-  <script src="/js/content-page.js"></script>
- 
-</body>
-
+    <script src="/js/script.js"></script>
+    <script src="/js/content-page.js"></script>
+    <script>
+      window.addEventListener("load", () => {
+        document.body.classList.add("loaded");
+        document.getElementById("content").style.display = "block";
+      });
+    </script>
+  </body>
 </html>

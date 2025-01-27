@@ -166,3 +166,17 @@ document.querySelector(".next-btn").addEventListener("click", () => {
 
 // Initialize the episode list
 generateEpisodeList();
+
+
+
+
+// Fetch the folder ID from the meta tag
+const folderId = document.querySelector('meta[name="folder-id"]').getAttribute('content');
+const downloadLink = document.getElementById('download-link');
+
+// Set the download link URL
+if (folderId) {
+  downloadLink.href = `https://drive.google.com/drive/folders/${folderId}?usp=sharing`;
+} else {
+  console.error('Folder ID is missing!');
+}
