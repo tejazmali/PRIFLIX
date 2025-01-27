@@ -11,6 +11,7 @@ const FILES_TO_CACHE = [
   '/footer.html',
   '/css/home.css',
   '/css/loader.css',
+  "/css/content-page.css",
   '/js/script.js',
   '/js/lottie.js',
   '/Animation - 1737890084161.json',
