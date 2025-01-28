@@ -1,12 +1,12 @@
-// Function to get meta tag content by name
-function getMetaTagContent(name) {
-  const metaTag = document.querySelector(`meta[name="${name}"]`);
+// Function to get meta tag content by ID
+function getMetaTagContentById(id) {
+  const metaTag = document.getElementById(id);
   return metaTag ? metaTag.getAttribute("content") : null;
 }
 
-// Get API Key and Folder ID from meta tags
-const API_KEY = getMetaTagContent("api-key");
-const FOLDER_ID = getMetaTagContent("folder-id");
+// Get API Key and Folder ID from meta tags by ID
+const API_KEY = getMetaTagContentById("api-key");
+const FOLDER_ID = getMetaTagContentById("folder-id");
 
 // Validate meta tag values
 if (!API_KEY || !FOLDER_ID) {
@@ -14,7 +14,7 @@ if (!API_KEY || !FOLDER_ID) {
 }
 
 // Title placeholder replacement
-const title = document.querySelector('meta[name="title"]')?.content || "Default Title";
+const title = document.getElementById("title")?.content || "Default Title";
 document.querySelectorAll("*").forEach((el) => {
   if (el.childNodes.length === 1 && el.childNodes[0].nodeType === Node.TEXT_NODE) {
     el.textContent = el.textContent.replace(/{title}/g, title);
@@ -81,16 +81,12 @@ async function fetchEpisodes() {
   }
 }
 
-
-
 // Function to generate the episode list
 async function generateEpisodeList() {
   const episodeListContainer = document.getElementById("episode-list");
   episodeListContainer.innerHTML = `<p>Loading episodes...</p>`; // Show loading indicator
 
   episodes = await fetchEpisodes(); // Fetch episodes
-
-  
 
   // Clear loading indicator
   episodeListContainer.innerHTML = "";
@@ -161,22 +157,16 @@ document.querySelector(".next-btn").addEventListener("click", () => {
   }
 });
 
-// Function to navigate to the home page
-
-
 // Initialize the episode list
 generateEpisodeList();
 
-
-
-
 // Fetch the folder ID from the meta tag
-const folderId = document.querySelector('meta[name="folder-id"]').getAttribute('content');
-const downloadLink = document.getElementById('download-link');
+const folderId = document.getElementById("folder-id")?.getAttribute("content");
+const downloadLink = document.getElementById("download-link");
 
 // Set the download link URL
 if (folderId) {
   downloadLink.href = `https://drive.google.com/drive/folders/${folderId}?usp=sharing`;
 } else {
-  console.error('Folder ID is missing!');
+  console.error("Folder ID is missing!");
 }
