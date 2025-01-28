@@ -1,168 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta
+      name="google-site-verification"
+      content="J51TCtyYzza0m-GDzCJUnKRyn61OtV7l_uNQJaGDx-k"
+    />
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Priflix</title>
+    <meta
+      name="description"
+      content="Priflix is a private Netflix-like website designed by Tejas Mali, offering a personalized streaming experience with a variety of content."
+    />
+    <meta name="author" content="Tejas Mali" />
+    <meta
+      name="keywords"
+      content="private Netflix, streaming, movies, episodes, Priflix, Tejas Mali"
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/loader.css" />
+    <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#000000" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
 
-<head>
-  <meta name="google-site-verification" content="J51TCtyYzza0m-GDzCJUnKRyn61OtV7l_uNQJaGDx-k" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Priflix</title>
-  <meta name="description"
-    content="Priflix is a private Netflix-like website designed by Tejas Mali, offering a personalized streaming experience with a variety of content." />
-  <meta name="author" content="Tejas Mali" />
-  <meta name="keywords" content="private Netflix, streaming, movies, episodes, Priflix, Tejas Mali" />
-  <meta name="robots" content="index, follow" />
-  <link rel="stylesheet" href="/css/home.css" />
-  <link rel="stylesheet" href="/css/loader.css" />
-  <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
-  <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#000000" />
- <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <body class="index-page">
+    <style>
+      * {
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+        -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
+        outline: none !important;
+      }
+      .index-page .home-btn {
+        display: none;
+      }
+    </style>
 
-</head>
+    <div class="loader-overlay">
+      <div class="progress-bar"></div>
+      <div class="loader"></div>
+    </div>
+    <div id="header"></div>
 
-<body class="index-page">
-  <style>
-    * {
-      -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
-      -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
-      outline: none !important;
-    }
-    .index-page .home-btn {
-  display: none;
-}
+    <!-- Movie Grid Placeholder -->
+    <div class="movie-grid" id="movie-grid"></div>
 
-    
-  </style>
-  
-   <div class="loader-overlay">
-    <div class="progress-bar"></div>
-    <div class="loader"></div>
-  </div>
-  <div id="header"></div>
+    <script>
+      // Define all content dynamically
+      const contentData = [
+        {
+          title: "Attack on Titan S01",
+          image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FAgaD7s1vgIf4Soi3flAKN6Bte6u.jpg",
+          link: "/Content/Anime/Attack on Titan S01.html",
+        },
+        {
+          title: "Attack on Titan S02",
+          image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F19REaSRoNcO0KgMmrGUWtfpRKZY.jpg",
+          link: "/Content/Anime/Attack on Titan S02.html",
+        },
+        {
+          title: "Attack on Titan S03",
+          image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fynow2o9v0G341PLv1chCRDufCgc.jpg",
+          link: "/Content/Anime/Attack on Titan S03.html",
+        },
+        {
+          title: "Attack on Titan S04",
+          image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsfbSjGlLHsvFQrMUSNR9RrwZgV1.jpg",
+          link: "/Content/Anime/Attack on Titan S04.html",
+        },
 
-  <!-- Movie Grid Placeholder -->
-  <div class="movie-grid" id="movie-grid"></div>
+        {
+          title: "Death Note",
+          image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FtCZFfYTIwrR7n94J6G14Y4hAFU6.jpg",
+          link: "/Content/Anime/deathnote.html",
+        },
+        {
+          title: "Shin-chan: Fierceness That Invites Storm!",
+          image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FnfpPzlKiqkIGpI8HXpsrU6vnNdp.jpg",
+          link: "/Content/cartoon Movie/shinchan.html",
+        },
+        {
+          title: "Squid Game S2",
+          image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsXZhtWLo3fecavpDuOyJiayjt32.jpg",
+          link: "/Content/series/Squid Game S2.html",
+        },
+        {
+          title: "Ice Age (2002)",
+          image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fe%2Fgracenote%2Fe24be4e62720ebe500a7e7a3cf1a65cf.jpg",
+          link: "/Content/cartoon Movie/iceage.html",
+        },
+        {
+          title: "Ice Age: The Meltdown (2006)",
+          image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F1%2Fgracenote%2F1fe9f7ac98263ff48063ed05767ac60e.jpg",
+          link: "/Content/cartoon Movie/Ice Age The Meltdown 2006.html",
+        },
+        {
+          title: "Alice in Borderland S1",
+          image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsGwYqVqheXuevFOBC0BFhFvDU9T.jpg",
+          link: "/Content/series/alice in borderland S1.html",
+        },
+        {
+          title: "Alice in Borderland S2",
+          image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fs3ZAS0AGLQ668sFveVFinAd2zVy.jpg",
+          link: "/Content/series/alice in borderland S2.html",
+        },
+        {
+          title: "Scam 1992 – The Harshad Mehta Story S01",
+          image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FfiimZ9Xt5cPTPHNrbS4QautBXpU.jpg",
+          link: "/Content/series/Scam 1992 – The Harshad Mehta Story S01.html",
+        },
+      ];
 
-  <script>
-    // Define all content dynamically
-    const contentData = [ 
-      {
-        title: "Attack on Titan S01",
-        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FAgaD7s1vgIf4Soi3flAKN6Bte6u.jpg",
-        link: "/Content/Anime/Attack on Titan S01.html",
-      },
-    {
-        title: "Attack on Titan S02",
-        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F19REaSRoNcO0KgMmrGUWtfpRKZY.jpg",
-        link: "/Content/Anime/Attack on Titan S02.html",
-      },
-      {
-        title: "Attack on Titan S03",
-        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fynow2o9v0G341PLv1chCRDufCgc.jpg",
-        link: "/Content/Anime/Attack on Titan S03.html",
-      },
-      {
-        title: "Attack on Titan S04",
-        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsfbSjGlLHsvFQrMUSNR9RrwZgV1.jpg",
-        link: "/Content/Anime/Attack on Titan S04.html",
-      },
-   
-      {
-        title: "Death Note",
-        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FtCZFfYTIwrR7n94J6G14Y4hAFU6.jpg",
-        link: "/Content/Anime/deathnote.html",
-      },
-      {
-        title: "Shin-chan: Fierceness That Invites Storm!",
-        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FnfpPzlKiqkIGpI8HXpsrU6vnNdp.jpg",
-        link: "/Content/cartoon Movie/shinchan.html",
-      },
-      {
-        title: "Squid Game S2",
-        image:
-          "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsXZhtWLo3fecavpDuOyJiayjt32.jpg",
-        link: "/Content/series/Squid Game S2.html",
-      },
-      {
-        title: "Ice Age (2002)",
-        image:
-          "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fe%2Fgracenote%2Fe24be4e62720ebe500a7e7a3cf1a65cf.jpg",
-        link: "/Content/cartoon Movie/iceage.html",
-      },
-      {
-        title: "Ice Age: The Meltdown (2006)",
-        image:
-          "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F1%2Fgracenote%2F1fe9f7ac98263ff48063ed05767ac60e.jpg",
-        link: "/Content/cartoon Movie/Ice Age The Meltdown 2006.html",
-      },
-      {
-        title: "Alice in Borderland S1",
-        image:
-          "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsGwYqVqheXuevFOBC0BFhFvDU9T.jpg",
-        link: "/Content/series/alice in borderland S1.html",
-      },
-      {
-        title: "Alice in Borderland S2",
-        image:
-          "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fs3ZAS0AGLQ668sFveVFinAd2zVy.jpg",
-        link: "/Content/series/alice in borderland S2.html",
-      },
-      {
-        title: "Scam 1992 – The Harshad Mehta Story S01",
-        image:
-          "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FfiimZ9Xt5cPTPHNrbS4QautBXpU.jpg",
-        link: "/Content/series/Scam 1992 – The Harshad Mehta Story S01.html",
-      },
-    ];
+      // Function to dynamically generate movie grid
+      function generateMovieGrid() {
+        const movieGrid = document.getElementById("movie-grid");
+        contentData.forEach((content) => {
+          const movieThumbnail = document.createElement("img");
+          movieThumbnail.src = content.image;
+          movieThumbnail.alt = content.title;
+          movieThumbnail.className = "thumbnail";
+          movieThumbnail.onclick = () => (window.location.href = content.link);
 
-    // Function to dynamically generate movie grid
-    function generateMovieGrid() {
-      const movieGrid = document.getElementById("movie-grid");
-      contentData.forEach((content) => {
-        const movieThumbnail = document.createElement("img");
-        movieThumbnail.src = content.image;
-        movieThumbnail.alt = content.title;
-        movieThumbnail.className = "thumbnail";
-        movieThumbnail.onclick = () => (window.location.href = content.link);
+          movieGrid.appendChild(movieThumbnail);
+        });
+      }
 
-        movieGrid.appendChild(movieThumbnail);
+      // Load the movie grid dynamically
+      window.addEventListener("load", () => {
+        document.body.classList.add("loaded");
+        generateMovieGrid();
       });
-    }
+    </script>
 
-  // Load the movie grid dynamically
-  window.addEventListener("load", () => {
-      document.body.classList.add("loaded");
-      generateMovieGrid();
-    });
-  </script>
-
-  <script src="/js/script.js"></script>
-
-  <div id="footer"></div>
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("/service-worker.js")
-        .then(() => console.log("Service Worker registered successfully."))
-        .catch((error) =>
-          console.error("Service Worker registration failed:", error)
-        );
-    }
-  </script>
-  
-  <script src="js/pwa-app request.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js').then((registration) => {
-        console.log('Service Worker registered with scope:', registration.scope);
-      }).catch((error) => {
-        console.log('Service Worker registration failed:', error);
-      });
-    }
-  </script>
-</body>
-
+    <div id="footer"></div>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/service-worker.js")
+          .then(() => console.log("Service Worker registered successfully."))
+          .catch((error) =>
+            console.error("Service Worker registration failed:", error)
+          );
+      }
+    </script>
+    <script src="/js/script.js"></script>
+    <script src="js/pwa-app request.js"></script>
+  </body>
 </html>
