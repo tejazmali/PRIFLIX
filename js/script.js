@@ -103,20 +103,3 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-(function () {
-  const version = localStorage.getItem("cache_version") || new Date().getTime();
-  localStorage.setItem("cache_version", version);
-
-  document.querySelectorAll("script[src], link[rel='stylesheet']").forEach((el) => {
-    let src = el.getAttribute("src") || el.getAttribute("href");
-    if (src) {
-      el.setAttribute(
-        el.tagName === "SCRIPT" ? "src" : "href",
-        src.split("?")[0] + "?v=" + version
-      );
-    }
-  });
-
-  // Uncomment below to force a hard reload (use with caution)
-  //location.reload(true);
-})();
