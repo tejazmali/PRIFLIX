@@ -67,6 +67,14 @@ const contentData = [
         type: "Cartoon movies",
     },
     {
+        title: "Ice Age: Dawn of the Dinosaurs (2009)",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F5%2Fgracenote%2F54a4822fda75894d4ef2dd652e7ee0c9.jpg",
+
+        folderid: "1XjstRqK2ULtFatabNzzJDsdwPOw9JNck",
+        type: "Cartoon movies",
+    },
+    {
         title: "The Devil Wears Prada",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fa%2Fgracenote%2Fa0518bb3b03fd1194ed5c832e17cbe0c.jpg",
