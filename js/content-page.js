@@ -100,46 +100,46 @@ async function fetchEpisodes() {
 // Function to generate and display the episode list
 // Function to generate and display the episode list
 async function generateEpisodeList() {
-  const episodeListContainer = document.getElementById("episode-list"); // Get the container for the episode list
-  const nextButton = document.querySelector(".next-btn"); // Get the "Next" button
+  const episodeListContainer = document.getElementById("episode-list");
+  const nextButton = document.querySelector(".next-btn");
+  const playedEpisodeName = document.getElementById("played-episode-name"); // Get the played episode name element
 
-  episodeListContainer.innerHTML = `<p>Loading episodes...</p>`; // Show loading message
+  episodeListContainer.innerHTML = `<p>Loading episodes...</p>`;
+  episodes = await fetchEpisodes();
+  episodeListContainer.innerHTML = "";
 
-  episodes = await fetchEpisodes(); // Fetch episodes
-  episodeListContainer.innerHTML = ""; // Clear loading message
-
-  // If there’s only one episode, hide the episode list and next button
   if (episodes.length === 1) {
-    episodeListContainer.style.visibility = "hidden"; // Hide the episode list container
-    nextButton.style.display = "none"; // Hide the "Next" button
-    playEpisode(episodes[0].title, episodes[0].link); // Automatically play the only episode
+    episodeListContainer.style.visibility = "hidden";
+    nextButton.style.display = "none";
+    playedEpisodeName.style.display = "none"; // Hide the played episode name
+    playEpisode(episodes[0].title, episodes[0].link);
     return;
   }
 
-  // If there are no episodes, show a message
   if (episodes.length === 0) {
     episodeListContainer.innerHTML = `<p>No episodes available.</p>`;
     return;
   }
 
-  // Create and append episode elements to the container
+  playedEpisodeName.style.display = "block"; // Ensure it is visible when there are multiple episodes
+
   episodes.forEach((episode, index) => {
     const episodeElement = document.createElement("div");
-    episodeElement.classList.add("episode"); // Add CSS class
+    episodeElement.classList.add("episode");
     episodeElement.innerHTML = `
       <i class="fas fa-circle-play play-icon"></i>
       <span class="episode-title">${episode.title}</span>
       <i class="fas fa-chevron-right"></i>
     `;
-    episodeElement.onclick = () => playEpisode(episode.title, episode.link, episodeElement); // Set click event to play episode
-    episodeListContainer.appendChild(episodeElement); // Append episode to the container
+    episodeElement.onclick = () => playEpisode(episode.title, episode.link, episodeElement);
+    episodeListContainer.appendChild(episodeElement);
   });
 
-  // Automatically play the first episode if available
   if (episodes.length > 0) {
     playEpisode(episodes[0].title, episodes[0].link, episodeListContainer.querySelector(".episode"));
   }
 }
+
 
 
 // Function to play an episode

@@ -13,7 +13,6 @@ const FILES_TO_CACHE = [
   '/css/home.css',
   '/css/loader.css',
   "/css/content-page.css",
-  '/js/content-data.js',
   '/js/script.js',
   '/js/lottie.js',
   '/Animation - 1737890084161.json',

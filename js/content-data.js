@@ -67,6 +67,14 @@ const contentData = [
         type: "Cartoon movies",
     },
     {
+        title: "The Devil Wears Prada",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fa%2Fgracenote%2Fa0518bb3b03fd1194ed5c832e17cbe0c.jpg",
+
+        folderid: "1JB3aP5C8FWvc18ahowXKaYAwxX4seYUE",
+        type: "Movie",
+    },
+    {
         title: "Squid Game S2",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsXZhtWLo3fecavpDuOyJiayjt32.jpg",
