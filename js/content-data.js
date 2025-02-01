@@ -75,6 +75,24 @@ const contentData = [
         type: "Cartoon movies",
     },
     {
+        title: "Ralph Breaks the Internet 2018",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fc%2Fgracenote%2Fc4e00199eaa2d5d48a3709e431812fd9.jpg",
+
+        folderid: "1Kx5kc_0hrpOleaia1wcVQsRf3JTfM7BO",
+        type: "Cartoon movies",
+    },
+
+    {
+        title: "Truth or Dare",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F1%2Fgracenote%2F18dbf68449ab7cb675cf23da4bcaad5e.jpg",
+
+        folderid: "1QnCBGU5lIYV7CyUQrpq9U6Rf2yuXKdGk",
+        type: "Movie",
+    },
+
+    {
         title: "The Devil Wears Prada",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fa%2Fgracenote%2Fa0518bb3b03fd1194ed5c832e17cbe0c.jpg",
