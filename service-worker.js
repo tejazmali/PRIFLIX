@@ -1,5 +1,5 @@
 // Set cache version for your app
-const CACHE_VERSION = 'v3'; // Update this version when you make changes
+const CACHE_VERSION = 'v3.01'; // Update this version when you make changes
 const CACHE_NAME = `priflix-cache-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
 
