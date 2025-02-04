@@ -1,163 +1,266 @@
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-<header>
-  <img class="logo" onclick="window.location.href='/'" src="/Logo.png"></img>
-  <button id="install-button" style="display: none;" class="install-btn">
+  <style>
+    header {
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      color: #dc1a28;
+      padding: 15px;
+      text-align: left;
+      border-bottom: #dc1a27ed solid;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    header img {
+      width: 100px !important;
+      cursor: pointer;
+    }
+
+    /* Home Button Styling */
+    .home-btn {
+      background: linear-gradient(135deg, #dc1a28, #dc1a28);
+      color: #ffffff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+      transition: background 0.4s ease-in-out, transform 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out;
+      margin-right: 34.5px;
+      margin-left: -20px;
+      text-decoration: none;
+    }
+
+    .home-btn:hover {
+      background-color: #dc1a28;
+      transform: scale(1.05);
+    }
+
+    .home-btn:active {
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .home-btn i {
+      font-size: 16px;
+    }
+
+    /* Install Button Styling */
+    .install-btn {
+      border-radius: 50px;
+      padding: 10px 20px;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      position: relative;
+      z-index: 0;
+      transition: all 0.3s ease;
+      margin-right: 34.5px;
+      margin-left: -20px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .install-btn {
+        font-size: 13px;
+        padding: 10px 15px;
+      }
+    }
+
+    .install-btn::after {
+      content: "";
+      z-index: -1;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      left: 0;
+      top: 0;
+      border-radius: 50px;
+    }
+
+    .install-btn::before {
+      content: "";
+      background: linear-gradient(
+        45deg,
+        #ff0000,
+        #600000,
+        #ff0000,
+        #600000,
+        #ff0000,
+        #600000,
+        #ff0000,
+        #600000
+      );
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      background-size: 500%;
+      z-index: -1;
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      filter: blur(8px);
+      animation: glowing 20s linear infinite;
+      transition: opacity 0.3s ease-in-out;
+      border-radius: 50px;
+      opacity: 1;
+    }
+
+    @keyframes glowing {
+      0% {
+        background-position: 0 0;
+      }
+      50% {
+        background-position: 400% 0;
+      }
+      100% {
+        background-position: 0 0;
+      }
+    }
+
+    .install-btn:hover::before {
+      opacity: 1;
+    }
+
+    .install-btn:hover::after {
+      background: transparent;
+    }
+
+    .install-btn:hover {
+      color: #000;
+      font-weight: bold;
+    }
+
+    /* Search Bar Styling */
+    .searchbar {
+      display: flex;
+      align-items: center;
+      position: relative;
+      max-width: 450px;
+      width: 100%;
+    }
+
+    .input {
+      font-family: "Montserrat", sans-serif;
+      width: 100%;
+      max-width: 400px;
+      height: 45px;
+      padding-left: 2.5rem;
+      box-shadow: 0 0 0 1.5px #212123, 0 0 25px -17px #000;
+      backdrop-filter: blur(10px);
+      border: 0;
+      border-radius: 30px;
+      background-color: #2d2d2ddb;
+      opacity: 0.8;
+      outline: none;
+      color: #fff;
+      transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+      cursor: text;
+      margin-right: 30px;
+    }
+
+    .input::placeholder {
+      color: #bdbecb;
+    }
+
+    .input:hover {
+      box-shadow: 0 0 0 2.5px #2f303d, 0px 0px 25px -15px #000;
+    }
+
+    .input:active {
+      transform: scale(0.95);
+    }
+
+    .input:focus {
+      box-shadow: 0 0 0 2.5px #2f303d;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      color: #dc1a28;
+      opacity: 0.8;
+      width: 1rem;
+      height: 1rem;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Responsive Adjustments */
+    @media screen and (max-width: 1024px) {
+      .input {
+        max-width: 350px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .searchbar {
+        max-width: 80%;
+
+      }
+      .input {
+        max-width: 100%;
+        font-size: 14px;
+        height: 40px;
+        padding-left: 2rem;
+      }
+      .search-icon {
+        width: 0.9rem;
+        height: 0.9rem;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .searchbar {
+        max-width: 90%;
+        margin-left: 40px;
+      }
+      .input {
+        height: 38px;
+        font-size: 13px;
+        padding-left: 1.8rem;
+      }
+      .search-icon {
+        left: 0.8rem;
+        width: 0.8rem;
+        height: 0.8rem;
+      }
+    }
+  </style>
+  
+  <header>
+    <img class="logo" onclick="window.location.href='/'" src="/Logo.png" alt="Logo" />
+    <!-- Search bar container -->
+    <div class="searchbar">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input
+        id="query"
+        class="input"
+        type="search"
+        placeholder="Search..."
+        name="searchbar"
+      />
+    </div>
+    <!-- Install Button (hidden by default) -->
+    <button id="install-button" style="display: none;" class="install-btn">
       <i class="fa-solid fa-download"></i>
-  </button>
-  <button onclick="window.location.href='/'" class="home-btn">
-    <i class="fa-solid fa-home"></i>
-  </button>
-  
-</header>
+    </button>
+    <!-- Home Button -->
+    <button onclick="window.location.href='/'" class="home-btn">
+      <i class="fa-solid fa-home"></i>
+    </button>
+  </header>
+  <!-- Rest of your page content -->
+  <script>
+    // Your JavaScript code if needed
+  </script>
 
-<style>
-  
-header {
-  background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
-  color: #DC1A28;
-  padding: 15px;
-  text-align: left;
-  border-bottom: #dc1a27ed solid;
-  display: flex;
-  justify-content: space-between;
-  position: fixed; /* Keep header fixed at the top */
-  top: 0; /* Ensure it stays at the top */
-  width: 100%; /* Ensure it stretches across the page */
-  z-index: 1000; /* Ensure it stays on top of other content */
-  
-
-}
-
-header img {
-  width: 100px !important;
-  cursor: pointer;
-}
-
-
-
-/* General button styling */
-.home-btn {
-  background: linear-gradient(135deg, #DC1A28, #DC1A28); /* Red gradient on hover */
-  color: #ffffff; /* White icon color */
-  border: none; /* No border */
-  border-radius: 50px; /* Rounded edges for a pill shape */
-  padding: 10px 20px; /* Adjust padding for proportions */
-  display: inline-flex; /* Center the icon */
-  align-items: center; /* Vertically center icon */
-  justify-content: center; /* Horizontally center icon */
-  cursor: pointer; /* Pointer cursor on hover */
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4); /* Subtle shadow for depth */
-  transition: background 0.4s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transitions for background and other properties */
-  margin-right: 34.5px; /* Add spacing between buttons */
-  text-decoration: none; /* Remove underline (if used with links) */
-}
-
-/* Hover effect */
-.home-btn:hover {
-  background-color: #DC1A28;
-  transform: scale(1.05);
-}
-
-/* Active/pressed state */
-.home-btn:active {
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Minimized shadow */
-}
-
-/* Icon styling */
-.home-btn i {
-  font-size: 16px; /* Larger icon size */
-}
-
-/* Optional: Add text next to the icon (if needed) */
-.home-btn span {
-  margin-left: 10px; /* Space between icon and text */
-  font-size: 16px; /* Readable text size */
-  font-weight: bold; /* Bold text */
-  color: inherit; /* Inherit color from the button */
-}
-
-
-/* Button Styling */
-.install-btn {
-  padding: 1px 25px;
-  border: none;
-  outline: none;
-  color: #FFF;
-  font-size: 1.2rem;
-  cursor: pointer;
-  position: relative;
-  z-index: 0;
-  border-radius: 50px;
-  transition: all 0.3s ease;
-  margin-right: 40px;
-}
-
-@media screen and (max-width: 768px){
-  .install-btn{  
-    font-size: 13px;
-    padding: 5px 16px;
-  }
-}
-
-.install-btn::after {
-  content: "";
-  z-index: -1;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #000000;
-  left: 0;
-  top: 0;
-  border-radius: 50px;
-}
-
-/* Glow Effect */
-.install-btn::before {
-  content: "";
-  background: linear-gradient(
-    45deg,
-    #ff0000,
-    #600000,
-    #ff0000,
-    #600000,
-    #ff0000,
-    #600000,
-    #ff0000,
-    #600000
-  );
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background-size: 500%;
-  z-index: -1;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  filter: blur(8px);
-  animation: glowing 20s linear infinite;
-  transition: opacity .3s ease-in-out;
-  border-radius: 50px;
-  opacity: 1;
-}
-
-@keyframes glowing {
-  0% {background-position: 0 0;}
-  50% {background-position: 400% 0;}
-  100% {background-position: 0 0;}
-}
-
-/* Hover Effects */
-.install-btn:hover::before {
-  opacity: 1;
-}
-
-.install-btn:hover::after {
-  background: transparent;
-}
-
-.install-btn:hover {
-  color: #000;
-  font-weight: bold;
-}
-</style>

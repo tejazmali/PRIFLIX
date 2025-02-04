@@ -121,11 +121,12 @@ main {
   display: flex;
   align-items: center;
   padding: 12px;
-  background-color: #2c2c2c;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s; 
   gap: 12px;
+
+ 
 }
 
 .episode:hover {
@@ -316,3 +317,4 @@ margin-left: 6.8px;
   color: #fff;
   text-decoration: none;
 }
+
