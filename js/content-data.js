@@ -1,5 +1,41 @@
 const contentData = [
     {
+        title: "Mr. Robot S1",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F1aiNh5Gak36EdpdwhvWHIXzAj50.jpg",
+
+        folderid: "1-jS6jChfxw-3akR_w7gOmzmLEJ0YLThC",
+        type: "Series",
+
+    },
+    {
+        title: "Mr. Robot S2",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FmjqAWBXM6zoxmoeC3q9J6I1wl7R.jpg",
+
+        folderid: "1yHvChPOqw7fJRQRgnZ308nu2h_7JuXUO",
+        type: "Series",
+
+    },
+    {
+        title: "Mr. Robot S3",
+        image:
+            "https://image.tmdb.org/t/p/original/whtaWBtS3zauurpEdEMI61489Km.jpg",
+
+        folderid: "1xDm_o5fTkK0XozJxg0fPFrpM4SK9zrgL",
+        type: "Series",
+
+    },
+    {
+        title: "Mr. Robot S4",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F4PxMbpF3pv5B8eYw48hZ1hy16gr.jpg",
+
+        folderid: "1-YymiD6PWLAkcqYYpqdZY5TQIrSOM8im",
+        type: "Series",
+
+    },
+    {
         title: "Attack on Titan S01",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FAgaD7s1vgIf4Soi3flAKN6Bte6u.jpg",
