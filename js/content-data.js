@@ -129,6 +129,23 @@ const contentData = [
     },
 
     {
+        title: "The Ice Age Adventures of Buck Wild (2022)",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fa%2Fgracenote%2Fa0487bd730ee5b1868375ff72ed70a2c.jpg",
+
+        folderid: "16sqFChtQwsGimkKA5F3w1XKoMbNEDe08",
+        type: "Cartoon movies",
+    },
+    {
+        title: "Ice Age Scrat Tales S01",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FmTfYwY7DELH08SeO8LyUMe9Tvfr.jpg",
+
+        folderid: "1lUp9gDT-_GuS8pmSaFdf7hlpsZPe8dt5",
+        type: "Cartoon movies",
+    },
+
+    {
         title: "Ralph Breaks the Internet 2018",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fc%2Fgracenote%2Fc4e00199eaa2d5d48a3709e431812fd9.jpg",
