@@ -57,43 +57,7 @@
     <!-- Movie Grid Placeholder -->
     <div class="movie-grid" id="movie-grid"></div>
 
-    <script>
-// Function to dynamically generate movie grid
-function generateMovieGrid() {
-  const movieGrid = document.getElementById("movie-grid");
-  contentData.forEach((content) => {
-    const movieThumbnail = document.createElement("img");
-    movieThumbnail.src = content.image;
-    movieThumbnail.alt = content.title;
-    movieThumbnail.className = "thumbnail";
 
-    // Generate dynamic link for content-page.html with query parameters
-    const link = `/content-page.html?title=${encodeURIComponent(content.title)}&folderid=${encodeURIComponent(content.folderid)}`;
-    movieThumbnail.onclick = () => (window.location.href = link);
-
-    movieGrid.appendChild(movieThumbnail);
-  });
-}
-
-
-      // Load the movie grid dynamically
-      window.addEventListener("load", () => {
-        document.body.classList.add("loaded");
-        generateMovieGrid();
-      });
-    </script>
-
-    <div id="footer"></div>
-    <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("/service-worker.js")
-          .then(() => console.log("Service Worker registered successfully."))
-          .catch((error) =>
-            console.error("Service Worker registration failed:", error)
-          );
-      }
-    </script>
     <script src="/js/content-data.js?v2"></script>
     <script src="/js/script.js"></script>
     <script src="js/pwa-app request.js"></script>
