@@ -235,6 +235,104 @@
         height: 0.8rem;
       }
     }
+    /* Clear Button Styling for the Search Bar */
+.clear-icon {
+  position: absolute;
+  right: 1rem; /* Adjust as needed */
+  color: #dc1a28;
+  opacity: 0.8;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  display: none; /* Hidden by default */
+  z-index: 1;
+  transition: opacity 0.3s ease;
+  margin-right: 40px;
+}
+
+.clear-icon:hover {
+  opacity: 1;
+}
+
+@media screen and (max-width: 480px) {
+  .clear-icon {
+    right: 0.8rem;
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+}
+/* Hide the native clear button in search inputs for WebKit-based browsers */
+.input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+
+/* Search Results Container Styling */
+#search-results-container {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 70px; /* Adjust based on your header's height */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+
+ 
+  background-color: rgba(45, 45, 45, 0.95);
+  border: 1px solid #2f303d;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  z-index: 999;
+  max-height: 80vh;    /* Limit to 90% of the viewport height */
+  overflow-y: auto;    /* Enable vertical scrolling if content overflows */
+}
+
+/* Styling for the results list */
+#search-results-container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+}
+
+/* No results found style */
+.no-result {
+  padding: 8px 10px;
+  color: #fff;
+}
+
+/* Search result item styling */
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-bottom: 1px solid #2f303d;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-result-item:hover {
+  background-color: #3a3a3a;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+/* Thumbnail image for each search result */
+.result-image {
+  width: 60px;
+  height: 80px; /* Set a small fixed height */
+  object-fit: contain; /* Ensures the entire image is visible without cropping */
+
+  border-radius: 4px;
+}
+
+/* Title styling for search results */
+.result-title {
+  flex: 1;
+}
   </style>
   
   <header>
@@ -248,7 +346,10 @@
         type="search"
         placeholder="Search..."
         name="searchbar"
+        oninput="toggleClearButton()"
       />
+      <!-- Clear button (hidden by default) -->
+      <i id="clear-btn" class="fa-solid fa-xmark clear-icon" onclick="clearSearch()"></i>
     </div>
     <!-- Install Button (hidden by default) -->
     <button id="install-button" style="display: none;" class="install-btn">
@@ -258,6 +359,7 @@
     <button onclick="window.location.href='/'" class="home-btn">
       <i class="fa-solid fa-home"></i>
     </button>
+    <div id="search-results-container"></div>
   </header>
   <!-- Rest of your page content -->
   <script>
