@@ -57,6 +57,7 @@ let episodes = []; // Store fetched episodes
 let currentEpisodeIndex = 0; // Track the currently playing episode
 
 // Function to fetch episodes from Google Drive
+// Function to fetch episodes from Google Drive
 async function fetchEpisodes() {
   try {
     // Fetch files from Google Drive API
@@ -64,35 +65,50 @@ async function fetchEpisodes() {
       `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+name+contains+'E'&key=${API_KEY}&fields=files(name,id)`
     );
 
-    if (!response.ok) throw new Error(`Error: ${response.status} - ${response.statusText}`); // Handle HTTP errors
+    if (!response.ok)
+      throw new Error(`Error: ${response.status} - ${response.statusText}`); // Handle HTTP errors
 
     const data = await response.json(); // Parse response JSON
     if (!data.files?.length) {
-      console.warn("No files found in the folder."); // Log a warning if no files are found
+      console.warn("No files found in the folder.");
       return [];
     }
 
-    // Process and sort files
+    // If there's exactly one file, play it regardless of its name pattern.
+    if (data.files.length === 1) {
+      const file = data.files[0];
+      let episodeNumber = 1; // default to episode 1 if no episode number is found
+      const match = file.name.match(/(?:S\d+\s)?E(\d+)/i);
+      if (match) {
+        episodeNumber = parseInt(match[1]);
+      }
+      return [{
+        title: `Episode ${episodeNumber}`,
+        link: `https://drive.google.com/file/d/${file.id}/preview`,
+      }];
+    }
+
+    // For multiple files, process and sort them based on the episode number
     const sortedFiles = data.files
       .map((file) => {
         const match = file.name.match(/(?:S\d+\s)?E(\d+)/i); // Extract episode number from file name
-        return { ...file, episodeNumber: match ? parseInt(match[1]) : null }; // Add episodeNumber property
+        return { ...file, episodeNumber: match ? parseInt(match[1]) : null };
       })
-      .filter((file) => file.episodeNumber !== null) // Filter out files without valid episode numbers
+      .filter((file) => file.episodeNumber !== null) // Filter out files without a valid episode number
       .sort((a, b) => a.episodeNumber - b.episodeNumber); // Sort files by episode number in ascending order
 
     if (sortedFiles.length === 0) {
-      console.warn("No valid episodes found."); // Log a warning if no valid episodes are found
+      console.warn("No valid episodes found.");
       return [];
     }
 
     // Create episodes list in ascending order
     return sortedFiles.map((file) => ({
-      title: `Episode ${file.episodeNumber}`, // Set episode title
-      link: `https://drive.google.com/file/d/${file.id}/preview`, // Set episode preview link
+      title: `Episode ${file.episodeNumber}`,
+      link: `https://drive.google.com/file/d/${file.id}/preview`,
     }));
   } catch (error) {
-    console.error("Failed to fetch episodes:", error.message); // Log any errors during fetching
+    console.error("Failed to fetch episodes:", error.message);
     return [];
   }
 }
