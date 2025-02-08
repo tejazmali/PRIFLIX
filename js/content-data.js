@@ -120,6 +120,15 @@ const contentData = [
     },
 
     {
+        title: "Ice Age Collision Course (2016)",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fa%2Fgracenote%2Faa6c63de12c07543e254a9f1f3aede99.jpg",
+
+        folderid: "1jJbr5gzNs_7TMqg9Q5CGdUXysVH2oTEJ",
+        type: "Cartoon movies",
+    },
+
+    {
         title: "Ralph Breaks the Internet 2018",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fc%2Fgracenote%2Fc4e00199eaa2d5d48a3709e431812fd9.jpg",
