@@ -162,6 +162,15 @@ const contentData = [
         folderid: "1QnCBGU5lIYV7CyUQrpq9U6Rf2yuXKdGk",
         type: "Movie",
     },
+    {
+        title: "Life of PI",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fa%2Fgracenote%2Fa2a7ce8a1a1c0030a01c721557e67554.jpg",
+
+        folderid: "1tRZcDBvW-M5Oip6cFTtXr7hMK3h4R-pX",
+        type: "Movie",
+    },
+
 
     {
         title: "The Devil Wears Prada",
