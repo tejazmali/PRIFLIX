@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   let headerLoaded = false;
   let footerLoaded = false;
+  let fallbackTimeoutId;
 
   // Function to reset the loader and progress bar
   function resetLoader() {
@@ -18,6 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to complete loading and show content
   function completeLoading() {
+    if (fallbackTimeoutId) {
+      clearTimeout(fallbackTimeoutId);
+    }
     document.body.classList.add("loaded");
     const contentElement = document.getElementById("content");
     if (contentElement) {
@@ -26,10 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const progressBar = document.querySelector(".progress-bar");
     if (progressBar) {
       progressBar.style.width = "100%"; // Fill the progress bar
+      progressBar.style.animation = "none";
     }
   }
 
-  // Check if header and footer are loaded
+  // Check if both header and footer are loaded
   function checkAllContentLoaded() {
     if (headerLoaded && footerLoaded) {
       completeLoading();
@@ -37,117 +42,101 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Load header with error handling
-  fetch("/header.html")
-    .then((response) => response.text())
-    .then((data) => {
-      const headerElement = document.getElementById("header");
-      if (headerElement) {
-        headerElement.innerHTML = data;
-      }
-      // Call initializeMenuToggle only if defined
-      if (typeof initializeMenuToggle === "function") {
-        initializeMenuToggle();
-      }
-      headerLoaded = true;
-      checkAllContentLoaded();
-    })
-    .catch((error) => {
-      console.error("Error loading header:", error);
-      headerLoaded = true; // Allow the page to load even if header fails
-      checkAllContentLoaded();
-    });
+  function loadHeader() {
+    fetch("/header.html")
+      .then((response) => response.text())
+      .then((data) => {
+        const headerEl = document.getElementById("header");
+        if (headerEl) {
+          headerEl.innerHTML = data;
+        }
+        if (typeof initializeMenuToggle === "function") {
+          initializeMenuToggle();
+        }
+        headerLoaded = true;
+        checkAllContentLoaded();
+      })
+      .catch((err) => {
+        console.error("Error loading header:", err);
+        headerLoaded = true;
+        checkAllContentLoaded();
+      });
+  }
 
   // Load footer with error handling
-  fetch("/footer.html")
-    .then((response) => response.text())
-    .then((data) => {
-      const footerElement = document.getElementById("footer");
-      if (footerElement) {
-        footerElement.innerHTML = data;
-      }
-      footerLoaded = true;
-      checkAllContentLoaded();
-    })
-    .catch((error) => {
-      console.error("Error loading footer:", error);
-      footerLoaded = true; // Allow the page to load even if footer fails
-      checkAllContentLoaded();
-    });
+  function loadFooter() {
+    fetch("/footer.html")
+      .then((response) => response.text())
+      .then((data) => {
+        const footerEl = document.getElementById("footer");
+        if (footerEl) {
+          footerEl.innerHTML = data;
+        }
+        footerLoaded = true;
+        checkAllContentLoaded();
+      })
+      .catch((err) => {
+        console.error("Error loading footer:", err);
+        footerLoaded = true;
+        checkAllContentLoaded();
+      });
+  }
 
-  // Start the progress bar
+  // Fallback: Force complete loading after 10 seconds if header/footer haven't loaded
+  function startFallbackTimer() {
+    fallbackTimeoutId = setTimeout(() => {
+      console.warn("Fallback triggered: Forcing load completion.");
+      headerLoaded = true;
+      footerLoaded = true;
+      completeLoading();
+    }, 10000);
+  }
+
+  // Start the progress bar animation and reset loader
   function startProgressBar() {
-    resetLoader(); // Reset loader
+    resetLoader();
     const progressBar = document.querySelector(".progress-bar");
     if (progressBar) {
       progressBar.style.animation = "progressAnimation 1s linear forwards";
     }
   }
 
-  // Handle navigation or redirection
-  function handleNavigation(event) {
+  // Navigation handling: start progress bar on link clicks or before unload
+  function handleNavigation() {
     startProgressBar();
   }
 
-  // Listen for beforeunload for navigation away
   window.addEventListener("beforeunload", handleNavigation);
-
-  // For single-page apps or dynamic links
   document.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", (event) => {
-      startProgressBar();
-    });
+    link.addEventListener("click", handleNavigation);
   });
 
-  // Handle browser back/forward navigation
+  // When the user navigates using the browser back/forward buttons:
   window.addEventListener("popstate", () => {
-    resetLoader(); // Reset loader on back/forward navigation
-    setTimeout(() => {
+    // If the current URL indicates the home page, force a full page reload.
+    if (
+      window.location.pathname === "/" ||
+      window.location.pathname.toLowerCase() === "/index.html"
+    ) {
+      window.location.reload();
+    } else {
+      // For other pages, attempt to load header/footer via AJAX.
+      resetLoader();
       headerLoaded = false;
       footerLoaded = false;
-
-      // Force re-fetch of header with error handling
-      fetch("/header.html")
-        .then((response) => response.text())
-        .then((data) => {
-          const headerElement = document.getElementById("header");
-          if (headerElement) {
-            headerElement.innerHTML = data;
-          }
-          if (typeof initializeMenuToggle === "function") {
-            initializeMenuToggle();
-          }
-          headerLoaded = true;
-          checkAllContentLoaded();
-        })
-        .catch((error) => {
-          console.error("Error loading header on popstate:", error);
-          headerLoaded = true;
-          checkAllContentLoaded();
-        });
-
-      // Force re-fetch of footer with error handling
-      fetch("/footer.html")
-        .then((response) => response.text())
-        .then((data) => {
-          const footerElement = document.getElementById("footer");
-          if (footerElement) {
-            footerElement.innerHTML = data;
-          }
-          footerLoaded = true;
-          checkAllContentLoaded();
-        })
-        .catch((error) => {
-          console.error("Error loading footer on popstate:", error);
-          footerLoaded = true;
-          checkAllContentLoaded();
-        });
-    }, 100); // Small delay to simulate the reload
+      startFallbackTimer();
+      loadHeader();
+      loadFooter();
+    }
   });
 
-  // Page load completion fallback
-  window.addEventListener("load", () => {
-    completeLoading();
-  });
+  // Start the header/footer loading process with a fallback timer
+  startFallbackTimer();
+  loadHeader();
+  loadFooter();
+
+  // As a fallback, complete loading on window load event
+  window.addEventListener("load", completeLoading);
 });
 
 // Toggle the clear button and search results container based on input content
@@ -181,7 +170,7 @@ function updateSearchResults(query) {
   const lowerQuery = query.toLowerCase();
 
   // Filter contentData based on the title match (case-insensitive)
-  const filteredResults = contentData.filter(item =>
+  const filteredResults = contentData.filter((item) =>
     item.title.toLowerCase().includes(lowerQuery)
   );
   
@@ -195,13 +184,13 @@ function updateSearchResults(query) {
     li.classList.add("no-result");
     ul.appendChild(li);
   } else {
-    filteredResults.forEach(result => {
+    filteredResults.forEach((result) => {
       const li = document.createElement("li");
       li.className = "search-result-item";
       
       // Generate dynamic link with query parameters
       const link = `/content-page.html?title=${encodeURIComponent(result.title)}&folderid=${encodeURIComponent(result.folderid)}`;
-      li.onclick = function() {
+      li.onclick = function () {
         window.location.href = link;
       };
       
