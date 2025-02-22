@@ -155,6 +155,15 @@ const contentData = [
     },
 
     {
+        title: "Mufasa The Lion King",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fb%2Fgracenote%2Fbe69e9091157888531f62d5b1b92587a.jpg",
+
+        folderid: "1GIcbxrhkoNKE0lmLOGaMGRRmaCfLhQVs",
+        type: "Cartoon movies",
+    },
+
+    {
         title: "Truth or Dare",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F1%2Fgracenote%2F18dbf68449ab7cb675cf23da4bcaad5e.jpg",
@@ -211,6 +220,14 @@ const contentData = [
 
         folderid: "1TEXHFDJlUAzQm5wSik4gCTCFVeAJIInk",
         type: "Series",
+    },
+    {
+        title: "The Fast and the Furious: Tokyo Drift",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F3%2Fgracenote%2F3fcca785b083f2d25ba8becc95f840da.jpg",
+
+        folderid: "1Ui9XyTBMY0wRz_YR5qaOj9rY9QHx6AYd",
+        type: "Movie",
     },
 ];
 

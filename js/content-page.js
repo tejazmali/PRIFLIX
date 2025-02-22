@@ -57,7 +57,6 @@ let episodes = []; // Store fetched episodes
 let currentEpisodeIndex = 0; // Track the currently playing episode
 
 // Function to fetch episodes from Google Drive
-// Function to fetch episodes from Google Drive
 async function fetchEpisodes() {
   try {
     // Fetch files from Google Drive API
@@ -113,7 +112,7 @@ async function fetchEpisodes() {
   }
 }
 
-// Function to generate and display the episode list
+
 // Function to generate and display the episode list
 async function generateEpisodeList() {
   const episodeListContainer = document.getElementById("episode-list");
