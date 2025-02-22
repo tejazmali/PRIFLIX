@@ -61,5 +61,12 @@
     <script src="/js/content-data.js"></script>
     <script src="/js/script.js"></script>
     <script src="js/pwa-app request.js"></script>
+    <script>
+      // Check if the user is logged in by reading localStorage
+      if (localStorage.getItem('loggedIn') !== 'true') {
+        // Redirect to the login page if not logged in
+        window.location.href = 'access.html';
+      }
+    </script>
   </body>
 </html>

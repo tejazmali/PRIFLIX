@@ -1,5 +1,5 @@
 // Set cache version for your app
-const CACHE_VERSION = 'V10'; // Increment this version when making changes
+const CACHE_VERSION = 'V11'; // Increment this version when making changes
 const CACHE_NAME = `priflix-cache-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
 
@@ -9,6 +9,7 @@ const FILES_TO_CACHE = [
   '/offline.html',
   '/footer.html',
   '/header.html',
+  '/access.html',
   '/content-page.html',
   '/css/home.css',
   '/css/loader.css',
