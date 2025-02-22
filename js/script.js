@@ -5,40 +5,29 @@ document.addEventListener("DOMContentLoaded", function () {
   // Function to reset the loader and progress bar
   function resetLoader() {
     const progressBar = document.querySelector(".progress-bar");
-    progressBar.style.width = "0%"; // Reset progress bar width
-    progressBar.style.animation = "none"; // Stop animation
+    if (progressBar) {
+      progressBar.style.width = "0%"; // Reset progress bar width
+      progressBar.style.animation = "none"; // Stop animation
+    }
     document.body.classList.remove("loaded"); // Show loader
-    document.getElementById("content").style.display = "none"; // Hide content
+    const contentElement = document.getElementById("content");
+    if (contentElement) {
+      contentElement.style.display = "none"; // Hide content
+    }
   }
 
   // Function to complete loading and show content
   function completeLoading() {
     document.body.classList.add("loaded");
-    document.getElementById("content").style.display = "block";
+    const contentElement = document.getElementById("content");
+    if (contentElement) {
+      contentElement.style.display = "block";
+    }
     const progressBar = document.querySelector(".progress-bar");
     if (progressBar) {
       progressBar.style.width = "100%"; // Fill the progress bar
     }
   }
-
-  // Load header
-  fetch("/header.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.getElementById("header").innerHTML = data;
-      initializeMenuToggle(); // Ensure menu toggle works
-      headerLoaded = true;
-      checkAllContentLoaded();
-    });
-
-  // Load footer
-  fetch("/footer.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.getElementById("footer").innerHTML = data;
-      footerLoaded = true;
-      checkAllContentLoaded();
-    });
 
   // Check if header and footer are loaded
   function checkAllContentLoaded() {
@@ -47,11 +36,51 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Load header with error handling
+  fetch("/header.html")
+    .then((response) => response.text())
+    .then((data) => {
+      const headerElement = document.getElementById("header");
+      if (headerElement) {
+        headerElement.innerHTML = data;
+      }
+      // Call initializeMenuToggle only if defined
+      if (typeof initializeMenuToggle === "function") {
+        initializeMenuToggle();
+      }
+      headerLoaded = true;
+      checkAllContentLoaded();
+    })
+    .catch((error) => {
+      console.error("Error loading header:", error);
+      headerLoaded = true; // Allow the page to load even if header fails
+      checkAllContentLoaded();
+    });
+
+  // Load footer with error handling
+  fetch("/footer.html")
+    .then((response) => response.text())
+    .then((data) => {
+      const footerElement = document.getElementById("footer");
+      if (footerElement) {
+        footerElement.innerHTML = data;
+      }
+      footerLoaded = true;
+      checkAllContentLoaded();
+    })
+    .catch((error) => {
+      console.error("Error loading footer:", error);
+      footerLoaded = true; // Allow the page to load even if footer fails
+      checkAllContentLoaded();
+    });
+
   // Start the progress bar
   function startProgressBar() {
     resetLoader(); // Reset loader
     const progressBar = document.querySelector(".progress-bar");
-    progressBar.style.animation = "progressAnimation 1s linear forwards";
+    if (progressBar) {
+      progressBar.style.animation = "progressAnimation 1s linear forwards";
+    }
   }
 
   // Handle navigation or redirection
@@ -76,20 +105,39 @@ document.addEventListener("DOMContentLoaded", function () {
       headerLoaded = false;
       footerLoaded = false;
 
-      // Force re-fetch of header and footer
+      // Force re-fetch of header with error handling
       fetch("/header.html")
         .then((response) => response.text())
         .then((data) => {
-          document.getElementById("header").innerHTML = data;
-          initializeMenuToggle();
+          const headerElement = document.getElementById("header");
+          if (headerElement) {
+            headerElement.innerHTML = data;
+          }
+          if (typeof initializeMenuToggle === "function") {
+            initializeMenuToggle();
+          }
+          headerLoaded = true;
+          checkAllContentLoaded();
+        })
+        .catch((error) => {
+          console.error("Error loading header on popstate:", error);
           headerLoaded = true;
           checkAllContentLoaded();
         });
 
+      // Force re-fetch of footer with error handling
       fetch("/footer.html")
         .then((response) => response.text())
         .then((data) => {
-          document.getElementById("footer").innerHTML = data;
+          const footerElement = document.getElementById("footer");
+          if (footerElement) {
+            footerElement.innerHTML = data;
+          }
+          footerLoaded = true;
+          checkAllContentLoaded();
+        })
+        .catch((error) => {
+          console.error("Error loading footer on popstate:", error);
           footerLoaded = true;
           checkAllContentLoaded();
         });
@@ -102,35 +150,34 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
 // Toggle the clear button and search results container based on input content
 function toggleClearButton() {
-  const queryInput = document.getElementById('query');
-  const clearBtn = document.getElementById('clear-btn');
-  const searchResultsContainer = document.getElementById('search-results-container');
+  const queryInput = document.getElementById("query");
+  const clearBtn = document.getElementById("clear-btn");
+  const searchResultsContainer = document.getElementById("search-results-container");
   const query = queryInput.value.trim();
 
   if (query.length > 0) {
-    clearBtn.style.display = 'block';
-    searchResultsContainer.style.display = 'block';
+    clearBtn.style.display = "block";
+    searchResultsContainer.style.display = "block";
     updateSearchResults(query);
   } else {
-    clearBtn.style.display = 'none';
-    searchResultsContainer.style.display = 'none';
+    clearBtn.style.display = "none";
+    searchResultsContainer.style.display = "none";
   }
 }
 
 // Clear the search input and hide the clear button and search results
 function clearSearch() {
-  const queryInput = document.getElementById('query');
-  queryInput.value = '';
+  const queryInput = document.getElementById("query");
+  queryInput.value = "";
   queryInput.focus();
   toggleClearButton();
 }
 
 // Update the search results container by filtering data from contentData
 function updateSearchResults(query) {
-  const searchResultsContainer = document.getElementById('search-results-container');
+  const searchResultsContainer = document.getElementById("search-results-container");
   const lowerQuery = query.toLowerCase();
 
   // Filter contentData based on the title match (case-insensitive)
