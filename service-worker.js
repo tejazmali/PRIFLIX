@@ -8,7 +8,7 @@ const FILES_TO_CACHE = [
   '/index.html',
   '/offline.html',
   '/footer.html',
-
+  '/header.html',
   '/content-page.html',
   '/css/home.css',
   '/css/loader.css',
