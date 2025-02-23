@@ -125,6 +125,7 @@ main {
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s; 
   gap: 12px;
+  
 
  
 }
@@ -155,7 +156,7 @@ main {
   margin-left: 10px;
   margin-bottom: -1px;
   font-size: 1.3em;
-  font-family: saira, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Oswald", serif;
   color: #fff;
   text-align: left;
 }
