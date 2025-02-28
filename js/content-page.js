@@ -12,7 +12,7 @@ function getQueryParams() {
     folderid: params.get("folderid"), // Get the 'folderid' parameter
   };
 }
-
+ 
 // Function to update the page content based on query parameters
 function updateContentPage() {
   const { title: queryTitle, folderid: queryFolderId } = getQueryParams(); // Destructure query parameters
