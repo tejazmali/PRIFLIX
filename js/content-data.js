@@ -229,5 +229,24 @@ const contentData = [
         folderid: "1Ui9XyTBMY0wRz_YR5qaOj9rY9QHx6AYd",
         type: "Movie",
     },
+
+    {
+        title: "Enola Holmes",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fe%2Fgracenote%2Fe089f10def76e48787bc8acc269745ca.jpg",
+
+        folderid: "18cF3bXkqkYh2BKaetMq4fwPuUDBq45q3",
+        type: "Movie",
+    },
+
+
+    {
+        title: "Enola Holmes 2",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fd%2Fgracenote%2Fd551c377007710fc338b07569f745fca.jpg",
+
+        folderid: "1BrDOFjpYtnfSOSxKxBfj-lZ8x6XehL3w",
+        type: "Movie",
+    },
 ];
 
