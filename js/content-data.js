@@ -248,5 +248,13 @@ const contentData = [
         folderid: "1BrDOFjpYtnfSOSxKxBfj-lZ8x6XehL3w",
         type: "Movie",
     },
+    {
+        title: "The Truman Show",
+        image:
+            "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fmetadata-static.plex.tv%2F5%2Fgracenote%2F58a340b72f0aabab670a993d7476aaca.jpg",
+
+        folderid: "1ZpeMA3SntuZS3ZQk7Bd7GyQL9uEHfo8j",
+        type: "Movie",
+    },
 ];
 
