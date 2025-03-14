@@ -256,5 +256,13 @@ const contentData = [
         folderid: "1ZpeMA3SntuZS3ZQk7Bd7GyQL9uEHfo8j",
         type: "Movie",
     },
+    {
+        title: "Lucky Baskhar",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fc%2Fgracenote%2Fc3a704b55ef6b15d1f929243abccb03d.jpg",
+
+        folderid: "1SulqE1WMqj-4y1JBPHzxKSEJcmJ_9PN5",
+        type: "Movie",
+    },
 ];
 
