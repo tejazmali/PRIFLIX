@@ -163,6 +163,35 @@ const contentData = [
         type: "Cartoon movies",
     },
 
+
+
+    {
+        title: "Doraemon in Nobita's Great Adventure to the South Seas",
+        image:
+            "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FhLfnLv6DDPz6DL5vFjb1u3nx5lq.jpg",
+
+        folderid: "1XpZOkSKlpm3jLd2UTaa57wKlA1Uqzo5K",
+        type: "Cartoon movies",
+    },
+
+    {
+        title: "Doraemon Nobita's Three Visionary Swordsmen",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Foll0P8SNBrz5vafdq8MDkCyqUEJ.jpg",
+
+        folderid: "1K2snYC39KhXsyfJXEUFRl6vyXiHDVHT4",
+        type: "Cartoon movies",
+    },
+
+    {
+        title: "Doraemon Horror EPs",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F9ZN1P32SHviL3SV51qLivxycvcx.jpg",
+
+        folderid: "14xjH6P1qv8LLl2yTJ2_qvwLzDTeQio8_",
+        type: "Cartoon series",
+    },
+
     {
         title: "Truth or Dare",
         image:
