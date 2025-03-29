@@ -200,6 +200,15 @@ const contentData = [
         type: "Movie",
     },
     {
+        title: "Searching",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F5%2Fgracenote%2F590da9fdcf01d06770beb8b9b1d94072.jpg",
+
+        folderid: "1ZoR3CmNfryitPpVDkipCOVXqkGCSMFfn",
+        type: "Movie",
+    },
+    
+    {
         title: "Mardaani 2014",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F5%2Fgracenote%2F54fe6acd5b36dccc91b8f2fa7e32b5fa.jpg",
