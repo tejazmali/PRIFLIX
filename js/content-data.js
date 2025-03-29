@@ -191,7 +191,30 @@ const contentData = [
         folderid: "14xjH6P1qv8LLl2yTJ2_qvwLzDTeQio8_",
         type: "Cartoon series",
     },
+    {
+        title: "CTRL",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Ff%2Fgracenote%2Ffadd5e899723cc47a343fbefb255fbff.jpg",
 
+        folderid: "1Tl9efmBmuVQO_5Vq0pQUFqESycZW5ZHi",
+        type: "Movie",
+    },
+    {
+        title: "Mardaani 2014",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F5%2Fgracenote%2F54fe6acd5b36dccc91b8f2fa7e32b5fa.jpg",
+
+        folderid: "173tU5ohMT2Eij5QkIpn0XMj3FeHtYjxV",
+        type: "Movie",
+    },
+    {
+        title: "3 Idiots",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F9%2Fgracenote%2F9b1b00f5202b6eac3d365aac0a505bd0.jpg",
+
+        folderid: "1Yt5XwbPfeA73oazfZNpSZLHTREHlwizk",
+        type: "Movie",
+    },
     {
         title: "Truth or Dare",
         image:
