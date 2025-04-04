@@ -244,6 +244,16 @@ const contentData = [
 
 
     {
+        title: "Urban Myths 2022",
+        image:
+            "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fmetadata-static.plex.tv%2Ff%2Fgracenote%2Ffc7e59e5036c0619a7c6f0ffc96f0b29.jpg",
+
+        folderid: "1LE0a4rPgXdeILFuG3WlB04W5o6VkB-Iy",
+        type: "Movie",
+    },
+
+
+    {
         title: "Mardaani 2014",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F5%2Fgracenote%2F54fe6acd5b36dccc91b8f2fa7e32b5fa.jpg",
