@@ -182,7 +182,7 @@ const contentData = [
         folderid: "1K2snYC39KhXsyfJXEUFRl6vyXiHDVHT4",
         type: "Cartoon movies",
     },
-
+    
     {
         title: "Doraemon Horror EPs",
         image:
@@ -214,6 +214,22 @@ const contentData = [
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fb%2Fgracenote%2Fbcb81d59b292170f9fbae7c75cac2572.jpg",
 
         folderid: "1_rKzaRjkA71uY68LHa9_Ge7gHWGszY4E",
+        type: "Movie",
+    },
+    {
+        title: "Memento",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Ff%2Fgracenote%2Ff953b010d9216fbd78c0aca11d1dc3b3.jpg",
+
+        folderid: "1oviQPE5Zea7ZsljnbxsCIgvfbIpIzHlU",
+        type: "Movie",
+    },
+    {
+        title: "Tenet",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fe%2Fgracenote%2Fe8c260df1f612494392ae154abfc9bdf.jpg",
+
+        folderid: "1VmlRq28s1p6XIG4HVr5ox3DI1VksnRXg",
         type: "Movie",
     },
 
