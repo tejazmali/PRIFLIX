@@ -321,6 +321,14 @@ const contentData = [
         type: "Series",
     },
     {
+        title: "Hijack S1",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FszDEqqarPi3YqiPLevm7LObYrDJ.jpg",
+
+        folderid: "1Rq8T0hKFNgu7qYx66D37CPqOofeawzbO",
+        type: "Series",
+    },
+    {
         title: "Scam 1992 – The Harshad Mehta Story S01",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FfiimZ9Xt5cPTPHNrbS4QautBXpU.jpg",
