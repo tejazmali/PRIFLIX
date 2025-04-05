@@ -1,0 +1,564 @@
+/* Streaming Page Styles */
+
+/* Main Content Area */
+.streaming-content {
+    padding-top: 60px;
+    background-color: var(--dark-bg);
+}
+
+/* Video Section */
+.video-section {
+    width: 100%;
+    background-color: black;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-controls {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: #0a0a0a;
+    color: white;
+}
+
+.episode-info {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.episode-info h3 {
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+.control-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.8rem;
+}
+
+.prev-btn, .next-btn, .episodes-btn {
+    padding: 0.7rem 1.2rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+}
+
+.prev-btn:hover, .next-btn:hover, .episodes-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.next-btn {
+    background-color: var(--primary-color);
+}
+
+.next-btn:hover {
+    background-color: #f4121c;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Content Details Section */
+.content-details {
+    position: relative;
+    padding: 2rem 0;
+    overflow: hidden;
+}
+
+.content-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-size: cover;
+    background-position: center top;
+    z-index: 0;
+    opacity: 0.4;
+}
+
+.content-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(20, 20, 20, 0.7) 0%, var(--dark-bg) 100%);
+}
+
+.details-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    gap: 2rem;
+}
+
+.content-poster {
+    flex: 0 0 300px;
+}
+
+.content-poster img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.content-info {
+    flex: 1;
+    color: white;
+}
+header img {
+    width: 120px !important;
+    cursor: pointer;
+  }
+.content-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.content-meta {
+    margin-bottom: 1rem;
+    color: var(--secondary-text);
+}
+
+.separator {
+    margin: 0 0.5rem;
+}
+
+.content-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.genre-tag {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.content-overview {
+    margin-bottom: 2rem;
+}
+
+.content-overview h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.content-overview p {
+    line-height: 1.6;
+    color: var(--secondary-text);
+}
+
+.content-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.action-btn {
+    padding: 0.7rem 1.2rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-decoration: none;
+}
+
+.action-btn:first-child {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.action-btn:last-child {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Episodes Section */
+.episodes-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.episodes-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.episodes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.episode-card {
+    background-color: var(--lighter-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.episode-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.episode-thumbnail {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    background-color: #333;
+    overflow: hidden;
+}
+
+.episode-card::before {
+    content: attr(data-index);
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.episode-thumbnail i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s ease;
+}
+
+.episode-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.episode-card:hover .episode-thumbnail img {
+    transform: scale(1.05);
+}
+
+.episode-card:hover .episode-thumbnail i {
+    color: var(--primary-color);
+}
+
+.episode-thumbnail::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.episode-card:hover .episode-thumbnail::after {
+    opacity: 1;
+}
+
+.episode-info {
+    padding: 1rem;
+}
+
+.episode-rating {
+    display: inline-block;
+    color: #ffc107;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.episode-rating i {
+    margin-right: 0.3rem;
+}
+
+.episode-title {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.episode-description {
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+    height: 2.4rem; /* 3 lines of text */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* Cast Section */
+.cast-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem 3rem;
+}
+
+.cast-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.cast-container {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+}
+
+.cast-card {
+    min-width: 140px;
+    background-color: var(--lighter-dark);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cast-photo {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.cast-info {
+    padding: 0.8rem;
+}
+
+.cast-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+}
+
+.cast-character {
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+}
+
+/* Similar Content Section */
+.similar-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem 4rem;
+}
+
+.similar-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.similar-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.similar-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.similar-card:hover {
+    transform: scale(1.05);
+}
+
+.similar-poster {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+}
+
+.similar-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.8rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    font-size: 0.9rem;
+}
+
+/* Detailed Episode Info Styles */
+.detailed-episode-info {
+    text-align: left;
+    padding: 0.5rem 0;
+}
+
+.detailed-episode-info .episode-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.detailed-episode-info .episode-meta {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+}
+
+.detailed-episode-info .air-date {
+    display: flex;
+    align-items: center;
+}
+
+.detailed-episode-info .air-date::before {
+    content: "\f073";
+    font-family: "Font Awesome 5 Free";
+    margin-right: 0.5rem;
+}
+
+.detailed-episode-info .rating {
+    color: #ffc107;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.detailed-episode-info .rating i {
+    font-size: 0.9rem;
+}
+
+.detailed-episode-info .episode-overview {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--secondary-text);
+    max-height: 3.6rem; /* 2 lines */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 992px) {
+    .details-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .content-poster {
+        flex: 0 0 250px;
+        max-width: 250px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .content-genres {
+        justify-content: center;
+    }
+    
+    .content-actions {
+        justify-content: center;
+    }
+    
+    .similar-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .control-buttons {
+        flex-wrap: wrap;
+    }
+    
+    .prev-btn, .next-btn, .episodes-btn {
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .content-header h1 {
+        font-size: 2rem;
+    }
+    
+    .episodes-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .details-container {
+        padding: 0 1rem;
+    }
+    
+    .content-header h1 {
+        font-size: 1.7rem;
+    }
+    
+    .episodes-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .similar-container {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+} 

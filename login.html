@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Priflix</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#e50914">
+    <meta name="description" content="Your Personal Streaming Platform">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Priflix">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Favicon and Apple Touch Icons -->
+    <link rel="icon" type="image/png" sizes="196x196" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('https://assets.nflxext.com/ffe/siteui/vlv3/9134db96-10d6-4a64-a619-a21da22f8999/a449fabb-05e4-4c8a-b062-b0bec7d03085/IN-en-20240115-trifectadaily-perspective_alpha_website_large.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+        }
+        .header {
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        .logo {
+            height: 45px;
+            cursor: pointer;
+        }
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0 20px;
+        }
+        .login-box {
+            background: rgba(0, 0, 0, 0.75);
+            padding: 60px 68px;
+            border-radius: 4px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+            color: white;
+            min-width: 380px;
+            max-width: 450px;
+            margin: 90px 0;
+        }
+        .login-box h1 {
+            margin: 0 0 30px 0;
+            font-size: 32px;
+            font-weight: 500;
+        }
+        .login-form input {
+            width: 100%;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            background: #333;
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .login-form input::placeholder {
+            color: #8c8c8c;
+        }
+        .login-form input:focus {
+            background: #454545;
+            outline: none;
+        }
+        .login-form button {
+            width: 100%;
+            padding: 16px;
+            margin-top: 24px;
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .login-form button:hover {
+            background-color: #f40612;
+        }
+        .error-message {
+            color: #e87c03;
+            margin-top: 16px;
+            font-size: 14px;
+            display: none;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #757575;
+            text-align: center;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #757575;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <img class="logo" src="/Logo.png" alt="Priflix Logo" />
+    </header>
+
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Sign In</h1>
+            <form class="login-form" id="loginForm" onsubmit="return checkPassword(event)">
+                <input type="password" id="password" placeholder="Enter password" required>
+                <button type="submit">Sign In</button>
+                <p class="error-message" id="errorMessage">Sorry, wrong password. Please try again.</p>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Priflix. This is a website for personal use only</p>
+        <p>Designed by <a href="https://tejasmali.vercel.app" target="_blank" rel="noopener noreferrer">Tejas Mali</a></p>
+    </footer>
+
+    <script>
+        // Check if user is already authenticated
+        if (localStorage.getItem('isAuthenticated') === 'true') {
+            window.location.href = 'index.html';
+        }
+
+        function checkPassword(event) {
+            event.preventDefault();
+            const password = document.getElementById('password').value;
+            const correctPassword = 'Meow<3';
+            
+            if (password === correctPassword) {
+                localStorage.setItem('isAuthenticated', 'true');
+                window.location.href = 'index.html';
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('password').value = '';
+            }
+            return false;
+        }
+
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+
+        // Add to Home Screen prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+    </script>
+</body>
+</html> 

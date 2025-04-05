@@ -1,91 +1,138 @@
+# DriveStream - Stream from Google Drive
 
-
-# Priflix Private Netflix
-
-**Priflix Private Netflix** is a personal media streaming platform that lets you create your very own Netflix-like experience. With seamless integration with Google Drive for content fetching, you can easily add and manage your personal movie and anime collection and enjoy them from anywhere.
+DriveStream is a web application that allows you to create your own Netflix-like streaming service using Google Drive as content storage. This application is built with HTML, CSS, and vanilla JavaScript.
 
 ## Features
 
-- **Personal Media Library:** Add your favorite movies, TV shows, and anime to create a custom streaming experience.
-- **Google Drive Integration:** Automatically fetch and stream content stored on your Google Drive.
-- **Automatic Content Arrangement:** Once content is added, it is automatically arranged in-line for a smooth browsing experience.
-- **Responsive Design:** Enjoy a clean, modern interface that works on both desktop and mobile devices.
-- **Private & Secure:** Designed for personal use, keeping your collection accessible only to you.
-- **Easy Setup & Customization:** Quick installation process and flexible configuration options to suit your needs.
+- Netflix-style user interface
+- Direct integration with Google Drive API to fetch content
+- Stream movies and series directly from Google Drive
+- Responsive design that works on desktop and mobile devices
+- Search functionality
+- Content categories (Movies, Series, Anime, Cartoons)
+- Episode browsing with automatic episode number detection
+- "Next Episode" functionality for series
+- "My List" feature to save favorite content
+- Direct URL access to specific content via query parameters
+- Mobile-friendly video player
 
-## Getting Started
+## Prerequisites
 
-Follow these instructions to set up your own instance of Priflix Private Netflix.
+Before you can use this application, you'll need:
 
-### Prerequisites
+1. A Google Cloud Platform account to create an API key
+2. Google Drive folder(s) with your content
+3. A web server or hosting service to deploy the application
 
-- **Node.js & npm:** Ensure you have Node.js (v12 or later) and npm installed on your system.
-- **Google Drive API Credentials:** You will need to create and configure your Google API credentials to enable content fetching.
-- **Git:** To clone the repository.
+## Setup
 
-### Installation
+1. Clone or download this repository
+2. Create a Google Cloud Platform project and enable the Google Drive API
+3. Create an API key in Google Cloud Console
+4. Update the `DRIVE_API_KEY` in `config.js` with your API key
+5. Update the `contentData` array in `content-data.js` with your own content data
+6. Host the files on a web server or deploy to a hosting service
 
-1. **Clone the Repository:**
+## Google Drive API Integration
 
-   ```bash
-   git clone https://github.com/tejazmali/priflix-private.netflix.git
-   cd priflix-private.netflix
-   ```
+This application now includes full Google Drive API integration:
 
-2. **Install Dependencies:**
+1. **API Key Configuration**: Set your Google Drive API key in the config.js file
+2. **Dynamic Content Fetching**: Episodes are dynamically fetched from Google Drive folders
+3. **Smart Episode Detection**: Automatically detects episode numbers from filenames (e.g., "S01E01")
+4. **Sorting**: Episodes are automatically sorted in the correct order
+5. **Direct URL Access**: Access content directly via URL parameters
 
-   ```bash
-   npm install
-   ```
+### Getting a Google Drive API Key
 
-3. **Set Up Google Drive API:**
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project
+3. Enable the Google Drive API
+4. Create credentials (API Key)
+5. Restrict the API key to Google Drive API only
+6. Copy the API key and paste it in your config.js file
 
-   - Visit the [Google Developers Console](https://console.developers.google.com/) and create a new project.
-   - Enable the Google Drive API for your project.
-   - Create OAuth 2.0 credentials and download the `credentials.json` file.
-   - Place the `credentials.json` file in the project root or in a designated configuration folder.
-   - Update the configuration file (e.g., `.env` or `config.js`) with your Google API credentials and any additional settings.
+## How to Use
 
-4. **Configure Your Media Collection:**
+### Preparing Content Files in Google Drive
 
-   - **Content Folder:** Create a folder named **ld** in your Google Drive. This folder is used for fetching content.
-   - **Public Access:** Ensure the **ld** folder is set to public. Only public folders can be fetched automatically by the application.
-   - **Automatic Arrangement:** Once your media files (movies and anime) are added to the **ld** folder, the service will automatically arrange them in-line for a seamless viewing experience.
-   - Update the configuration file with the folder ID of your **ld** folder and any desired streaming settings.
+1. Organize your content into folders on Google Drive
+2. Share the folders with "Anyone with the link can view" permissions
+3. For series with multiple episodes, name your files with episode numbers (e.g., "S01E01 - Episode Name.mp4")
+4. Get the folder IDs from the URLs (the long string of characters in the URL)
 
-### Running the Application
+### Adding Content to the Application
 
-Start the development server with:
+To add content to the application, edit the `contentData` array in `content-data.js` with your content information:
 
-```bash
-npm start
+```javascript
+const contentData = [
+    {
+        title: "Movie Title",
+        image: "URL to image/poster",
+        folderid: "Google Drive Folder ID",
+        type: "Movie" // or "Series", "Anime", "Cartoon movies", "Cartoon series"
+    },
+    // Add more content items...
+];
 ```
 
-Then, open your browser and navigate to `http://localhost:3000` (or your specified port) to access your personal streaming platform.
+### Direct URL Access
 
-## Usage
+You can directly access specific content using URL parameters:
 
-- **Dashboard:** Access your collection and browse through your movies and anime.
-- **Search & Filter:** Quickly find your desired content using the built-in search and filter features.
-- **Playback:** Click on any item to start streaming directly from your Google Drive.
-- **Customization:** Adjust settings, change themes, or update the configuration to better suit your preferences.
+```
+https://your-site.com/index.html?folderid=YOUR_FOLDER_ID&title=Content%20Title&type=Movie
+```
 
-## Contributing
+The following URL parameters are supported:
+- `folderid`: The Google Drive folder ID containing your content (required)
+- `title`: The title to display for the content (optional)
+- `type`: The content type - "Movie", "Series", "Anime", etc. (optional, defaults to "Series")
 
-Contributions are welcome! If you have suggestions, bug reports, or improvements, please submit an issue or create a pull request. Ensure your code adheres to the project’s coding standards and include relevant tests where applicable.
+## Files in this Project
 
-1. Fork the repository.
-2. Create your feature branch: `git checkout -b feature/YourFeatureName`
-3. Commit your changes: `git commit -m 'Add Your Feature'`
-4. Push to the branch: `git push origin feature/YourFeatureName`
-5. Open a pull request.
+- `index.html` - Main HTML structure with meta tags for Google Drive API
+- `styles.css` - CSS styling for the Netflix-like interface
+- `config.js` - Configuration settings including Google Drive API key
+- `content-data.js` - Content data array with all movies and series
+- `app.js` - Main application code with Google Drive API integration
 
+## Google Drive Integration
 
-## Acknowledgements
+This application uses Google Drive as content storage and the Google Drive API for content retrieval:
 
-- **Google Drive API:** Thanks to the Google team for the robust API that makes content fetching seamless.
-- **Open Source Community:** Appreciation to all contributors and the community who continuously improve this project.
+1. **Direct File Access for Movies**: The application automatically fetches and plays the first video file found in movie folders without requiring user selection
+2. **Episode Browsing for Series**: For TV shows, anime, and cartoon series, the application extracts episode numbers and displays them in order for selection
+3. **Smart File Detection**: Automatically identifies video files in folders using MIME type detection
+4. **Direct URL Access**: Access specific content by folder ID with URL parameters that specify content type
 
----
+### URL Parameters
 
-Any Problem ? - [CONTACT ME HERE](https://tejasmali.vercel.app/#contact)
+You can directly access specific content using URL parameters:
+
+```
+https://your-site.com/index.html?folderid=YOUR_FOLDER_ID&title=Content%20Title&type=Movie
+```
+
+The following URL parameters are supported:
+- `folderid`: The Google Drive folder ID containing your content (required)
+- `title`: The title to display for the content (optional)
+- `type`: The content type - "Movie", "Series", "Anime", etc. (optional, defaults to "Series")
+
+## Limitations and Considerations
+
+- For best results, name your episode files with a clear episode number format (e.g., "S01E01")
+- Google Drive API has usage limits - for high traffic sites, implement caching strategies
+- This application doesn't include user authentication - add Firebase Auth or similar for user management
+- For production use, implement server-side components to securely manage API keys
+
+## License
+
+This project is intended for educational purposes only.
+
+## Disclaimer
+
+This application is not affiliated with, endorsed by, or in any way officially connected with Netflix or Google. All product names, logos, and brands are property of their respective owners.
+
+Using this application to stream copyrighted content that you don't have the rights to may violate copyright laws. Always ensure you have the proper rights to the content you're streaming. 

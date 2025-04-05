@@ -381,3 +381,8 @@ const contentData = [
     },
 ];
 
+
+
+
+// Export the content data for use in other files
+window.contentData = contentData;

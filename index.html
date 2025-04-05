@@ -1,72 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta
-      name="google-site-verification"
-      content="J51TCtyYzza0m-GDzCJUnKRyn61OtV7l_uNQJaGDx-k"
-    />
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Priflix</title>
-    <meta
-      name="description"
-      content="Priflix is a private Netflix-like website designed by Tejas Mali, offering a personalized streaming experience with a variety of content."
-    />
-    <meta name="author" content="Tejas Mali" />
-    <meta
-      name="keywords"
-      content="private Netflix, streaming, movies, episodes, Priflix, Tejas Mali"
-    />
-    <meta name="robots" content="index, follow" />
-    <link rel="stylesheet" href="/css/home.css" />
-    <link rel="stylesheet" href="/css/loader.css" />
-    <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#000000" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-  </head>
+    <!-- Google Drive API Meta Tags -->
 
-  <body class="index-page">
-    <style>
-      * {
-        -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
-        -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
-        outline: none !important;
-      }
-      .index-page .home-btn {
-        display: none;
-      }
-    </style>
-
-    <div class="loader-overlay">
-      <div class="progress-bar"></div>
-      <div class="loader"></div>
-    </div>
-    <div id="header"></div>
-
-    <!-- Movie Grid Placeholder -->
-    <div class="movie-grid" id="movie-grid"></div>
-
-<div id="footer"></div>
-    <script src="/js/content-data.js"></script>
-    <script src="/js/script.js"></script>
-    <script src="js/pwa-app request.js"></script>
+    <meta id="title" content="Priflix">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logo.jpg">
+</head>
+<body>
     <script>
-      // Check if the user is logged in by reading localStorage
-      if (localStorage.getItem('loggedIn') !== 'true') {
-        // Redirect to the login page if not logged in
-        window.location.href = 'access.html';
-      }
+        // Check authentication
+        if (!localStorage.getItem('isAuthenticated')) {
+            window.location.href = 'login.html';
+        }
     </script>
-  </body>
-</html>
+    <!-- Header/Navigation -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img class="logo" onclick="window.location.href='/'" src="/Logo.png" alt="Logo" />
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#movies">Movies</a></li>
+                    <li><a href="#series">Series</a></li>
+                    <li><a href="#anime">Anime</a></li>
+                    <li><a href="#cartoons">Cartoons</a></li>
+                    <li><a href="#mylist">My List</a></li>
+                </ul>
+            </nav>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search for movies...">
+                    <button id="searchBtn"><i class="fas fa-search"></i></button>
+                </div>
+               
+            </div>
+            
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner" id="heroBanner">
+        <!-- Content will be dynamically added here -->
+        <div class="hero-content">
+            <h2 class="hero-title">Loading...</h2>
+            <p class="hero-description">Please wait while we load content...</p>
+            <div class="hero-buttons">
+                <button class="play-btn"><i class="fas fa-play"></i> Play</button>
+                <button class="more-info-btn"><i class="fas fa-info-circle"></i> More Info</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Sections -->
+    <main class="content">
+        <!-- Seasonal content will be dynamically added here -->
+        
+        <!-- Series Section -->
+        <section class="movie-row" id="series">
+            <h2 class="row-title">Series</h2>
+            <div class="movie-slider" id="seriesContent">
+                <!-- Content will be dynamically added here -->
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="slider-nav left">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="slider-nav right">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </section>
+
+        <!-- Anime Section -->
+        <section class="movie-row" id="anime">
+            <h2 class="row-title">Anime</h2>
+            <div class="movie-slider" id="animeContent">
+                <!-- Content will be dynamically added here -->
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="slider-nav left">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="slider-nav right">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </section>
+
+        <!-- Movies Section -->
+        <section class="movie-row" id="movies">
+            <h2 class="row-title">Movies</h2>
+            <div class="movie-slider" id="movieContent">
+                <!-- Content will be dynamically added here -->
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="slider-nav left">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="slider-nav right">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </section>
+
+        <!-- Cartoon Movies Section -->
+        <section class="movie-row" id="cartoons">
+            <h2 class="row-title">Cartoon Movies</h2>
+            <div class="movie-slider" id="cartoonMoviesContent">
+                <!-- Content will be dynamically added here -->
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="slider-nav left">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="slider-nav right">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </section>
+
+        <!-- Cartoon Series Section -->
+        <section class="movie-row" id="cartoonSeries">
+            <h2 class="row-title">Cartoon Series</h2>
+            <div class="movie-slider" id="cartoonSeriesContent">
+                <!-- Content will be dynamically added here -->
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="slider-nav left">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="slider-nav right">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </section>
+
+        <!-- My List Section -->
+        <section class="movie-row" id="mylist">
+            <h2 class="row-title">My List</h2>
+            <div class="movie-slider" id="myListContent">
+                <!-- Content will be dynamically added here -->
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="slider-nav left">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="slider-nav right">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </section>
+
+        <!-- Trending Now -->
+        <section class="movie-row">
+            <h2 class="row-title">Trending Now</h2>
+            <div class="movie-slider" id="trendingMovies">
+                <!-- Content will be dynamically added here -->
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="slider-nav left">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="slider-nav right">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </section>
+    </main>
+
+    <!-- Movie Details Modal -->
+    <div class="modal" id="movieModal">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Close modal">&times;</button>
+            <div class="modal-body">
+                <!-- Content will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+       
+        <div class="footer-bottom">
+            <p>&copy; 2025 Priflix. This is a website for personal use only</p>
+            <p>
+                Designed by 
+                <a href="https://tejasmali.vercel.app" target="_blank" rel="noopener noreferrer">Tejas Mali</a>
+               
+              </p>
+        </div>
+    </footer>
+
+    <!-- Config and API keys -->
+    <script src="config.js"></script>
+    <!-- Content Data -->
+    <script src="content-data.js"></script>
+    <!-- URL Query Parameter Handling -->
+    <script>
+    // Function to handle direct content access via URL parameters
+    function handleDirectContentAccess() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const folderId = urlParams.get('folderId');
+      const title = urlParams.get('title');
+      const type = urlParams.get('type');
+      
+      // If we have direct content parameters, redirect to streaming page
+      if (folderId && title) {
+        const streamingUrl = new URL('streaming.html', window.location.origin);
+        streamingUrl.searchParams.set('folderId', folderId);
+        streamingUrl.searchParams.set('title', title);
+        if (type) streamingUrl.searchParams.set('type', type);
+        
+        // Redirect to streaming page
+        window.location.href = streamingUrl.toString();
+        return true;
+      }
+      
+      return false;
+    }
+
+    // Check for direct content access before app initialization
+    if (!handleDirectContentAccess()) {
+      // Continue normal app initialization if no direct content access
+      document.addEventListener('DOMContentLoaded', () => {
+        // Initialize My List after app loads
+        renderMyList();
+      });
+    }
+    </script>
+    <!-- Main JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html> 

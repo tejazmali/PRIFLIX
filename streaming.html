@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priflix</title>
+    <!-- Google Drive API Meta Tags -->
+    <meta id="api-key" content="YOUR_GOOGLE_DRIVE_API_KEY">
+    <meta id="folderid" content="">
+    <meta id="title" content="Priflix">
+    <meta id="tmdbid" content="">
+    <meta id="content-type" content="movie">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="streaming.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img class="logo" onclick="window.location.href='/'" src="/Logo.png" alt="Logo" />
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#movies">Movies</a></li>
+                    <li><a href="index.html#series">Series</a></li>
+                    <li><a href="index.html#anime">Anime</a></li>
+                    <li><a href="index.html#cartoons">Cartoons</a></li>
+                    <li><a href="index.html#mylist">My List</a></li>
+                </ul>
+            </nav>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search for movies...">
+                    <button id="searchBtn"><i class="fas fa-search"></i></button>
+                </div>
+              
+            </div>
+       
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="streaming-content">
+        <!-- Video Player Section -->
+        <section class="video-section">
+            <div class="video-container" id="videoPlayer">
+                <!-- Video player will be added here -->
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="video-controls">
+                <div class="episode-info">
+                    <h3 id="currentEpisodeTitle">Loading...</h3>
+                </div>
+                <div class="control-buttons">
+                    <button class="prev-btn" id="prevEpisodeBtn" disabled><i class="fas fa-step-backward"></i> Previous</button>
+                    <a href="#episodes" class="episodes-btn"><i class="fas fa-list"></i> Episodes</a>
+                    <button class="next-btn" id="nextEpisodeBtn" disabled><i class="fas fa-step-forward"></i> Next</button>
+                </div>
+            </div>
+        </section>
+
+       
+    
+
+        <!-- Episodes Section (for Series) -->
+        <section class="episodes-section" id="episodes">
+            <h2>Episodes</h2>
+            <div class="episodes-container" id="episodesContainer">
+                <!-- Episodes will be dynamically added here -->
+                <div class="loading-spinner"></div>
+            </div>
+        </section>
+
+        <!-- Cast Section -->
+        <section class="cast-section">
+            <h2>Cast</h2>
+            <div class="cast-container" id="castContainer">
+                <!-- Cast members will be dynamically added here -->
+                <div class="loading-spinner"></div>
+            </div>
+        </section>
+
+
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2024 DriveStream. This is a demo project. Not affiliated with Netflix or Google.</p>
+            <p>Content information provided by <a href="https://www.themoviedb.org/" target="_blank">TMDB</a>.</p>
+        </div>
+    </footer>
+
+    <!-- Config and API keys -->
+    <script src="config.js"></script>
+    <!-- Content Data -->
+    <script src="content-data.js"></script>
+    <!-- Streaming Page JavaScript -->
+    <script src="streaming.js"></script>
+</body>
+</html> 
