@@ -53,26 +53,34 @@ function setupEventListeners() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     mobileMenuBtn.addEventListener('click', toggleMobileMenu);
     
-    // Hero banner buttons
-    const heroPlayBtn = document.querySelector('.hero-banner .play-btn');
-    const heroInfoBtn = document.querySelector('.hero-banner .more-info-btn');
-    
-    heroPlayBtn.addEventListener('click', () => {
-        const contentId = heroPlayBtn.dataset.contentId;
-        const folderid = heroPlayBtn.dataset.folderid;
-        const title = document.querySelector('.hero-title').textContent;
-        
-        if (contentId) {
-            const type = document.querySelector('.hero-description').textContent.split(' • ')[0];
-            // Create a content item object and use showFolderContent for consistent behavior
-            const contentItem = {
-                title: title,
-                folderid: folderid,
-                type: type
-            };
+    document.addEventListener("DOMContentLoaded", () => {
+        const heroPlayBtn = document.querySelector('.hero-banner .play-btn');
+        const heroInfoBtn = document.querySelector('.hero-banner .more-info-btn');
+      
+        console.log("Play Button:", heroPlayBtn); // <-- Confirm this shows the element
+      
+        heroPlayBtn?.addEventListener('click', () => {
+          const contentId = heroPlayBtn.dataset.contentId;
+          const folderid = heroPlayBtn.dataset.folderid;
+          const title = document.querySelector('.hero-title')?.textContent;
+      
+          console.log("Clicked", { contentId, folderid, title });
+      
+          if (contentId) {
+            const type = document.querySelector('.hero-description')?.textContent.split(' • ')[0];
+            const contentItem = { title, folderid, type };
             showFolderContent(contentItem);
-        }
-    });
+          }
+        });
+      
+        heroInfoBtn?.addEventListener('click', () => {
+          const contentId = heroInfoBtn.dataset.contentId;
+          if (contentId) {
+            showContentDetails(contentId);
+          }
+        });
+      });
+      
     
     heroInfoBtn.addEventListener('click', () => {
         const contentId = heroInfoBtn.dataset.contentId;
