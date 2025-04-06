@@ -288,7 +288,7 @@
 
     <main class="add-content-container">
         <h1 style="color: white; margin-bottom: 0.5rem;">Priflix Content Creator</h1>
-        <p style="color: #aaa; margin-bottom: 2rem;">Generate content-data.js code for your Priflix streaming site</p>
+        <p style="color: #aaa; margin-bottom: 2rem;">Generate and add content directly to your Priflix streaming site</p>
         
         <form id="addContentForm">
             <div class="form-group">
@@ -359,9 +359,14 @@
             <img id="imagePreview" class="image-preview" src="" alt="Preview">
             <input type="hidden" id="imageUrl" name="imageUrl">
             
-            <button type="submit" class="btn-submit">
-                <i class="fas fa-code"></i> Generate Code
-            </button>
+            <div class="form-group" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button type="submit" class="btn-submit" style="flex: 1;">
+                    <i class="fas fa-code"></i> Generate Code
+                </button>
+                <button type="button" id="addDirectlyBtn" class="btn-submit" style="flex: 1; background-color: #28a745;">
+                    <i class="fas fa-plus"></i> Add Directly
+                </button>
+            </div>
         </form>
         
         <div class="result-container" id="resultContainer">
@@ -371,6 +376,19 @@
             <button class="copy-btn" id="copyBtn">
                 <i class="fas fa-copy"></i> Copy to Clipboard
             </button>
+        </div>
+        
+        <div class="result-container" id="successContainer" style="display: none; background-color: #28a74520;">
+            <h2 style="color: white; margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color: #28a745;"></i> Content Added Successfully!</h2>
+            <p style="color: #aaa; margin-bottom: 1rem;">Your content has been added to content-data.js</p>
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                <button id="viewContentBtn" class="btn-submit" style="background-color: #2c2c2c;">
+                    <i class="fas fa-eye"></i> View All Content
+                </button>
+                <button id="addAnotherBtn" class="btn-submit">
+                    <i class="fas fa-plus"></i> Add Another
+                </button>
+            </div>
         </div>
     </main>
 
@@ -598,6 +616,128 @@
                     .catch(err => {
                         console.error('Failed to copy:', err);
                     });
+            });
+            
+            // Add directly to content-data.js
+            const addDirectlyBtn = document.getElementById('addDirectlyBtn');
+            const successContainer = document.getElementById('successContainer');
+            const viewContentBtn = document.getElementById('viewContentBtn');
+            const addAnotherBtn = document.getElementById('addAnotherBtn');
+            
+            // Function to update content-data.js file
+            async function updateContentDataFile(newContentCode) {
+                try {
+                    // First, fetch the current content-data.js file
+                    const response = await fetch('content-data.js');
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch content-data.js: ${response.status} ${response.statusText}`);
+                    }
+                    
+                    let contentDataText = await response.text();
+                    
+                    // Find the position to insert new content (after the opening bracket of the array)
+                    const insertPos = contentDataText.indexOf('[') + 1;
+                    if (insertPos <= 0) {
+                        throw new Error('Could not find the start of the contentData array');
+                    }
+                    
+                    // Insert the new content code at the beginning of the array
+                    const updatedContent = contentDataText.slice(0, insertPos) + '\n    ' + 
+                                          newContentCode + contentDataText.slice(insertPos);
+                    
+                    // Send the updated content back to the server
+                    const saveResponse = await fetch('save-content.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            content: updatedContent,
+                            filename: 'content-data.js'
+                        })
+                    });
+                    
+                    if (!saveResponse.ok) {
+                        const errorText = await saveResponse.text();
+                        throw new Error(`Failed to save changes: ${errorText}`);
+                    }
+                    
+                    return true;
+                } catch (error) {
+                    console.error('Error updating content-data.js:', error);
+                    alert(`Error adding content: ${error.message}\n\nPlease copy the code manually.`);
+                    return false;
+                }
+            }
+            
+            // Add directly button click handler
+            addDirectlyBtn.addEventListener('click', async function() {
+                const title = document.getElementById('title').value;
+                const type = document.getElementById('type').value;
+                const folderId = document.getElementById('folderId').value;
+                const imageUrl = document.getElementById('imageUrl').value;
+                const customImage = document.getElementById('customImage').value;
+                const directUrl = document.getElementById('directImageUrl').value.trim();
+                
+                if (!title || !type || !folderId) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                // Use custom image if provided, otherwise use TMDB image or direct URL
+                let finalImageUrl = customImage || imageUrl || directUrl;
+                
+                if (!finalImageUrl) {
+                    alert('Please select or upload an image');
+                    return;
+                }
+                
+                // Create the content object code
+                const contentCode = `{
+        title: "${title}",
+        image: "${finalImageUrl}",
+        folderid: "${folderId}",
+        type: "${type}",
+    },`;
+                
+                // Show loading state
+                addDirectlyBtn.disabled = true;
+                addDirectlyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
+                
+                // Try to update the content-data.js file
+                const success = await updateContentDataFile(contentCode);
+                
+                // Reset button state
+                addDirectlyBtn.disabled = false;
+                addDirectlyBtn.innerHTML = '<i class="fas fa-plus"></i> Add Directly';
+                
+                if (success) {
+                    // Hide form result and show success message
+                    resultContainer.style.display = 'none';
+                    successContainer.style.display = 'block';
+                    successContainer.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+            
+            // View Content button
+            viewContentBtn.addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+            
+            // Add Another button
+            addAnotherBtn.addEventListener('click', () => {
+                // Reset form
+                form.reset();
+                document.getElementById('imagePreview').style.display = 'none';
+                document.getElementById('imageUrl').value = '';
+                document.getElementById('customImage').value = '';
+                document.getElementById('tmdbSearchResults').innerHTML = '';
+                
+                // Hide success message
+                successContainer.style.display = 'none';
+                
+                // Focus on title field
+                document.getElementById('title').focus();
             });
         });
     </script>
