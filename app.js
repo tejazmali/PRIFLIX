@@ -274,18 +274,27 @@ function createContentCard(contentItem) {
         if (target.classList.contains('fa-play')) {
             // For seasonal content that doesn't have folder ID, show details modal
             if (contentItem.isSeasonalContent) {
-            showContentDetails(contentItem);
+                showContentDetails(contentItem);
             } else {
                 showFolderContent(contentItem);
             }
         } else if (target.classList.contains('fa-info-circle')) {
-            showContentDetails(contentItem);
+            // For info icon, also directly navigate to streaming page unless it's seasonal content
+            if (contentItem.isSeasonalContent) {
+                showContentDetails(contentItem);
+            } else {
+                navigateToStreamingPage(contentItem);
+            }
         } else if (target.classList.contains('fa-plus')) {
             addToMyList(contentItem);
             event.stopPropagation();
         } else {
-            // If user clicked elsewhere on the card, show content details
-            showContentDetails(contentItem);
+            // If user clicked elsewhere on the card, directly navigate to streaming page
+            if (contentItem.isSeasonalContent) {
+                showContentDetails(contentItem);
+            } else {
+                navigateToStreamingPage(contentItem);
+            }
         }
     });
     
@@ -324,6 +333,15 @@ function setupHeroBanner() {
 
                 // ✅ Add click event to play button
                 playBtn.onclick = () => {
+                    const url = new URL('streaming.html', window.location.origin);
+                    url.searchParams.set('folderId', randomContent.folderid);
+                    url.searchParams.set('title', randomContent.title);
+                    url.searchParams.set('type', randomContent.type);
+                    window.location.href = url.toString();
+                };
+                
+                // ✅ Add click event to info button (redirect directly instead of showing modal)
+                infoBtn.onclick = () => {
                     const url = new URL('streaming.html', window.location.origin);
                     url.searchParams.set('folderId', randomContent.folderid);
                     url.searchParams.set('title', randomContent.title);

@@ -400,13 +400,8 @@ header img {
     transform: translateY(20px);
     transition: all 0.3s ease;
 }
-@media only screen and (max-width: 767px) {
-    /* Styles for phones */
-    .movie-card .movie-info {
-        opacity: 1;
-        transform: translateY(0);
-    }
-  }
+
+
   
 
 .movie-card:hover .movie-info {
