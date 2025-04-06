@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priflix Content Creator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #141414;
+            color: #fff;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: #0a0a0a;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background-color: #0a0a0a;
+            padding: 1.5rem 0;
+            margin-top: auto;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Content Creator Form Styles */
+        .add-content-container {
+            max-width: 800px;
+            margin: 100px auto 50px;
+            padding: 2rem;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            width: 95%;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #2c2c2c;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .form-select {
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+        
+        .btn-submit {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-submit:hover {
+            background-color: #f4121c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+        
+        .image-preview {
+            margin: 1rem auto;
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 4px;
+            object-fit: contain;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .result-container {
+            margin-top: 2rem;
+            display: none;
+            padding: 1.5rem;
+            background-color: #242424;
+            border-radius: 8px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .code-output {
+            background-color: #0a0a0a;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 1rem;
+            color: #87c38f;
+            font-family: monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .copy-btn {
+            background-color: #2c2c2c;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: #3c3c3c;
+            transform: translateY(-2px);
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #444;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            color: #aaa;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .tab.active {
+            color: #fff;
+            border-bottom: 2px solid #e50914;
+        }
+
+        #tmdbSearchResults {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tmdb-poster {
+            width: 100%;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .tmdb-poster:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .loading {
+            text-align: center;
+            color: #fff;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        #customImage {
+            display: none;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .add-content-container {
+                padding: 1.5rem;
+                margin-top: 80px;
+            }
+            
+            .tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            #tmdbSearchResults {
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            }
+            
+            .btn-submit {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .add-content-container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .tab {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            #tmdbSearchResults {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1 style="color: #e50914; margin: 0;">Priflix Content Creator</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="add-content-container">
+        <h1 style="color: white; margin-bottom: 0.5rem;">Priflix Content Creator</h1>
+        <p style="color: #aaa; margin-bottom: 2rem;">Generate content-data.js code for your Priflix streaming site</p>
+        
+        <form id="addContentForm">
+            <div class="form-group">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-input" type="text" id="title" name="title" placeholder="Enter content title" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="type">Content Type</label>
+                <select class="form-select" id="type" name="type" required>
+                    <option value="">Select content type</option>
+                    <option value="Movie">Movie</option>
+                    <option value="Series">Series</option>
+                    <option value="Anime">Anime</option>
+                    <option value="Cartoon movies">Cartoon Movie</option>
+                    <option value="Cartoon series">Cartoon Series</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="folderId">Google Drive Folder ID</label>
+                <input class="form-input" type="text" id="folderId" name="folderId" placeholder="Enter Google Drive folder ID" required>
+                <small style="color: #aaa; display: block; margin-top: 0.3rem;">
+                    Example: From https://drive.google.com/drive/folders/1PuT1fk7CtI3kyvwKxiPasRsPSrdIYj_0, 
+                    the folder ID is 1PuT1fk7CtI3kyvwKxiPasRsPSrdIYj_0
+                </small>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Image Source</label>
+                <div class="tabs">
+                    <div class="tab active" data-tab="tmdb">Search TMDB</div>
+                    <div class="tab" data-tab="upload">Upload Image</div>
+                    <div class="tab" data-tab="url">Direct URL</div>
+                </div>
+                
+                <div id="tmdbTab" class="tab-content">
+                    <div class="form-group">
+                        <label class="form-label" for="tmdbSearch">Search TMDB</label>
+                        <input class="form-input" type="text" id="tmdbSearch" name="tmdbSearch" placeholder="Search for movies or TV shows">
+                        <button type="button" id="searchTmdbBtn" class="btn-submit" style="margin-top: 0.5rem;">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                        <div class="loading" id="tmdbLoading">Searching TMDB...</div>
+                        <div id="tmdbSearchResults"></div>
+                    </div>
+                </div>
+                
+                <div id="uploadTab" class="tab-content" style="display: none;">
+                    <div class="form-group">
+                        <label class="form-label" for="customImageUpload">Upload Image</label>
+                        <input class="form-input" type="file" id="customImageUpload" accept="image/*">
+                        <input type="hidden" id="customImage" name="customImage">
+                    </div>
+                </div>
+                
+                <div id="urlTab" class="tab-content" style="display: none;">
+                    <div class="form-group">
+                        <label class="form-label" for="directImageUrl">Direct Image URL</label>
+                        <input class="form-input" type="url" id="directImageUrl" name="directImageUrl" placeholder="Enter image URL">
+                        <button type="button" id="previewUrlBtn" class="btn-submit" style="margin-top: 0.5rem;">
+                            <i class="fas fa-eye"></i> Preview
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <img id="imagePreview" class="image-preview" src="" alt="Preview">
+            <input type="hidden" id="imageUrl" name="imageUrl">
+            
+            <button type="submit" class="btn-submit">
+                <i class="fas fa-code"></i> Generate Code
+            </button>
+        </form>
+        
+        <div class="result-container" id="resultContainer">
+            <h2 style="color: white; margin-bottom: 1rem;">Code for content-data.js</h2>
+            <p style="color: #aaa; margin-bottom: 1rem;">Copy this code and paste it into your content-data.js file</p>
+            <div class="code-output" id="codeOutput"></div>
+            <button class="copy-btn" id="copyBtn">
+                <i class="fas fa-copy"></i> Copy to Clipboard
+            </button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>Content Creator Tool for Priflix</p>
+        </div>
+    </footer>
+
+
+    <script>
+        // TMDB API configuration
+        const CONFIG = {
+            TMDB_API_KEY: '1f91c893c917fb2698a1167b5aaa2820',
+            TMDB_BASE_URL: 'https://api.themoviedb.org/3',
+            TMDB_IMAGE_BASE_URL: 'https://image.tmdb.org/t/p',
+            TMDB_POSTER_SIZE: 'w500'
+        };
+
+        // Helper function to get TMDB API URL
+        function getTMDBApiUrl(endpoint, params = {}) {
+            const url = new URL(`${CONFIG.TMDB_BASE_URL}${endpoint}`);
+            url.searchParams.append('api_key', CONFIG.TMDB_API_KEY);
+            
+            // Add additional parameters
+            for (const key in params) {
+                url.searchParams.append(key, params[key]);
+            }
+            
+            return url.toString();
+        }
+
+        // Helper function to get TMDB Image URL
+        function getTMDBImageUrl(path, size) {
+            if (!path) return null;
+            return `${CONFIG.TMDB_IMAGE_BASE_URL}/${size}${path}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    const tabName = tab.dataset.tab;
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.style.display = 'none';
+                    });
+                    document.getElementById(tabName + 'Tab').style.display = 'block';
+                });
+            });
+            
+            // TMDB search
+            const searchTmdbBtn = document.getElementById('searchTmdbBtn');
+            const tmdbSearch = document.getElementById('tmdbSearch');
+            const tmdbSearchResults = document.getElementById('tmdbSearchResults');
+            const tmdbLoading = document.getElementById('tmdbLoading');
+            
+            searchTmdbBtn.addEventListener('click', async () => {
+                const query = tmdbSearch.value.trim();
+                if (!query) return;
+                
+                tmdbLoading.style.display = 'block';
+                tmdbSearchResults.innerHTML = '';
+                
+                try {
+                    const type = document.getElementById('type').value;
+                    if (!type) {
+                        throw new Error('Please select a content type first');
+                    }
+                    
+                    const mediaType = type === 'Series' || type === 'Cartoon series' ? 'tv' : 'movie';
+                    
+                    // Use the getTMDBApiUrl function from config.js if available
+                    let url;
+                    if (typeof getTMDBApiUrl === 'function') {
+                        url = getTMDBApiUrl(`/search/${mediaType}`, {
+                            query: query,
+                            include_adult: false,
+                            language: 'en-US',
+                            page: 1
+                        });
+                    } else {
+                        // Fallback to direct URL construction if function not available
+                        url = `${CONFIG.TMDB_BASE_URL}/search/${mediaType}?api_key=${CONFIG.TMDB_API_KEY}&query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=1`;
+                    }
+                    
+                    const response = await fetch(url);
+                    
+                    if (!response.ok) {
+                        throw new Error(`TMDB API error: ${response.status} - ${response.statusText}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    tmdbLoading.style.display = 'none';
+                    
+                    if (data.results && data.results.length > 0) {
+                        data.results.slice(0, 12).forEach(result => {
+                            if (result.poster_path) {
+                                // Use the getTMDBImageUrl function if available
+                                let imgUrl;
+                                if (typeof getTMDBImageUrl === 'function') {
+                                    imgUrl = getTMDBImageUrl(result.poster_path, CONFIG.TMDB_POSTER_SIZE);
+                                } else {
+                                    imgUrl = `${CONFIG.TMDB_IMAGE_BASE_URL}/${CONFIG.TMDB_POSTER_SIZE}${result.poster_path}`;
+                                }
+                                
+                                const imgElement = document.createElement('img');
+                                imgElement.src = imgUrl;
+                                imgElement.className = 'tmdb-poster';
+                                imgElement.alt = result.title || result.name;
+                                imgElement.title = result.title || result.name;
+                                
+                                imgElement.addEventListener('click', () => {
+                                    document.getElementById('imagePreview').src = imgUrl;
+                                    document.getElementById('imagePreview').style.display = 'block';
+                                    document.getElementById('imageUrl').value = imgUrl;
+                                });
+                                
+                                tmdbSearchResults.appendChild(imgElement);
+                            }
+                        });
+                        
+                        if (tmdbSearchResults.children.length === 0) {
+                            tmdbSearchResults.innerHTML = '<p style="color: white; grid-column: 1/-1;">No poster images found for these results</p>';
+                        }
+                    } else {
+                        tmdbSearchResults.innerHTML = '<p style="color: white; grid-column: 1/-1;">No results found</p>';
+                    }
+                } catch (error) {
+                    console.error('Error searching TMDB:', error);
+                    tmdbLoading.style.display = 'none';
+                    tmdbSearchResults.innerHTML = `<p style="color: white; grid-column: 1/-1;">Error searching TMDB: ${error.message}</p>`;
+                }
+            });
+            
+            // Custom image upload
+            const customImageUpload = document.getElementById('customImageUpload');
+            customImageUpload.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('imagePreview').src = e.target.result;
+                        document.getElementById('imagePreview').style.display = 'block';
+                        document.getElementById('customImage').value = e.target.result;
+                        document.getElementById('imageUrl').value = '';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Direct URL preview
+            const directImageUrl = document.getElementById('directImageUrl');
+            const previewUrlBtn = document.getElementById('previewUrlBtn');
+            
+            previewUrlBtn.addEventListener('click', function() {
+                const url = directImageUrl.value.trim();
+                if (url) {
+                    const imgPreview = document.getElementById('imagePreview');
+                    imgPreview.src = url;
+                    imgPreview.style.display = 'block';
+                    document.getElementById('imageUrl').value = url;
+                    
+                    // Handle preview error
+                    imgPreview.onerror = function() {
+                        imgPreview.style.display = 'none';
+                        alert('Unable to load image from URL. Please check the URL and try again.');
+                    };
+                }
+            });
+            
+            // Form submission
+            const form = document.getElementById('addContentForm');
+            const resultContainer = document.getElementById('resultContainer');
+            const codeOutput = document.getElementById('codeOutput');
+            const copyBtn = document.getElementById('copyBtn');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const title = document.getElementById('title').value;
+                const type = document.getElementById('type').value;
+                const folderId = document.getElementById('folderId').value;
+                const imageUrl = document.getElementById('imageUrl').value;
+                const customImage = document.getElementById('customImage').value;
+                const directUrl = document.getElementById('directImageUrl').value.trim();
+                
+                // Use custom image if provided, otherwise use TMDB image or direct URL
+                let finalImageUrl = customImage || imageUrl || directUrl;
+                
+                if (!finalImageUrl) {
+                    alert('Please select or upload an image');
+                    return;
+                }
+                
+                // Format the code with proper spacing
+                const codeText = `{
+        title: "${title}",
+        image: "${finalImageUrl}",
+        folderid: "${folderId}",
+        type: "${type}",
+    },`;
+                
+                codeOutput.textContent = codeText;
+                resultContainer.style.display = 'block';
+                
+                // Scroll to see results
+                resultContainer.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Copy to clipboard
+            copyBtn.addEventListener('click', () => {
+                const codeText = codeOutput.textContent;
+                navigator.clipboard.writeText(codeText)
+                    .then(() => {
+                        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                        setTimeout(() => {
+                            copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy to Clipboard';
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy:', err);
+                    });
+            });
+        });
+    </script>
+</body>
+</html> 
