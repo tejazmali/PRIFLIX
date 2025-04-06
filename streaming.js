@@ -119,6 +119,58 @@ function setupEventListeners() {
         } else {
             header.classList.remove('scrolled');
         }
+
+        // Handle sticky video player for mobile devices
+        if (window.innerWidth <= 768) {
+            const videoSection = document.querySelector('.video-section');
+            const videoContainer = document.querySelector('.video-container');
+            const videoControls = document.querySelector('.video-controls');
+            const videoSectionHeight = videoSection.offsetHeight;
+            
+            if (window.scrollY > videoSectionHeight && !videoSection.dataset.minimized) {
+                videoSection.classList.add('sticky');
+                videoContainer.classList.add('sticky');
+                videoControls.classList.add('sticky');
+                document.body.classList.add('has-sticky-video');
+                
+                // Add event listener to close button
+                videoSection.addEventListener('click', function(e) {
+                    // Check if we clicked on the ::after pseudo-element (close button)
+                    // We can approximate this by checking click position relative to element
+                    const rect = videoSection.getBoundingClientRect();
+                    if (e.clientX > rect.right - 30 && e.clientY < rect.top + 30) {
+                        videoSection.dataset.minimized = 'true';
+                        videoSection.classList.remove('sticky');
+                        videoContainer.classList.remove('sticky');
+                        videoControls.classList.remove('sticky');
+                        document.body.classList.remove('has-sticky-video');
+                        e.stopPropagation();
+                    }
+                });
+            } else if (window.scrollY <= videoSectionHeight) {
+                videoSection.classList.remove('sticky');
+                videoContainer.classList.remove('sticky');
+                videoControls.classList.remove('sticky');
+                document.body.classList.remove('has-sticky-video');
+                // Reset minimized state when scrolling back to top
+                videoSection.dataset.minimized = '';
+            }
+        }
+    });
+    
+    // Update sticky player on resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            // Remove sticky classes on desktop
+            const videoSection = document.querySelector('.video-section');
+            const videoContainer = document.querySelector('.video-container');
+            const videoControls = document.querySelector('.video-controls');
+            
+            if (videoSection) videoSection.classList.remove('sticky');
+            if (videoContainer) videoContainer.classList.remove('sticky');
+            if (videoControls) videoControls.classList.remove('sticky');
+            document.body.classList.remove('has-sticky-video');
+        }
     });
 }
 
@@ -217,8 +269,9 @@ function updateEpisodeInfo(fileId, title) {
     const episodeTitle = document.getElementById('currentEpisodeTitle');
     if (!episodeTitle) return;
     
-    // Set basic title
-    episodeTitle.textContent = title || 'Playing';
+    // Get content title from meta tags
+    const contentTitleMeta = document.getElementById('title');
+    const contentTitle = contentTitleMeta ? contentTitleMeta.content : '';
     
     // Find full episode data if available
     const episodes = window.currentEpisodes || [];
@@ -251,8 +304,14 @@ function updateEpisodeInfo(fileId, title) {
             }
         }
         
+        // Format title with show name and episode number
+        const formattedTitle = episode.episodeNumber ? 
+            `${contentTitle} S${episode.seasonNumber}:E${episode.episodeNumber}` : 
+            contentTitle;
+            
         episodeInfo.innerHTML = `
-            <div class="episode-title">${episode.title}</div>
+            <div class="episode-title">${formattedTitle}</div>
+            <div class="episode-subtitle">${episode.title}</div>
             <div class="episode-meta">
                 ${airDateDisplay ? `<span class="air-date">${airDateDisplay}</span>` : ''}
                 ${rating ? `<span class="rating">${starsHTML} ${rating.toFixed(1)}</span>` : ''}
@@ -263,6 +322,35 @@ function updateEpisodeInfo(fileId, title) {
         // Replace the current episode title with detailed info
         episodeTitle.innerHTML = '';
         episodeTitle.appendChild(episodeInfo);
+    } else if (episode) {
+        // For non-TMDB episodes, still format nicely
+        const formattedTitle = episode.episodeNumber ? 
+            `${contentTitle} S${episode.seasonNumber}:E${episode.episodeNumber}` : 
+            contentTitle;
+        
+        episodeTitle.textContent = formattedTitle;
+    } else {
+        // Clean up the title by removing quality and encoding info
+        let cleanTitle = title || 'Playing';
+        
+        // Only process if it's not already cleaned
+        if (cleanTitle !== 'Playing') {
+            cleanTitle = cleanTitle
+                // Remove quality and encoding info
+                .replace(/\b(480p|720p|1080p|2160p|BluRay|WEB-DL|WEBRip|HDRip|BRRip|DVDRip)\b/ig, '')
+                .replace(/\b(HEVC|x265|x264|10bit|8bit|AC3|AAC|DTS|DDP|Atmos|5\.1|2\.0|Dual|Multi)\b/ig, '')
+                .replace(/\b(ESub|mkvCinemas|RARBG|YIFY|YTS|SPARKS|GECKOS|FGT|AMZN|DSNP|NF)\b/ig, '')
+                // Remove language indicators
+                .replace(/\b(Hindi|English|Japanese|Korean|Tamil|Telugu|Dual Audio|Multi Audio)\b/ig, '')
+                .replace(/\[(.*?)\]/g, '') // Remove content in square brackets which often contains language info
+                .replace(/\((.*?)\)/g, '') // Remove content in parentheses which often contains language info
+                .replace(/[-_.]/g, ' ') // Replace separators with spaces
+                .replace(/\s{2,}/g, ' ') // Remove double spaces
+                .trim();
+        }
+        
+        // Fallback to cleaned title
+        episodeTitle.textContent = cleanTitle;
     }
 }
 
@@ -336,14 +424,55 @@ function processEpisodeFiles(files) {
         const seasonMatch = file.name.match(/S(\d+)/i);
         const seasonNumber = seasonMatch ? parseInt(seasonMatch[1]) : 1; // Default to season 1
         
+        // Get content title from meta tags
+        const contentTitleMeta = document.getElementById('title');
+        const contentTitle = contentTitleMeta ? contentTitleMeta.content : '';
+        
+        // Generate a clean episode title
+        let episodeTitle = '';
+        
+        // Remove extension and clean up filename for potential title
+        const cleanName = file.name
+            .replace(/\.[^.]+$/, '') // Remove file extension
+            .replace(/\b(S\d+E\d+|Episode\s+\d+)\b/i, '') // Remove S01E01 or Episode 1 patterns
+            .replace(contentTitle, '') // Remove show name if present
+            .replace(/\s{2,}/g, ' ') // Remove double spaces
+            // Remove quality and encoding info
+            .replace(/\b(480p|720p|1080p|2160p|BluRay|WEB-DL|WEBRip|HDRip|BRRip|DVDRip)\b/ig, '')
+            .replace(/\b(HEVC|x265|x264|10bit|8bit|AC3|AAC|DTS|DDP|Atmos|5\.1|2\.0|Dual|Multi)\b/ig, '')
+            .replace(/\b(ESub|mkvCinemas|RARBG|YIFY|YTS|SPARKS|GECKOS|FGT|AMZN|DSNP|NF)\b/ig, '')
+            // Remove language indicators
+            .replace(/\b(Hindi|English|Japanese|Korean|Tamil|Telugu|Dual Audio|Multi Audio)\b/ig, '')
+            .replace(/\[(.*?)\]/g, '') // Remove content in square brackets which often contains language info
+            .replace(/\((.*?)\)/g, '') // Remove content in parentheses which often contains language info
+            .replace(/[-_\.]/g, ' ') // Replace separators with spaces
+            .replace(/\s{2,}/g, ' ') // Remove double spaces again after cleaning
+            .trim();
+            
+        // If there's meaningful text left after cleaning, use it as episode title
+        if (cleanName && cleanName !== '') {
+            episodeTitle = cleanName;
+        } else if (episodeNumber) {
+            // Default to "Episode X" if we have a number but no title
+            episodeTitle = `Episode ${episodeNumber}`;
+        } else {
+            // Last resort: use filename without extension
+            episodeTitle = file.name.replace(/\.[^.]+$/, '');
+        }
+        
+        // Ensure thumbnailLink is used if available
+        const thumbnailLink = file.thumbnailLink || null;
+        
         return {
             id: file.id,
             name: file.name,
             seasonNumber,
             episodeNumber,
-            title: episodeNumber ? `Episode ${episodeNumber}` : file.name,
+            title: episodeTitle,
             still_path: null, // Will be filled from TMDB if available
             overview: null, // Will be filled from TMDB if available
+            thumbnailLink: thumbnailLink, // Store Google Drive thumbnail link
+            duration: null // Will be filled with video duration if available
         };
     });
     
@@ -474,6 +603,10 @@ function displayEpisodesList(episodes, folderId) {
         return;
     }
     
+    // Get content title from meta tags
+    const contentTitleMeta = document.getElementById('title');
+    const contentTitle = contentTitleMeta ? contentTitleMeta.content : '';
+    
     // Create episode cards
     episodes.forEach((episode, index) => {
         const episodeCard = document.createElement('div');
@@ -481,19 +614,38 @@ function displayEpisodesList(episodes, folderId) {
         episodeCard.dataset.id = episode.id;
         episodeCard.dataset.index = episode.episodeNumber || index + 1; // Use actual episode number or index+1
         
+        // Format the episode title with show name and episode number
+        const formattedTitle = episode.episodeNumber ? 
+            `S${episode.seasonNumber}:E${episode.episodeNumber}` : 
+            '';
+        
         // Determine thumbnail source
         let thumbnailHTML = '';
+        let thumbnailSource = null;
+        
         if (episode.still_path) {
             // Use TMDB image if available
+            thumbnailSource = getTMDBImageUrl(episode.still_path, CONFIG.TMDB_STILL_SIZE);
+        } else if (episode.thumbnailLink) {
+            // Use Google Drive thumbnail if available
+            thumbnailSource = episode.thumbnailLink;
+        }
+        
+        if (thumbnailSource) {
             thumbnailHTML = `
-                <img src="${getTMDBImageUrl(episode.still_path, CONFIG.TMDB_STILL_SIZE)}" 
+                <img src="${thumbnailSource}" 
                      alt="${episode.title}" 
-                     onerror="this.parentNode.innerHTML = '<i class=\\'fas fa-play-circle\\'></i>'">
+                     loading="lazy"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='none'; this.parentNode.insertAdjacentHTML('afterbegin', '<i class=\\'fas fa-play-circle\\'></i>');">
+                <div class="thumbnail-overlay"></div>
             `;
         } else {
             // Otherwise use icon
             thumbnailHTML = '<i class="fas fa-play-circle"></i>';
         }
+        
+        // Always add time display element
+        const timeDisplay = `<div class="episode-duration">${episode.duration ? formatDuration(episode.duration) : '--:--'}</div>`;
         
         // Determine episode description
         const description = episode.overview || `${episode.name}`;
@@ -501,9 +653,13 @@ function displayEpisodesList(episodes, folderId) {
         episodeCard.innerHTML = `
             <div class="episode-thumbnail">
                 ${thumbnailHTML}
+                ${timeDisplay}
             </div>
             <div class="episode-info">
-                <h3 class="episode-title">${episode.title}</h3>
+                <div class="episode-header">
+                    ${formattedTitle ? `<span class="episode-number">${formattedTitle}</span>` : ''}
+                    <h3 class="episode-title">${episode.title}</h3>
+                </div>
                 ${episode.tmdbData ? `<div class="episode-rating"><i class="fas fa-star"></i> ${episode.vote_average?.toFixed(1) || 'N/A'}</div>` : ''}
                 <p class="episode-description">${description}</p>
             </div>
@@ -523,8 +679,104 @@ function displayEpisodesList(episodes, folderId) {
             window.history.replaceState({}, '', url);
         });
         
+        // Always load video duration if not already loaded
+        // This ensures that every thumbnail has a duration display
+        loadVideoDuration(episode, episodeCard);
+        
         episodesContainer.appendChild(episodeCard);
     });
+}
+
+// Helper function to format duration in HH:MM:SS or MM:SS format
+function formatDuration(seconds) {
+    if (!seconds) return '--:--';
+    
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    
+    if (hours > 0) {
+        return `${hours}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+    } else {
+        return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+    }
+}
+
+// Helper function to load video duration
+function loadVideoDuration(episode, episodeCard) {
+    // For Google Drive, fetch video metadata to get duration
+    const durationElement = episodeCard.querySelector('.episode-duration');
+    
+    try {
+        // Use Google Drive API to get video metadata
+        // Need scope https://www.googleapis.com/auth/drive.metadata.readonly
+        fetch(`https://www.googleapis.com/drive/v3/files/${episode.id}?fields=videoMediaMetadata,thumbnailLink&supportsAllDrives=true&key=${CONFIG.DRIVE_API_KEY}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error fetching video metadata: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Update thumbnail if we got a better one and current one is missing
+                if (!episode.still_path && data.thumbnailLink && !episode.thumbnailLink) {
+                    episode.thumbnailLink = data.thumbnailLink;
+                    const thumbnailContainer = episodeCard.querySelector('.episode-thumbnail');
+                    if (thumbnailContainer && thumbnailContainer.querySelector('i')) {
+                        // Save the current duration element text if it exists
+                        const durationText = durationElement ? durationElement.textContent : '--:--';
+                        
+                        // Replace the icon with the thumbnail but preserve the duration
+                        thumbnailContainer.innerHTML = `
+                            <img src="${data.thumbnailLink}" 
+                                 alt="${episode.title}"
+                                 loading="lazy" 
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='none'; this.parentNode.insertAdjacentHTML('afterbegin', '<i class=\\'fas fa-play-circle\\'></i>');">
+                            <div class="thumbnail-overlay"></div>
+                            <div class="episode-duration">${durationText}</div>
+                        `;
+                    }
+                }
+                
+                // Update duration if available
+                if (data && data.videoMediaMetadata && data.videoMediaMetadata.durationMillis) {
+                    const durationInSeconds = Math.floor(data.videoMediaMetadata.durationMillis / 1000);
+                    episode.duration = durationInSeconds;
+                    
+                    // Find the duration element again
+                    const updatedDurationElement = episodeCard.querySelector('.episode-duration');
+                    if (updatedDurationElement) {
+                        updatedDurationElement.textContent = formatDuration(durationInSeconds);
+                    } else {
+                        // If no duration element exists, add one
+                        const thumbnailContainer = episodeCard.querySelector('.episode-thumbnail');
+                        if (thumbnailContainer) {
+                            thumbnailContainer.insertAdjacentHTML('beforeend', 
+                                `<div class="episode-duration">${formatDuration(durationInSeconds)}</div>`);
+                        }
+                    }
+                }
+            })
+            .catch(error => {
+                console.warn('Could not fetch video metadata from Drive API:', error);
+                // Ensure duration element exists if it doesn't already
+                if (!episodeCard.querySelector('.episode-duration')) {
+                    const thumbnailContainer = episodeCard.querySelector('.episode-thumbnail');
+                    if (thumbnailContainer) {
+                        thumbnailContainer.insertAdjacentHTML('beforeend', '<div class="episode-duration">--:--</div>');
+                    }
+                }
+            });
+    } catch (error) {
+        console.warn('Error attempting to get video metadata:', error);
+        // Ensure duration element exists if it doesn't already
+        if (!episodeCard.querySelector('.episode-duration')) {
+            const thumbnailContainer = episodeCard.querySelector('.episode-thumbnail');
+            if (thumbnailContainer) {
+                thumbnailContainer.insertAdjacentHTML('beforeend', '<div class="episode-duration">--:--</div>');
+            }
+        }
+    }
 }
 
 // Update navigation buttons
