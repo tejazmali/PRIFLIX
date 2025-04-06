@@ -296,38 +296,47 @@ function createContentCard(contentItem) {
 function setupHeroBanner() {
     try {
         if (contentData.length > 0) {
-            // Select a random content item for the hero banner (prefer movies)
             const movies = contentData.filter(item => item.type === 'Movie');
             const randomContent = movies.length > 0 ? 
                 movies[Math.floor(Math.random() * movies.length)] : 
                 contentData[Math.floor(Math.random() * contentData.length)];
-            
-            // Set hero banner background and content
+
             const heroBanner = document.getElementById('heroBanner');
             heroBanner.style.backgroundImage = `url(${randomContent.image})`;
-            
-            // Update hero content
-            document.querySelector('.hero-title').textContent = randomContent.title;
-            document.querySelector('.hero-description').textContent = 
-                `${randomContent.type} • Stream Now`;
-            
-            // Set content data for buttons
+
+            const titleEl = document.querySelector('.hero-title');
+            const descEl = document.querySelector('.hero-description');
             const playBtn = document.querySelector('.hero-buttons .play-btn');
             const infoBtn = document.querySelector('.hero-buttons .more-info-btn');
-            
-            playBtn.dataset.contentId = randomContent.folderid;
-            playBtn.dataset.folderid = randomContent.folderid;
-            infoBtn.dataset.contentId = randomContent.folderid;
-            
-            // Update play button text based on content type
-            if (randomContent.type !== 'Movie') {
-                playBtn.innerHTML = '<i class="fas fa-play"></i> Watch Episodes';
+
+            if (titleEl && descEl && playBtn && infoBtn) {
+                titleEl.textContent = randomContent.title;
+                descEl.textContent = `${randomContent.type} • Stream Now`;
+
+                // Set data attributes (optional)
+                playBtn.dataset.folderid = randomContent.folderid;
+                infoBtn.dataset.folderid = randomContent.folderid;
+
+                // Update button text if it's not a movie
+                playBtn.innerHTML = randomContent.type !== 'Movie'
+                    ? '<i class="fas fa-play"></i> Watch Episodes'
+                    : '<i class="fas fa-play"></i> Play';
+
+                // ✅ Add click event to play button
+                playBtn.onclick = () => {
+                    const url = new URL('streaming.html', window.location.origin);
+                    url.searchParams.set('folderId', randomContent.folderid);
+                    url.searchParams.set('title', randomContent.title);
+                    url.searchParams.set('type', randomContent.type);
+                    window.location.href = url.toString();
+                };
             }
         }
     } catch (error) {
         console.error('Error setting up hero banner:', error);
     }
 }
+
 
 // Search for content
 function searchContent(query) {
@@ -744,6 +753,7 @@ function getCurrentContentItemFromContext() {
 }
 
 // Add content to My List
+
 function addToMyList(contentItem) {
     // In a real app, this would save to localStorage or a backend
     // Get existing list from localStorage
@@ -791,83 +801,7 @@ function truncateText(text, maxLength) {
     return text.length > maxLength ? text.substr(0, maxLength) + '...' : text;
 }
 
-// Load seasonal content from TMDB based on current season
-async function loadSeasonalContent() {
-    try {
-        // Add seasonal section to DOM if it doesn't exist
-        if (!document.getElementById('seasonalContent')) {
-            const contentSection = document.querySelector('.content');
-            
-            // Create seasonal section and insert it after the hero banner
-            const seasonalSection = document.createElement('section');
-            seasonalSection.className = 'movie-row seasonal-row';
-            seasonalSection.id = 'seasonal';
-            
-            // Get current season info
-            const currentSeason = getCurrentSeason();
-            
-            // Add season-specific class for styling
-            seasonalSection.classList.add(currentSeason.name.toLowerCase());
-            
-            seasonalSection.innerHTML = `
-                <h2 class="row-title">${currentSeason.name} Picks</h2>
-                <div class="movie-slider" id="seasonalContent">
-                    <div class="loading-spinner"></div>
-                </div>
-            `;
-            
-            // Insert at the beginning of content section
-            contentSection.insertBefore(seasonalSection, contentSection.firstChild);
-        }
-        
-        // Get seasonal content
-        const seasonalData = await getSeasonalContent();
-        const seasonalContainer = document.getElementById('seasonalContent');
-        
-        // Clear loading spinner
-        seasonalContainer.innerHTML = '';
-        
-        if (seasonalData.results.length === 0) {
-            document.getElementById('seasonal').style.display = 'none';
-            return;
-        }
-        
-        // Format the TMDB results to match our content structure
-        const formattedContent = seasonalData.results.map(item => {
-            return {
-                title: item.title || item.name,
-                image: getTMDBImageUrl(item.poster_path, CONFIG.TMDB_POSTER_SIZE),
-                backdrop: getTMDBImageUrl(item.backdrop_path, CONFIG.TMDB_BACKDROP_SIZE),
-                overview: item.overview,
-                rating: Math.round(item.vote_average * 10) / 10,
-                type: item.media_type === 'tv' ? 'Series' : 'Movie',
-                tmdbId: item.id,
-                year: new Date(item.release_date || item.first_air_date).getFullYear(),
-                isSeasonalContent: true
-            };
-        });
-        
-        // Render the seasonal content
-        formattedContent.forEach(item => {
-            const card = createContentCard(item);
-            
-            // Add season-specific class to badge
-            const badge = card.querySelector('.seasonal-badge');
-            if (badge) {
-                badge.classList.add(getCurrentSeason().name.toLowerCase());
-            }
-            
-            seasonalContainer.appendChild(card);
-        });
-    } catch (error) {
-        console.error('Error loading seasonal content:', error);
-        // Hide the section if there's an error
-        const seasonalSection = document.getElementById('seasonal');
-        if (seasonalSection) {
-            seasonalSection.style.display = 'none';
-        }
-    }
-}
+
 
 // Get content description
 function getContentDescription(contentItem) {
