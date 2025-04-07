@@ -324,7 +324,7 @@ const contentData = [
         type: "Series",
     },
     {
-        title: "Hijack S1",
+        title: "Hijack",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FszDEqqarPi3YqiPLevm7LObYrDJ.jpg",
 
