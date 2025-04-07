@@ -136,13 +136,11 @@ const contentData = [
         folderid: "16sqFChtQwsGimkKA5F3w1XKoMbNEDe08",
         type: "Cartoon movies",
     },
-    {
-        title: "Ice Age Scrat Tales S01",
-        image:
-            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FmTfYwY7DELH08SeO8LyUMe9Tvfr.jpg",
-
+  {
+        title: "Ice Age Scrat Tales",
+        image: "https://image.tmdb.org/t/p/w500/mTfYwY7DELH08SeO8LyUMe9Tvfr.jpg",
         folderid: "1lUp9gDT-_GuS8pmSaFdf7hlpsZPe8dt5",
-        type: "Cartoon movies",
+        type: "Cartoon series",
     },
 
     {
