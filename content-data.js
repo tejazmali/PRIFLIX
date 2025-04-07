@@ -38,7 +38,7 @@ const contentData = [
     {
         title: "Attack on Titan",
         image:
-            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FAgaD7 vgIf4Soi3flAKN6Bte6u.jpg",
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FAgaD7vgIf4Soi3flAKN6Bte6u.jpg",
 
         folderid: "1-5chzScNIAIbel5gb7VLByT3dz8sYBqZ",
         type: "Anime",
