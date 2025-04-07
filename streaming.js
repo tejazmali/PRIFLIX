@@ -578,15 +578,15 @@ function compareTitles(title1, title2) {
     if (clean1.includes(clean2) || clean2.includes(clean1)) return 0.8;
     
     // Count matching words
-    const words1 = clean1.split(/\s+/);
+    const word  = clean1.split(/\s+/);
     const words2 = clean2.split(/\s+/);
     
     let matchCount = 0;
-    words1.forEach(word => {
+    word .forEach(word => {
         if (words2.includes(word)) matchCount++;
     });
     
-    const totalWords = Math.max(words1.length, words2.length);
+    const totalWords = Math.max(word .length, words2.length);
     return totalWords > 0 ? matchCount / totalWords : 0;
 }
 

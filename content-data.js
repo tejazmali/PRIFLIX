@@ -1,6 +1,6 @@
 const contentData = [
     {
-        title: "Mr. Robot S1",
+        title: "Mr. Robot",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F1aiNh5Gak36EdpdwhvWHIXzAj50.jpg",
 
@@ -9,7 +9,7 @@ const contentData = [
 
     },
     {
-        title: "Mr. Robot S2",
+        title: "Mr. Robot",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FmjqAWBXM6zoxmoeC3q9J6I1wl7R.jpg",
 
@@ -18,7 +18,7 @@ const contentData = [
 
     },
     {
-        title: "Mr. Robot S3",
+        title: "Mr. Robot",
         image:
             "https://image.tmdb.org/t/p/original/whtaWBtS3zauurpEdEMI61489Km.jpg",
 
@@ -27,7 +27,7 @@ const contentData = [
 
     },
     {
-        title: "Mr. Robot S4",
+        title: "Mr. Robot",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F4PxMbpF3pv5B8eYw48hZ1hy16gr.jpg",
 
@@ -36,16 +36,16 @@ const contentData = [
 
     },
     {
-        title: "Attack on Titan S01",
+        title: "Attack on Titan",
         image:
-            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FAgaD7s1vgIf4Soi3flAKN6Bte6u.jpg",
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FAgaD7 vgIf4Soi3flAKN6Bte6u.jpg",
 
         folderid: "1-5chzScNIAIbel5gb7VLByT3dz8sYBqZ",
         type: "Anime",
 
     },
     {
-        title: "Attack on Titan S02",
+        title: "Attack on Titan",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F19REaSRoNcO0KgMmrGUWtfpRKZY.jpg",
 
@@ -53,7 +53,7 @@ const contentData = [
         type: "Anime",
     },
     {
-        title: "Attack on Titan S03",
+        title: "Attack on Titan",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fynow2o9v0G341PLv1chCRDufCgc.jpg",
 
@@ -61,7 +61,7 @@ const contentData = [
         type: "Anime",
     },
     {
-        title: "Attack on Titan S04",
+        title: "Attack on Titan",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsfbSjGlLHsvFQrMUSNR9RrwZgV1.jpg",
 
@@ -74,7 +74,7 @@ const contentData = [
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FtCZFfYTIwrR7n94J6G14Y4hAFU6.jpg",
 
-        folderid: "1XlCp3canUS1QfNFq0X9YFZK_ZwCu4TLo",
+        folderid: "1XlCp3canU QfNFq0X9YFZK_ZwCu4TLo",
         type: "Anime",
     },
     {
@@ -144,7 +144,7 @@ const contentData = [
     },
 
     {
-        title: "Ralph Breaks the Internet 2018",
+        title: "Ralph Breaks the Internet",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fc%2Fgracenote%2Fc4e00199eaa2d5d48a3709e431812fd9.jpg",
 
@@ -212,7 +212,7 @@ const contentData = [
     },
     
     {
-        title: "Inception 2010",
+        title: "Inception",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fb%2Fgracenote%2Fbcb81d59b292170f9fbae7c75cac2572.jpg",
 
@@ -232,7 +232,7 @@ const contentData = [
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fe%2Fgracenote%2Fe8c260df1f612494392ae154abfc9bdf.jpg",
 
-        folderid: "1VmlRq28s1p6XIG4HVr5ox3DI1VksnRXg",
+        folderid: "1VmlRq28 p6XIG4HVr5ox3DI1VksnRXg",
         type: "Movie",
     },
 
@@ -247,7 +247,7 @@ const contentData = [
 
 
     {
-        title: "Urban Myths 2022",
+        title: "Urban Myths",
         image:
             "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fmetadata-static.plex.tv%2Ff%2Fgracenote%2Ffc7e59e5036c0619a7c6f0ffc96f0b29.jpg",
 
@@ -257,7 +257,7 @@ const contentData = [
 
 
     {
-        title: "Mardaani 2014",
+        title: "Mardaani",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F5%2Fgracenote%2F54fe6acd5b36dccc91b8f2fa7e32b5fa.jpg",
 
@@ -300,7 +300,7 @@ const contentData = [
         type: "Movie",
     },
     {
-        title: "Squid Game S2",
+        title: "Squid Game",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsXZhtWLo3fecavpDuOyJiayjt32.jpg",
 
@@ -308,7 +308,7 @@ const contentData = [
         type: "Series",
     },
     {
-        title: "Alice in Borderland S1",
+        title: "Alice in Borderland",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsGwYqVqheXuevFOBC0BFhFvDU9T.jpg",
 
@@ -316,7 +316,7 @@ const contentData = [
         type: "Series",
     },
     {
-        title: "Alice in Borderland S2",
+        title: "Alice in Borderland",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fs3ZAS0AGLQ668sFveVFinAd2zVy.jpg",
 
@@ -359,7 +359,7 @@ const contentData = [
 
 
     {
-        title: "Enola Holmes 2",
+        title: "Enola Holmes",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fd%2Fgracenote%2Fd551c377007710fc338b07569f745fca.jpg",
 
