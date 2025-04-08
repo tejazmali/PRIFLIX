@@ -74,7 +74,7 @@ const contentData = [
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FtCZFfYTIwrR7n94J6G14Y4hAFU6.jpg",
 
-        folderid: "1XlCp3canU QfNFq0X9YFZK_ZwCu4TLo",
+        folderid: "1XlCp3canUS1QfNFq0X9YFZK_ZwCu4TLo",
         type: "Anime",
     },
     {
