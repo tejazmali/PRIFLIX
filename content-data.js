@@ -340,6 +340,12 @@ const contentData = [
         type: "Series",
     },
     {
+        title: "Parasite",
+        image: "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+        folderid: "1UaUGObEyiUzahXCpaKvWgyyrx7W_wALH",
+        type: "Movie",
+    },
+    {
         title: "The Fast and the Furious: Tokyo Drift",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F3%2Fgracenote%2F3fcca785b083f2d25ba8becc95f840da.jpg",

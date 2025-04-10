@@ -3,7 +3,7 @@
 // Configuration Object
 const CONFIG = {
     // TMDB API Configuration
-    TMDB_API_KEY: '1f91c893c917fb2698a1167b5aaa2820',
+    TMDB_API_KEY: 'b53f986e99e7ffc7ebb9831b2b15d139',
     TMDB_BASE_URL: 'https://api.themoviedb.org/3',
     TMDB_IMAGE_BASE_URL: 'https://image.tmdb.org/t/p',
     TMDB_POSTER_SIZE: 'w500',
