@@ -323,6 +323,21 @@ const contentData = [
         folderid: "1o4qBz6A2-Ffg7bVW6oqxazjFa_Auw6Jf",
         type: "Series",
     },
+
+    {
+        title: "The Witcher",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F5BvFJfi3qBxTFaLKsft202YeqGl.jpg",
+        folderid: "1YdX3v0OeoS68QXacwfvbFJ1nCJcRz3nb",
+        type: "Series",
+    },
+
+    {
+        title: "The Witcher",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fe4ALUvmGoQL1LhAwdc0ORs0BSd0.jpg",
+        folderid: "1ZijBoUQ2WPwg6Vbe6KN3-Tahn3GuuMl0",
+        type: "Series",
+    },
+
     {
         title: "Hijack",
         image:
