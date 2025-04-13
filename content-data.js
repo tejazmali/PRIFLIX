@@ -266,7 +266,7 @@ const contentData = [
     {
         title: "Stranger Things",
         image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FrbnuP7hlynAMLdqcQRCpZW9qDkV.jpg",
-        folderid: "1aKyqUgRdfFhssJKqmt5SeDVThgsbUqpq",
+        folderid: "1GmpzxtmJc0kWzrTEbiOILrOS-bFw-Rtr",
         type: "Series",
     },
 
