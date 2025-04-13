@@ -1,41 +1,5 @@
 const contentData = [
     {
-        title: "Mr. Robot",
-        image:
-            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F1aiNh5Gak36EdpdwhvWHIXzAj50.jpg",
-
-        folderid: "1-jS6jChfxw-3akR_w7gOmzmLEJ0YLThC",
-        type: "Series",
-
-    },
-    {
-        title: "Mr. Robot",
-        image:
-            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FmjqAWBXM6zoxmoeC3q9J6I1wl7R.jpg",
-
-        folderid: "1yHvChPOqw7fJRQRgnZ308nu2h_7JuXUO",
-        type: "Series",
-
-    },
-    {
-        title: "Mr. Robot",
-        image:
-            "https://image.tmdb.org/t/p/original/whtaWBtS3zauurpEdEMI61489Km.jpg",
-
-        folderid: "1xDm_o5fTkK0XozJxg0fPFrpM4SK9zrgL",
-        type: "Series",
-
-    },
-    {
-        title: "Mr. Robot",
-        image:
-            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F4PxMbpF3pv5B8eYw48hZ1hy16gr.jpg",
-
-        folderid: "1-YymiD6PWLAkcqYYpqdZY5TQIrSOM8im",
-        type: "Series",
-
-    },
-    {
         title: "Attack on Titan",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FAgaD7s1vgIf4Soi3flAKN6Bte6u.jpg",
@@ -299,6 +263,33 @@ const contentData = [
         folderid: "1JB3aP5C8FWvc18ahowXKaYAwxX4seYUE",
         type: "Movie",
     },
+    {
+        title: "Stranger Things",
+        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FrbnuP7hlynAMLdqcQRCpZW9qDkV.jpg",
+        folderid: "1aKyqUgRdfFhssJKqmt5SeDVThgsbUqpq",
+        type: "Series",
+    },
+
+    {
+        title: "Stranger Things",
+        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F9S2nGW6tPU5HzX8FMStNj7xKoqP.jpg",
+        folderid: "1p3xwsXw2pskjd3f4r2UuR7JSfkvXSFCB",
+        type: "Series",
+    },
+
+    {
+        title: "Stranger Things",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsDms9g40ZBhjMIfX9YqqaqId8sK.jpg",
+        folderid: "1e_4CC4bstvzJAN-l94mPxwnMp12qQ9BW",
+        type: "Series",
+    },
+
+    {
+        title: "Stranger Things",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F5xiUqrCFgT6wU2KzynZMu5CXkM6.jpg",
+        folderid: "1v51_M15N87rCIRaqlH0mICc6JGw2Aeg-",
+        type: "Series",
+    },
 
     {
         title: "The Witcher",
@@ -312,6 +303,52 @@ const contentData = [
         image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fe4ALUvmGoQL1LhAwdc0ORs0BSd0.jpg",
         folderid: "1Ttsi2q0bEG0nUiqtzMeVzqn935esp8nm",
         type: "Series",
+    },
+
+    {
+        title: "The Witcher",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FwgmaqKgweZA6AahZ95aioSRd1M6.jpg",
+        folderid: "1gjMZiDSQKQIjbbckKe7OTU5ENHVhungb",
+        type: "Series",
+    },
+
+
+
+    {
+        title: "Mr. Robot",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F1aiNh5Gak36EdpdwhvWHIXzAj50.jpg",
+
+        folderid: "1-jS6jChfxw-3akR_w7gOmzmLEJ0YLThC",
+        type: "Series",
+
+    },
+    {
+        title: "Mr. Robot",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FmjqAWBXM6zoxmoeC3q9J6I1wl7R.jpg",
+
+        folderid: "1yHvChPOqw7fJRQRgnZ308nu2h_7JuXUO",
+        type: "Series",
+
+    },
+    {
+        title: "Mr. Robot",
+        image:
+            "https://image.tmdb.org/t/p/original/whtaWBtS3zauurpEdEMI61489Km.jpg",
+
+        folderid: "1xDm_o5fTkK0XozJxg0fPFrpM4SK9zrgL",
+        type: "Series",
+
+    },
+    {
+        title: "Mr. Robot",
+        image:
+            "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F4PxMbpF3pv5B8eYw48hZ1hy16gr.jpg",
+
+        folderid: "1-YymiD6PWLAkcqYYpqdZY5TQIrSOM8im",
+        type: "Series",
+
     },
 
     {
