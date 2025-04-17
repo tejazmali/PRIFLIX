@@ -608,16 +608,39 @@ function displayEpisodesList(episodes, folderId) {
         return;
     }
     
+    // Show skeleton loading
+    const skeletonCount = Math.min(episodes.length, 6); // Show max 6 skeleton cards
+    const loadingContainer = document.createElement('div');
+    loadingContainer.className = 'loading-container';
+    
+    for (let i = 0; i < skeletonCount; i++) {
+        const skeletonCard = document.createElement('div');
+        skeletonCard.className = 'skeleton-episode-card';
+        skeletonCard.innerHTML = `
+            <div class="skeleton-thumbnail"></div>
+            <div class="skeleton-info">
+                <div class="skeleton-episode-number skeleton"></div>
+                <div class="skeleton-title skeleton"></div>
+                <div class="skeleton-description skeleton"></div>
+                <div class="skeleton-description skeleton"></div>
+            </div>
+            <div class="skeleton-duration skeleton"></div>
+        `;
+        loadingContainer.appendChild(skeletonCard);
+    }
+    
+    episodesContainer.appendChild(loadingContainer);
+    
     // Get content title from meta tags
     const contentTitleMeta = document.getElementById('title');
     const contentTitle = contentTitleMeta ? contentTitleMeta.content : '';
     
     // Create episode cards
-    episodes.forEach((episode, index) => {
+    const episodeCards = episodes.map((episode, index) => {
         const episodeCard = document.createElement('div');
         episodeCard.className = 'episode-card';
         episodeCard.dataset.id = episode.id;
-        episodeCard.dataset.index = episode.episodeNumber || index + 1; // Use actual episode number or index+1
+        episodeCard.dataset.index = episode.episodeNumber || index + 1;
         
         // Format the episode title with show name and episode number
         const formattedTitle = episode.episodeNumber ? 
@@ -686,12 +709,21 @@ function displayEpisodesList(episodes, folderId) {
             window.history.replaceState({}, '', url);
         });
         
-        // Always load video duration if not already loaded
-        // This ensures that every thumbnail has a duration display
-        loadVideoDuration(episode, episodeCard);
-        
-        episodesContainer.appendChild(episodeCard);
+        return episodeCard;
     });
+    
+    // Replace skeleton loading with actual content after a short delay
+    setTimeout(() => {
+        episodesContainer.innerHTML = '';
+        episodeCards.forEach(card => {
+            episodesContainer.appendChild(card);
+            // Load video duration for each card
+            const episode = episodes.find(ep => ep.id === card.dataset.id);
+            if (episode) {
+                loadVideoDuration(episode, card);
+            }
+        });
+    }, 500); // Short delay to show skeleton loading
 }
 
 // Helper function to format duration in HH:MM:SS or MM:SS format
@@ -997,8 +1029,14 @@ function updateContentDetailsUI(details, contentType) {
         });
     }
     
-    // Update cast
-    updateCastSection(details.credits?.cast);
+    // Only update cast section if not on mobile
+    if (!isMobileDevice()) {
+        updateCastSection(details.credits?.cast);
+    } else {
+        // Hide cast section on mobile
+        const castSection = document.querySelector('.cast-section');
+        if (castSection) castSection.style.display = 'none';
+    }
     
     // Update similar content
     updateSimilarContent(details.recommendations?.results, contentType);
