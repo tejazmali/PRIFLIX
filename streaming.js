@@ -199,7 +199,86 @@ async function setupContentDetails(params) {
     }
 }
 
-// Fetch and display content
+// Function to display related series/seasons
+async function displayRelatedSeries(contentTitle, contentType) {
+    // Only show related series for TV shows and anime
+    if (contentType !== 'Series' && contentType !== 'Anime' && contentType !== 'Cartoon series') {
+        return;
+    }
+
+    // Create the related series section
+    const relatedSection = document.createElement('section');
+    relatedSection.className = 'related-series-section';
+    relatedSection.innerHTML = `
+        <h2>Related Series</h2>
+        <div class="related-series-container" id="relatedSeriesContainer">
+            <div class="loading-spinner"></div>
+        </div>
+    `;
+
+    // Add the section after the episodes section
+    const episodesSection = document.getElementById('episodes');
+    if (episodesSection) {
+        episodesSection.parentNode.insertBefore(relatedSection, episodesSection.nextSibling);
+    }
+
+    // Search for related series
+    const relatedSeries = contentData.filter(item => {
+        // Check if the title matches (ignoring season numbers)
+        const baseTitle = contentTitle.replace(/\s*S\d+\s*$/, '').trim();
+        const itemBaseTitle = item.title.replace(/\s*S\d+\s*$/, '').trim();
+        
+        return itemBaseTitle === baseTitle && 
+               item.type === contentType && 
+               item.folderid !== getQueryParams().folderId;
+    });
+
+    // Display related series
+    const relatedContainer = document.getElementById('relatedSeriesContainer');
+    if (!relatedContainer) return;
+
+    if (relatedSeries.length === 0) {
+        relatedContainer.innerHTML = '<p class="no-results">No related series found.</p>';
+        return;
+    }
+
+    // Clear loading spinner
+    relatedContainer.innerHTML = '';
+
+    // Create cards for each related series
+    relatedSeries.forEach(series => {
+        const seriesCard = document.createElement('div');
+        seriesCard.className = 'related-series-card';
+        
+        seriesCard.innerHTML = `
+            <div class="series-thumbnail">
+                <img src="${series.image || 'https://via.placeholder.com/300x450?text=No+Image'}" 
+                     alt="${series.title}" 
+                     loading="lazy"
+                     onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
+                <div class="thumbnail-overlay"></div>
+            </div>
+        `;
+
+        // Add click event to the entire card
+        seriesCard.addEventListener('click', () => {
+            // Create URL parameters for the new series
+            const params = new URLSearchParams({
+                folderId: series.folderid,
+                title: series.title,
+                type: series.type,
+                tmdbId: series.tmdbId || ''
+            });
+
+            // Navigate to the streaming page for the selected series
+            window.location.href = `streaming.html?${params.toString()}`;
+        });
+
+        relatedContainer.appendChild(seriesCard);
+    });
+}
+
+// Modify fetchAndDisplayContent to include related series
 async function fetchAndDisplayContent(params) {
     try {
         // Set title in the UI
@@ -234,6 +313,9 @@ async function fetchAndDisplayContent(params) {
                 await processEpisodes(files, params.folderId);
             }
         }
+
+        // Display related series
+        await displayRelatedSeries(params.title, params.type);
     } catch (error) {
         console.error('Error fetching content:', error);
         showErrorMessage('Failed to load content. Please try again later.');

@@ -680,4 +680,127 @@ header img {
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+}
+
+/* Related Series Section */
+.related-series-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.related-series-section h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+}
+
+.related-series-container {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.related-series-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.related-series-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.related-series-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.related-series-card {
+    flex: 0 0 200px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.related-series-card:hover {
+    transform: translateY(-5px);
+}
+
+.series-thumbnail {
+    position: relative;
+    width: 100%;
+    padding-top: 150%;
+    overflow: hidden;
+}
+
+.series-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.related-series-card:hover .series-thumbnail img {
+    transform: scale(1.05);
+}
+
+.thumbnail-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.8));
+}
+
+.series-info {
+    padding: 1rem;
+}
+
+.series-title {
+    color: #fff;
+    font-size: 1rem;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.watch-btn {
+    width: 100%;
+    padding: 0.5rem;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.watch-btn:hover {
+    background: var(--primary-color-hover);
+}
+
+.watch-btn i {
+    font-size: 0.9rem;
+}
+
+.no-results {
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    padding: 2rem;
+    font-style: italic;
 } 
