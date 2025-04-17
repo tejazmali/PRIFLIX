@@ -240,6 +240,9 @@ async function fetchAndDisplayContent(params) {
             } else {
                 // For series, show episode list
                 await processEpisodes(files, params.folderId);
+                
+                // Show next season content if available
+                await displayNextSeasonContent(params);
             }
         }
     } catch (error) {
@@ -1242,4 +1245,139 @@ function showErrorMessage(message) {
     
     const similarSection = document.querySelector('.similar-section');
     if (similarSection) similarSection.style.display = 'none';
+}
+
+// Display next season content
+async function displayNextSeasonContent(params) {
+    try {
+        // Get current season number from episodes
+        const episodes = window.currentEpisodes || [];
+        if (episodes.length === 0) return;
+        
+        // Find the highest season number
+        const currentSeason = Math.max(...episodes.map(ep => ep.seasonNumber));
+        
+        // Search for content with the same name but different season
+        const sameNameContent = contentData.filter(item => 
+            item.title.toLowerCase() === params.title.toLowerCase() && 
+            item.folderid !== params.folderId
+        );
+        
+        if (sameNameContent.length === 0) return;
+        
+        // Create next season section
+        const nextSeasonSection = document.createElement('section');
+        nextSeasonSection.className = 'next-season-section';
+        nextSeasonSection.innerHTML = `
+            <h2>Next Season</h2>
+            <div class="next-season-container" id="nextSeasonContainer">
+                <div class="loading-spinner"></div>
+            </div>
+        `;
+        
+        // Insert after episodes section
+        const episodesSection = document.getElementById('episodes');
+        episodesSection.parentNode.insertBefore(nextSeasonSection, episodesSection.nextSibling);
+        
+        // Create content cards for next season
+        const nextSeasonContainer = document.getElementById('nextSeasonContainer');
+        nextSeasonContainer.innerHTML = '';
+        
+        sameNameContent.forEach(content => {
+            const contentCard = document.createElement('div');
+            contentCard.className = 'next-season-card';
+            
+            // Try to determine season number from folder name or content
+            let seasonNumber = 'Next';
+            const seasonMatch = content.folderid.match(/S(\d+)/i);
+            if (seasonMatch) {
+                const foundSeason = parseInt(seasonMatch[1]);
+                if (foundSeason > currentSeason) {
+                    seasonNumber = `Season ${foundSeason}`;
+                }
+            }
+            
+            contentCard.innerHTML = `
+                <div class="next-season-poster">
+                    <img src="${content.image || 'https://via.placeholder.com/300x450?text=No+Image'}" 
+                         alt="${content.title}" 
+                         loading="lazy">
+                    <div class="next-season-overlay">
+                        <button class="play-btn" data-folderid="${content.folderid}">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Add click event to play button
+            const playBtn = contentCard.querySelector('.play-btn');
+            playBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.location.href = `streaming.html?folderId=${content.folderid}&title=${encodeURIComponent(content.title)}&type=${content.type}`;
+            });
+            
+            // Add click event to the entire card
+            contentCard.addEventListener('click', () => {
+                window.location.href = `streaming.html?folderId=${content.folderid}&title=${encodeURIComponent(content.title)}&type=${content.type}`;
+            });
+            
+            nextSeasonContainer.appendChild(contentCard);
+        });
+        
+        // Add slider navigation if there are multiple items
+        if (sameNameContent.length > 1) {
+            nextSeasonContainer.classList.add('slider');
+            nextSeasonSection.innerHTML += `
+                <button class="slider-nav left"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-nav right"><i class="fas fa-chevron-right"></i></button>
+            `;
+            
+            // Setup slider navigation
+            setupNextSeasonSlider(nextSeasonContainer);
+        }
+    } catch (error) {
+        console.error('Error displaying next season content:', error);
+    }
+}
+
+// Setup next season slider navigation
+function setupNextSeasonSlider(container) {
+    const leftNav = container.parentElement.querySelector('.slider-nav.left');
+    const rightNav = container.parentElement.querySelector('.slider-nav.right');
+    
+    if (leftNav) {
+        leftNav.addEventListener('click', () => {
+            container.scrollBy({
+                left: -container.clientWidth,
+                behavior: 'smooth'
+            });
+        });
+    }
+    
+    if (rightNav) {
+        rightNav.addEventListener('click', () => {
+            container.scrollBy({
+                left: container.clientWidth,
+                behavior: 'smooth'
+            });
+        });
+    }
+    
+    // Show/hide navigation buttons based on scroll position
+    container.addEventListener('scroll', () => {
+        if (leftNav) {
+            leftNav.style.opacity = container.scrollLeft > 0 ? '1' : '0';
+        }
+        if (rightNav) {
+            rightNav.style.opacity = 
+                (container.scrollLeft + container.clientWidth) < container.scrollWidth ? '1' : '0';
+        }
+    });
+    
+    // Initial button visibility
+    if (leftNav) leftNav.style.opacity = '0';
+    if (rightNav) {
+        rightNav.style.opacity = container.scrollWidth > container.clientWidth ? '1' : '0';
+    }
 } 
