@@ -5,6 +5,25 @@ document.addEventListener('DOMContentLoaded', () => {
     initStreamingPage();
 });
 
+// Check network connection quality
+function checkNetworkQuality() {
+    return new Promise((resolve) => {
+        if (!navigator.connection) {
+            // If connection API is not available, assume good connection
+            resolve(true);
+            return;
+        }
+
+        const connection = navigator.connection;
+        const isSlowConnection = 
+            connection.effectiveType === '2g' || 
+            connection.effectiveType === 'slow-2g' ||
+            connection.downlink < 1; // Less than 1 Mbps
+
+        resolve(!isSlowConnection);
+    });
+}
+
 // Initialize streaming page
 async function initStreamingPage() {
     try {
@@ -17,17 +36,26 @@ async function initStreamingPage() {
         // Setup event listeners
         setupEventListeners();
         
+        // Check network quality
+        const isGoodConnection = await checkNetworkQuality();
+        
         // First priority: Load and play the video
         await loadAndPlayVideo(params);
         
         // Second priority: Load basic episode list
         await loadBasicEpisodeList(params);
         
-        // Third priority: Load TMDB data and enhance UI (deferred)
-        setTimeout(() => {
-            setupContentDetails(params);
-            enhanceWithTMDBData(params);
-        }, 2000); // Delay TMDB data loading by 2 seconds
+        // Only load TMDB data if connection is good
+        if (isGoodConnection) {
+            // Third priority: Load TMDB data and enhance UI (deferred)
+            setTimeout(() => {
+                setupContentDetails(params);
+                enhanceWithTMDBData(params);
+            }, 2000); // Delay TMDB data loading by 2 seconds
+        } else {
+            // For slow connections, use basic content details
+            updateBasicContentDetails(params.title, params.type);
+        }
     } catch (error) {
         console.error('Error initializing streaming page:', error);
         showErrorMessage('There was an error loading the content. Please try again later.');
@@ -1390,6 +1418,13 @@ function displayBasicEpisodesList(episodes) {
 // Enhance UI with TMDB data after initial load
 async function enhanceWithTMDBData(params) {
     try {
+        // Check network quality again before proceeding
+        const isGoodConnection = await checkNetworkQuality();
+        if (!isGoodConnection) {
+            console.log('Skipping TMDB data loading due to slow connection');
+            return;
+        }
+
         // Get TMDB ID from meta tag
         const tmdbIdMeta = document.getElementById('tmdbid');
         const tmdbId = tmdbIdMeta ? tmdbIdMeta.content : null;
@@ -1403,8 +1438,14 @@ async function enhanceWithTMDBData(params) {
         // Only proceed for TV content
         if (tmdbType !== 'tv') return;
         
-        // Get show details
-        const showDetails = await getContentDetails(tmdbId, contentType);
+        // Get show details with timeout
+        const showDetails = await Promise.race([
+            getContentDetails(tmdbId, contentType),
+            new Promise((_, reject) => 
+                setTimeout(() => reject(new Error('TMDB request timeout')), 5000)
+            )
+        ]);
+
         if (!showDetails) return;
         
         // Update content details UI
@@ -1418,6 +1459,7 @@ async function enhanceWithTMDBData(params) {
         updateEpisodesWithTMDBData(episodes);
     } catch (error) {
         console.error('Error enhancing with TMDB data:', error);
+        // Don't show error to user, just fall back to basic content
     }
 }
 
@@ -1447,7 +1489,7 @@ function updateEpisodesWithTMDBData(episodes) {
             `;
         }
         
-        // Update thumbnail if TMDB still is available
+        // Only update thumbnail if TMDB still is available and connection is good
         if (episode.still_path) {
             const thumbnailContainer = episodeCard.querySelector('.episode-thumbnail');
             if (thumbnailContainer) {
