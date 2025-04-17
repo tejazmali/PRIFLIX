@@ -68,8 +68,17 @@ const CONFIG = {
 // Debug Mode (set to false in production)
 const DEBUG = true;
 
+// Function to detect if device is mobile
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 // Function to get TMDB API URL with API key
 function getTMDBApiUrl(endpoint, params = {}) {
+    if (isMobileDevice()) {
+        console.log('TMDB API calls disabled on mobile devices');
+        return null;
+    }
     const url = new URL(`${CONFIG.TMDB_BASE_URL}${endpoint}`);
     url.searchParams.append('api_key', CONFIG.TMDB_API_KEY);
     
@@ -89,6 +98,10 @@ function getTMDBImageUrl(path, size) {
 
 // Function to search TMDB for content information
 async function searchTMDB(title, type) {
+    if (isMobileDevice()) {
+        console.log('TMDB API calls disabled on mobile devices');
+        return null;
+    }
     const searchType = CONFIG.TMDB_SEARCH_TYPES[type] || 'movie';
     const url = getTMDBApiUrl(`/search/${searchType}`, {
         query: title,
@@ -96,6 +109,8 @@ async function searchTMDB(title, type) {
         language: 'en-US',
         page: 1
     });
+    
+    if (!url) return null;
     
     try {
         const response = await fetch(url);
@@ -112,11 +127,17 @@ async function searchTMDB(title, type) {
 
 // Function to get detailed content info from TMDB
 async function getContentDetails(id, type) {
+    if (isMobileDevice()) {
+        console.log('TMDB API calls disabled on mobile devices');
+        return null;
+    }
     const contentType = CONFIG.TMDB_SEARCH_TYPES[type] || 'movie';
     const url = getTMDBApiUrl(`/${contentType}/${id}`, {
         append_to_response: 'credits,videos,recommendations',
         language: 'en-US'
     });
+    
+    if (!url) return null;
     
     try {
         const response = await fetch(url);
@@ -151,6 +172,10 @@ function getDriveFolderUrl(folderId) {
 
 // Function to get TV show season details
 async function getTVSeasonDetails(showId, seasonNumber) {
+    if (isMobileDevice()) {
+        console.log('TMDB API calls disabled on mobile devices');
+        return null;
+    }
     if (!showId || !seasonNumber) return null;
     
     try {
@@ -158,6 +183,8 @@ async function getTVSeasonDetails(showId, seasonNumber) {
             language: 'en-US',
             append_to_response: 'images,credits'
         });
+        
+        if (!url) return null;
         
         const response = await fetch(url);
         if (!response.ok) {
@@ -172,6 +199,10 @@ async function getTVSeasonDetails(showId, seasonNumber) {
 
 // Function to get TV show episode details
 async function getTVEpisodeDetails(showId, seasonNumber, episodeNumber) {
+    if (isMobileDevice()) {
+        console.log('TMDB API calls disabled on mobile devices');
+        return null;
+    }
     if (!showId || !seasonNumber || !episodeNumber) return null;
     
     try {
@@ -179,6 +210,8 @@ async function getTVEpisodeDetails(showId, seasonNumber, episodeNumber) {
             language: 'en-US',
             append_to_response: 'images,credits'
         });
+        
+        if (!url) return null;
         
         const response = await fetch(url);
         if (!response.ok) {
@@ -211,6 +244,10 @@ function getCurrentSeason() {
 
 // Function to get seasonal content from TMDB
 async function getSeasonalContent() {
+    if (isMobileDevice()) {
+        console.log('TMDB API calls disabled on mobile devices');
+        return null;
+    }
     const currentSeason = getCurrentSeason();
     const seasonKeywords = currentSeason.keywords.join('|');
     const seasonGenres = currentSeason.genres.join('|');
@@ -223,6 +260,8 @@ async function getSeasonalContent() {
             include_adult: false,
             page: 1
         });
+        
+        if (!keywordUrl) return null;
         
         const keywordResponse = await fetch(keywordUrl);
         if (!keywordResponse.ok) {
@@ -239,6 +278,8 @@ async function getSeasonalContent() {
                 include_adult: false,
                 page: 1
             });
+            
+            if (!genreUrl) return null;
             
             const genreResponse = await fetch(genreUrl);
             if (!genreResponse.ok) {
@@ -265,10 +306,7 @@ async function getSeasonalContent() {
         };
     } catch (error) {
         console.error('Error fetching seasonal content:', error);
-        return {
-            results: [],
-            season: currentSeason.name
-        };
+        return null;
     }
 }
 

@@ -192,10 +192,18 @@ async function setupContentDetails(params) {
     
     // If we have a TMDB ID, fetch details from TMDB
     if (params.tmdbId) {
-        await fetchTMDBDetails(params.tmdbId, params.type);
+        const details = await fetchTMDBDetails(params.tmdbId, params.type);
+        if (!details) {
+            // If TMDB API is disabled or failed, use basic content details
+            updateBasicContentDetails(params.title, params.type);
+        }
     } else {
         // Otherwise use the title to search TMDB
-        await searchAndFetchTMDBDetails(params.title, params.type);
+        const details = await searchAndFetchTMDBDetails(params.title, params.type);
+        if (!details) {
+            // If TMDB API is disabled or failed, use basic content details
+            updateBasicContentDetails(params.title, params.type);
+        }
     }
 }
 
@@ -503,7 +511,10 @@ async function enhanceEpisodesWithTMDB(episodes) {
         
         // Get show details first to have show name for matching
         const showDetails = await getContentDetails(tmdbId, contentType);
-        if (!showDetails) return;
+        if (!showDetails) {
+            // If TMDB API is disabled or failed, use basic episode details
+            return;
+        }
         
         const showName = showDetails.name || '';
         
@@ -910,9 +921,9 @@ async function searchAndFetchTMDBDetails(title, contentType) {
         const searchResult = await searchTMDB(title, contentType);
         
         if (!searchResult) {
-            // If no results, use basic content details
+            // If TMDB API is disabled or no results, use basic content details
             updateBasicContentDetails(title, contentType);
-            return;
+            return null;
         }
         
         // Store TMDB ID in URL parameters
@@ -930,32 +941,38 @@ async function searchAndFetchTMDBDetails(title, contentType) {
         
         if (details) {
             updateContentDetailsUI(details, tmdbType);
+            return details;
         } else {
             updateBasicContentDetails(title, contentType);
+            return null;
         }
     } catch (error) {
         console.error('Error searching TMDB:', error);
         updateBasicContentDetails(title, contentType);
+        return null;
     }
 }
 
 // Fetch TMDB details using ID
 async function fetchTMDBDetails(tmdbId, contentType) {
     try {
-        if (!tmdbId) return;
+        if (!tmdbId) return null;
         
         const details = await getContentDetails(tmdbId, contentType);
         
         if (details) {
             const tmdbType = CONFIG.TMDB_SEARCH_TYPES[contentType] || 'movie';
             updateContentDetailsUI(details, tmdbType);
+            return details;
         }
+        return null;
     } catch (error) {
         console.error('Error fetching TMDB details:', error);
         
         // Use basic content details as fallback
         const params = getQueryParams();
         updateBasicContentDetails(params.title, params.type);
+        return null;
     }
 }
 

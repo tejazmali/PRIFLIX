@@ -166,8 +166,10 @@ function loadContentData() {
         renderContentByType('Cartoon movies', contentByType['Cartoon movies'] || [], 'cartoonMoviesContent');
         renderContentByType('Cartoon series', contentByType['Cartoon series'] || [], 'cartoonSeriesContent');
         
-        // Load seasonal content from TMDB
-        loadSeasonalContent();
+        // Load seasonal content from TMDB only if not on mobile
+        if (!isMobileDevice()) {
+            loadSeasonalContent();
+        }
         
         // Create trending section with mix of content
         const trendingContent = createTrendingContent(contentData);
@@ -411,27 +413,13 @@ function searchContent(query) {
 // Show content details in a modal
 function showContentDetails(contentItem) {
     // Set up modal content
-    const modal = document.getElementById('movieModal');
-    const modalBody = modal.querySelector('.modal-body');
+    const modal = document.getElementById('contentModal');
+    const modalTitle = document.getElementById('contentModalTitle');
+    const modalBody = document.getElementById('contentModalBody');
     
-    // Start with loading state
-    modalBody.innerHTML = '<div class="loading-spinner"></div>';
+    if (!modal || !modalTitle || !modalBody) return;
     
-    // Display the modal
-    modal.style.display = 'block';
-    
-    // Setup close button functionality
-    const closeBtn = modal.querySelector('.close-modal');
-    if (closeBtn) {
-        // Remove existing event listeners
-        const newCloseBtn = closeBtn.cloneNode(true);
-        closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
-        
-        // Add new event listener
-        newCloseBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-    }
+    modalTitle.textContent = contentItem.title;
     
     // Process differently based on whether it's seasonal content or not
     if (contentItem.isSeasonalContent && contentItem.tmdbId) {
@@ -441,7 +429,20 @@ function showContentDetails(contentItem) {
         getContentDetails(contentItem.tmdbId, contentType)
             .then(details => {
                 if (!details) {
-                    modalBody.innerHTML = '<p class="no-results">Content details not available.</p>';
+                    // If TMDB API is disabled or failed, use basic content details
+                    renderContentDetailsInModal({
+                        title: contentItem.title,
+                        overview: 'No overview available.',
+                        backdrop: null,
+                        poster: null,
+                        year: '',
+                        rating: '',
+                        genres: '',
+                        runtime: '',
+                        contentId: contentItem.id,
+                        folderid: contentItem.folderid,
+                        type: contentItem.type
+                    }, contentItem);
                     return;
                 }
                 
@@ -453,32 +454,24 @@ function showContentDetails(contentItem) {
                 modalBody.innerHTML = '<p class="no-results">Failed to load content details.</p>';
             });
     } else {
-        // For regular content, use our existing method
-        // ... existing implementation ...
-        
-        // Placeholder for search functionality
+        // For regular content, search TMDB
         searchTMDB(contentItem.title, contentItem.type)
             .then(result => {
                 if (!result) {
-                    // If no result, display basic information
-                    const basicInfo = getContentDescription(contentItem);
-        modalBody.innerHTML = `
-            <div class="modal-details">
-                <h2 class="modal-title">${contentItem.title}</h2>
-                            <p class="modal-info">${basicInfo}</p>
-                <div class="modal-actions">
-                                <button class="play-btn" data-folderid="${contentItem.folderid}" data-content-id="${contentItem.id}">
-                            <i class="fas fa-play"></i> Play
-                        </button>
-                                <button class="add-list-btn" data-content-id="${contentItem.id}">
-                                    <i class="fas fa-plus"></i> Add to My List
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        // Add event listeners to buttons
-                    setupModalButtonListeners();
+                    // If TMDB API is disabled or no results, use basic content details
+                    renderContentDetailsInModal({
+                        title: contentItem.title,
+                        overview: 'No overview available.',
+                        backdrop: null,
+                        poster: null,
+                        year: '',
+                        rating: '',
+                        genres: '',
+                        runtime: '',
+                        contentId: contentItem.id,
+                        folderid: contentItem.folderid,
+                        type: contentItem.type
+                    }, contentItem);
                     return;
                 }
                 
