@@ -166,6 +166,9 @@ function loadContentData() {
         renderContentByType('Cartoon movies', contentByType['Cartoon movies'] || [], 'cartoonMoviesContent');
         renderContentByType('Cartoon series', contentByType['Cartoon series'] || [], 'cartoonSeriesContent');
         
+        // Load seasonal content from TMDB
+        loadSeasonalContent();
+        
         // Create trending section with mix of content
         const trendingContent = createTrendingContent(contentData);
         renderContentByType('Trending', trendingContent, 'trendingMovies');
@@ -241,17 +244,18 @@ function createContentCard(contentItem) {
     typeBadge.className = 'content-type-badge';
     typeBadge.textContent = contentItem.type;
     
+    // For seasonal content, add special styling or icon
+    if (contentItem.isSeasonalContent) {
+        typeBadge.className += ' seasonal-badge';
+        typeBadge.innerHTML = `<i class="fas fa-snowflake"></i> ${getCurrentSeason().name}`;
+    }
+    
     // Create the card HTML structure with poster image
     card.innerHTML = `
-        <div class="image-container">
-            <img src="${contentItem.image || 'https://via.placeholder.com/300x450?text=No+Image'}" 
-                 alt="${contentItem.title}" 
-                 loading="lazy"
-                 onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
-            <div class="loading-spinner" style="display: none;"></div>
-        </div>
+        <img src="${contentItem.image || 'https://via.placeholder.com/300x450?text=No+Image'}" alt="${contentItem.title}" loading="lazy">
         <div class="movie-info">
             <h3 class="movie-title">${contentItem.title}</h3>
+            
             <div class="movie-actions">
                 <i class="fas fa-play" title="Play"></i>
                 <i class="fas fa-info-circle" title="More Info"></i>
@@ -262,45 +266,35 @@ function createContentCard(contentItem) {
     
     // Add the badge to the card
     card.appendChild(typeBadge);
-
-    // If this is a TMDB content, load the image asynchronously
-    if (contentItem.tmdbId) {
-        const img = card.querySelector('img');
-        const spinner = card.querySelector('.loading-spinner');
-        
-        // Show loading spinner
-        spinner.style.display = 'block';
-        
-        // Load TMDB image asynchronously
-        const contentType = contentItem.type === 'Series' || contentItem.type === 'Cartoon series' ? 'tv' : 'movie';
-        getContentDetails(contentItem.tmdbId, contentType)
-            .then(details => {
-                if (details && details.poster_path) {
-                    img.src = getTMDBImageUrl(details.poster_path, CONFIG.TMDB_POSTER_SIZE);
-                }
-            })
-            .catch(error => {
-                console.error('Error loading TMDB image:', error);
-            })
-            .finally(() => {
-                // Hide loading spinner
-                spinner.style.display = 'none';
-            });
-    }
     
     // Add click event listener to show folder content or content details
     card.addEventListener('click', (event) => {
         const target = event.target;
         
         if (target.classList.contains('fa-play')) {
-            showFolderContent(contentItem);
+            // For seasonal content that doesn't have folder ID, show details modal
+            if (contentItem.isSeasonalContent) {
+                showContentDetails(contentItem);
+            } else {
+                showFolderContent(contentItem);
+            }
         } else if (target.classList.contains('fa-info-circle')) {
-            navigateToStreamingPage(contentItem);
+            // For info icon, also directly navigate to streaming page unless it's seasonal content
+            if (contentItem.isSeasonalContent) {
+                showContentDetails(contentItem);
+            } else {
+                navigateToStreamingPage(contentItem);
+            }
         } else if (target.classList.contains('fa-plus')) {
             addToMyList(contentItem);
             event.stopPropagation();
         } else {
-            navigateToStreamingPage(contentItem);
+            // If user clicked elsewhere on the card, directly navigate to streaming page
+            if (contentItem.isSeasonalContent) {
+                showContentDetails(contentItem);
+            } else {
+                navigateToStreamingPage(contentItem);
+            }
         }
     });
     
@@ -853,26 +847,9 @@ function getContentDescription(contentItem) {
 
 // Search TMDB
 async function searchTMDB(query, type) {
-    try {
-        const searchType = CONFIG.TMDB_SEARCH_TYPES[type] || 'movie';
-        const url = getTMDBApiUrl(`/search/${searchType}`, {
-            query: query,
-            include_adult: false,
-            language: 'en-US',
-            page: 1
-        });
-        
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`TMDB API error: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        return data.results && data.results.length > 0 ? data.results[0] : null;
-    } catch (error) {
-        console.error('Error searching TMDB:', error);
-        return null;
-    }
+    // Implement the logic to search TMDB
+    // This is a placeholder and should be replaced with actual implementation
+    return null; // Placeholder return, actual implementation needed
 }
 
 // Setup modal button listeners
@@ -980,40 +957,4 @@ function setupSliderNavigation() {
             }
         }
     });
-}
-
-// Add styles for loading spinner and image container
-const style = document.createElement('style');
-style.textContent = `
-    .image-container {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 2/3;
-        overflow: hidden;
-    }
-    
-    .image-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: opacity 0.3s ease;
-    }
-    
-    .loading-spinner {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 30px;
-        height: 30px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top-color: #e50914;
-        animation: spin 1s ease-in-out infinite;
-    }
-    
-    @keyframes spin {
-        to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-`;
-document.head.appendChild(style); 
+} 

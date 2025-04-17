@@ -25,7 +25,7 @@ const CONFIG = {
     EPISODE_PATTERN: /(?:S\d+\s)?E(\d+)/i,
     
     // Categories for organizing content
-    CATEGORIES: ['Movies', 'Series', 'Anime', 'Cartoons', 'My List'],
+    CATEGORIES: ['Movies', 'Series', 'Anime', 'Cartoons', 'My List', 'Seasonal Picks'],
     
     // TMDB Search Settings
     TMDB_SEARCH_TYPES: {
@@ -34,6 +34,34 @@ const CONFIG = {
         'Anime': 'tv',
         'Cartoon movies': 'movie',
         'Cartoon series': 'tv'
+    },
+    
+    // Seasonal configuration
+    SEASONS: {
+        WINTER: {
+            name: 'Winter',
+            months: [12, 1, 2],
+            keywords: ['winter', 'snow', 'christmas', 'holiday', 'new year', 'ice'],
+            genres: [18, 10751, 14] // Drama, Family, Fantasy genres often associated with winter
+        },
+        SPRING: {
+            name: 'Spring',
+            months: [3, 4, 5],
+            keywords: ['spring', 'bloom', 'garden', 'flower', 'renewal'],
+            genres: [10749, 35, 12] // Romance, Comedy, Adventure genres
+        },
+        SUMMER: {
+            name: 'Summer',
+            months: [6, 7, 8],
+            keywords: ['summer', 'beach', 'vacation', 'sun', 'ocean', 'sea'],
+            genres: [12, 28, 35] // Adventure, Action, Comedy genres
+        },
+        FALL: {
+            name: 'Fall',
+            months: [9, 10, 11],
+            keywords: ['autumn', 'fall', 'halloween', 'harvest', 'thanksgiving'],
+            genres: [27, 9648, 18] // Horror, Mystery, Drama genres
+        }
     }
 };
 
@@ -163,6 +191,87 @@ async function getTVEpisodeDetails(showId, seasonNumber, episodeNumber) {
     }
 }
 
+// Function to detect current season
+function getCurrentSeason() {
+    const now = new Date();
+    const currentMonth = now.getMonth() + 1; // JavaScript months are 0-based
+    
+    for (const season in CONFIG.SEASONS) {
+        if (CONFIG.SEASONS[season].months.includes(currentMonth)) {
+            return CONFIG.SEASONS[season];
+        }
+    }
+    
+    // Default to current season based on hemisphere (Northern)
+    if (currentMonth >= 3 && currentMonth <= 5) return CONFIG.SEASONS.SPRING;
+    if (currentMonth >= 6 && currentMonth <= 8) return CONFIG.SEASONS.SUMMER;
+    if (currentMonth >= 9 && currentMonth <= 11) return CONFIG.SEASONS.FALL;
+    return CONFIG.SEASONS.WINTER;
+}
+
+// Function to get seasonal content from TMDB
+async function getSeasonalContent() {
+    const currentSeason = getCurrentSeason();
+    const seasonKeywords = currentSeason.keywords.join('|');
+    const seasonGenres = currentSeason.genres.join('|');
+    
+    try {
+        // Try to get content by seasonal keywords first
+        const keywordUrl = getTMDBApiUrl('/discover/movie', {
+            with_keywords: seasonKeywords,
+            sort_by: 'popularity.desc',
+            include_adult: false,
+            page: 1
+        });
+        
+        const keywordResponse = await fetch(keywordUrl);
+        if (!keywordResponse.ok) {
+            throw new Error(`TMDB API error: ${keywordResponse.status}`);
+        }
+        
+        const keywordData = await keywordResponse.json();
+        
+        // If we don't get enough results, try by genre
+        if (keywordData.results.length < 5) {
+            const genreUrl = getTMDBApiUrl('/discover/movie', {
+                with_genres: seasonGenres,
+                sort_by: 'popularity.desc',
+                include_adult: false,
+                page: 1
+            });
+            
+            const genreResponse = await fetch(genreUrl);
+            if (!genreResponse.ok) {
+                throw new Error(`TMDB API error: ${genreResponse.status}`);
+            }
+            
+            const genreData = await genreResponse.json();
+            
+            // Combine results
+            const combinedResults = [...keywordData.results, ...genreData.results];
+            // Remove duplicates
+            const uniqueResults = Array.from(new Set(combinedResults.map(item => item.id)))
+                .map(id => combinedResults.find(item => item.id === id));
+                
+            return {
+                results: uniqueResults.slice(0, 10),
+                season: currentSeason.name
+            };
+        }
+        
+        return {
+            results: keywordData.results.slice(0, 10),
+            season: currentSeason.name
+        };
+    } catch (error) {
+        console.error('Error fetching seasonal content:', error);
+        return {
+            results: [],
+            season: currentSeason.name
+        };
+    }
+}
+
 // Export configuration
 window.CONFIG = CONFIG;
 window.getTMDBApiUrl = getTMDBApiUrl;
@@ -173,4 +282,6 @@ window.getTVSeasonDetails = getTVSeasonDetails;
 window.getTVEpisodeDetails = getTVEpisodeDetails;
 window.getDriveAPIUrl = getDriveAPIUrl;
 window.getDriveEmbedUrl = getDriveEmbedUrl;
-window.getDriveFolderUrl = getDriveFolderUrl; 
+window.getDriveFolderUrl = getDriveFolderUrl;
+window.getCurrentSeason = getCurrentSeason;
+window.getSeasonalContent = getSeasonalContent; 
