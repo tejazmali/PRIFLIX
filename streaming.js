@@ -245,14 +245,40 @@ function playVideo(fileId, title) {
     const videoPlayer = document.getElementById('videoPlayer');
     if (!videoPlayer) return;
     
-    // Clear existing content
-    videoPlayer.innerHTML = '';
+    // Show loading state
+    videoPlayer.innerHTML = `
+        <div class="loading-state">
+            <div class="loading-spinner"></div>
+            <p>Loading video...</p>
+        </div>
+    `;
     
-    // Create iframe
+    // Create iframe with progressive loading
     const iframe = document.createElement('iframe');
     iframe.src = getDriveEmbedUrl(fileId);
     iframe.setAttribute('frameborder', '0');
     iframe.setAttribute('allowfullscreen', 'true');
+    iframe.setAttribute('loading', 'lazy');
+    
+    // Add loading event listener
+    iframe.addEventListener('load', () => {
+        // Remove loading state when video is ready
+        const loadingState = videoPlayer.querySelector('.loading-state');
+        if (loadingState) {
+            loadingState.remove();
+        }
+    });
+    
+    // Add error handling
+    iframe.addEventListener('error', () => {
+        videoPlayer.innerHTML = `
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i>
+                <p>Failed to load video. Please check your internet connection and try again.</p>
+                <button onclick="playVideo('${fileId}', '${title}')" class="retry-btn">Retry</button>
+            </div>
+        `;
+    });
     
     // Add iframe to player
     videoPlayer.appendChild(iframe);
@@ -590,7 +616,7 @@ function compareTitles(title1, title2) {
     return totalWords > 0 ? matchCount / totalWords : 0;
 }
 
-// Display episodes list
+// Display episodes list with optimized thumbnail loading
 function displayEpisodesList(episodes, folderId) {
     const episodesContainer = document.getElementById('episodesContainer');
     if (!episodesContainer) return;
@@ -607,44 +633,27 @@ function displayEpisodesList(episodes, folderId) {
     const contentTitleMeta = document.getElementById('title');
     const contentTitle = contentTitleMeta ? contentTitleMeta.content : '';
     
-    // Create episode cards
+    // Create episode cards with lazy loading
     episodes.forEach((episode, index) => {
         const episodeCard = document.createElement('div');
         episodeCard.className = 'episode-card';
         episodeCard.dataset.id = episode.id;
-        episodeCard.dataset.index = episode.episodeNumber || index + 1; // Use actual episode number or index+1
+        episodeCard.dataset.index = episode.episodeNumber || index + 1;
         
-        // Format the episode title with show name and episode number
+        // Format the episode title
         const formattedTitle = episode.episodeNumber ? 
             `S${episode.seasonNumber}:E${episode.episodeNumber}` : 
             '';
         
-        // Determine thumbnail source
-        let thumbnailHTML = '';
-        let thumbnailSource = null;
+        // Create placeholder for thumbnail
+        let thumbnailHTML = `
+            <div class="thumbnail-placeholder">
+                <i class="fas fa-play-circle"></i>
+            </div>
+            <div class="thumbnail-overlay"></div>
+        `;
         
-        if (episode.still_path) {
-            // Use TMDB image if available
-            thumbnailSource = getTMDBImageUrl(episode.still_path, CONFIG.TMDB_STILL_SIZE);
-        } else if (episode.thumbnailLink) {
-            // Use Google Drive thumbnail if available
-            thumbnailSource = episode.thumbnailLink;
-        }
-        
-        if (thumbnailSource) {
-            thumbnailHTML = `
-                <img src="${thumbnailSource}" 
-                     alt="${episode.title}" 
-                     loading="lazy"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='none'; this.parentNode.insertAdjacentHTML('afterbegin', '<i class=\\'fas fa-play-circle\\'></i>');">
-                <div class="thumbnail-overlay"></div>
-            `;
-        } else {
-            // Otherwise use icon
-            thumbnailHTML = '<i class="fas fa-play-circle"></i>';
-        }
-        
-        // Always add time display element
+        // Add time display
         const timeDisplay = `<div class="episode-duration">${episode.duration ? formatDuration(episode.duration) : '--:--'}</div>`;
         
         // Determine episode description
@@ -679,12 +688,56 @@ function displayEpisodesList(episodes, folderId) {
             window.history.replaceState({}, '', url);
         });
         
-        // Always load video duration if not already loaded
-        // This ensures that every thumbnail has a duration display
-        loadVideoDuration(episode, episodeCard);
+        // Load thumbnail and duration when card is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadThumbnailAndDuration(episode, episodeCard);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        observer.observe(episodeCard);
         
         episodesContainer.appendChild(episodeCard);
     });
+}
+
+// Helper function to load thumbnail and duration
+function loadThumbnailAndDuration(episode, episodeCard) {
+    const thumbnailContainer = episodeCard.querySelector('.episode-thumbnail');
+    if (!thumbnailContainer) return;
+    
+    // Determine thumbnail source
+    let thumbnailSource = null;
+    if (episode.still_path) {
+        thumbnailSource = getTMDBImageUrl(episode.still_path, CONFIG.TMDB_STILL_SIZE);
+    } else if (episode.thumbnailLink) {
+        thumbnailSource = episode.thumbnailLink;
+    }
+    
+    if (thumbnailSource) {
+        const img = document.createElement('img');
+        img.src = thumbnailSource;
+        img.alt = episode.title;
+        img.loading = 'lazy';
+        img.onerror = () => {
+            img.style.display = 'none';
+            const placeholder = thumbnailContainer.querySelector('.thumbnail-placeholder');
+            if (placeholder) placeholder.style.display = 'block';
+        };
+        
+        // Replace placeholder with actual thumbnail
+        const placeholder = thumbnailContainer.querySelector('.thumbnail-placeholder');
+        if (placeholder) {
+            thumbnailContainer.insertBefore(img, placeholder);
+            placeholder.remove();
+        }
+    }
+    
+    // Load video duration
+    loadVideoDuration(episode, episodeCard);
 }
 
 // Helper function to format duration in HH:MM:SS or MM:SS format
