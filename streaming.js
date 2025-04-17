@@ -17,11 +17,17 @@ async function initStreamingPage() {
         // Setup event listeners
         setupEventListeners();
         
-        // Setup content details
-        await setupContentDetails(params);
+        // First priority: Load and play the video
+        await loadAndPlayVideo(params);
         
-        // Fetch and display content
-        await fetchAndDisplayContent(params);
+        // Second priority: Load basic episode list
+        await loadBasicEpisodeList(params);
+        
+        // Third priority: Load TMDB data and enhance UI (deferred)
+        setTimeout(() => {
+            setupContentDetails(params);
+            enhanceWithTMDBData(params);
+        }, 2000); // Delay TMDB data loading by 2 seconds
     } catch (error) {
         console.error('Error initializing streaming page:', error);
         showErrorMessage('There was an error loading the content. Please try again later.');
@@ -1233,4 +1239,240 @@ function showErrorMessage(message) {
     
     const similarSection = document.querySelector('.similar-section');
     if (similarSection) similarSection.style.display = 'none';
+}
+
+// Load and play video first
+async function loadAndPlayVideo(params) {
+    try {
+        // If we have a specific episode ID, play that episode
+        if (params.episodeId) {
+            playVideo(params.episodeId, params.episodeTitle || 'Episode');
+        } else {
+            // Otherwise fetch all files from the folder
+            const files = await fetchFilesFromDrive(params.folderId);
+            
+            if (files.length === 0) {
+                showErrorMessage('No files found in this folder.');
+                return;
+            }
+            
+            // If this is a movie (single file expected)
+            if (params.type === 'Movie' || params.type === 'Cartoon movies') {
+                const videoFile = files.find(file => file.mimeType && file.mimeType.includes('video'));
+                if (videoFile) {
+                    playVideo(videoFile.id, params.title);
+                    // Hide episodes section for movies
+                    const episodesSection = document.getElementById('episodes');
+                    if (episodesSection) episodesSection.style.display = 'none';
+                } else {
+                    showErrorMessage('No video files found in this folder.');
+                }
+            } else {
+                // For series, play first episode
+                const videoFiles = files.filter(file => file.mimeType && file.mimeType.includes('video'));
+                if (videoFiles.length > 0) {
+                    playVideo(videoFiles[0].id, videoFiles[0].name);
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error loading video:', error);
+        showErrorMessage('Failed to load video. Please try again later.');
+    }
+}
+
+// Load basic episode list without TMDB data
+async function loadBasicEpisodeList(params) {
+    try {
+        const files = await fetchFilesFromDrive(params.folderId);
+        const videoFiles = files.filter(file => file.mimeType && file.mimeType.includes('video'));
+        
+        if (videoFiles.length === 0) {
+            const episodesSection = document.getElementById('episodes');
+            if (episodesSection) episodesSection.style.display = 'none';
+            return;
+        }
+        
+        // Process episodes with basic info only
+        const episodes = processEpisodeFiles(videoFiles);
+        
+        // Store episodes in window for navigation
+        window.currentEpisodes = episodes;
+        
+        // Find current episode index
+        const currentIndex = episodes.findIndex(episode => episode.id === params.episodeId);
+        window.currentEpisodeIndex = currentIndex !== -1 ? currentIndex : 0;
+        
+        // Display basic episodes list
+        displayBasicEpisodesList(episodes);
+        
+        // Update navigation buttons
+        updateNavigationButtons();
+    } catch (error) {
+        console.error('Error loading episode list:', error);
+    }
+}
+
+// Display basic episodes list without TMDB data
+function displayBasicEpisodesList(episodes) {
+    const episodesContainer = document.getElementById('episodesContainer');
+    if (!episodesContainer) return;
+    
+    // Clear loading spinner
+    episodesContainer.innerHTML = '';
+    
+    if (episodes.length === 0) {
+        episodesContainer.innerHTML = '<p class="no-results">No episodes found.</p>';
+        return;
+    }
+    
+    // Create basic episode cards
+    episodes.forEach((episode, index) => {
+        const episodeCard = document.createElement('div');
+        episodeCard.className = 'episode-card';
+        episodeCard.dataset.id = episode.id;
+        episodeCard.dataset.index = index + 1;
+        
+        // Use Google Drive thumbnail if available
+        let thumbnailHTML = '';
+        if (episode.thumbnailLink) {
+            thumbnailHTML = `
+                <img src="${episode.thumbnailLink}" 
+                     alt="${episode.title}" 
+                     loading="lazy"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="thumbnail-placeholder" style="display: none;">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+            `;
+        } else {
+            thumbnailHTML = `
+                <div class="thumbnail-placeholder">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+            `;
+        }
+        
+        episodeCard.innerHTML = `
+            <div class="episode-thumbnail">
+                ${thumbnailHTML}
+                <div class="thumbnail-overlay"></div>
+                <div class="episode-duration">--:--</div>
+            </div>
+            <div class="episode-info">
+                <div class="episode-header">
+                    <h3 class="episode-title">${episode.title}</h3>
+                </div>
+                <p class="episode-description">Loading episode details...</p>
+            </div>
+        `;
+        
+        // Add click event to play the episode
+        episodeCard.addEventListener('click', () => {
+            playVideo(episode.id, episode.title);
+            window.currentEpisodeIndex = index;
+            updateNavigationButtons();
+            
+            // Update URL with episode info
+            const url = new URL(window.location.href);
+            url.searchParams.set('episodeId', episode.id);
+            url.searchParams.set('episodeTitle', episode.title);
+            window.history.replaceState({}, '', url);
+        });
+        
+        episodesContainer.appendChild(episodeCard);
+        
+        // Load video duration in background
+        loadVideoDuration(episode, episodeCard);
+    });
+}
+
+// Enhance UI with TMDB data after initial load
+async function enhanceWithTMDBData(params) {
+    try {
+        // Get TMDB ID from meta tag
+        const tmdbIdMeta = document.getElementById('tmdbid');
+        const tmdbId = tmdbIdMeta ? tmdbIdMeta.content : null;
+        
+        if (!tmdbId) return;
+        
+        // Get content details
+        const contentType = document.getElementById('content-type').content;
+        const tmdbType = CONFIG.TMDB_SEARCH_TYPES[contentType] || 'tv';
+        
+        // Only proceed for TV content
+        if (tmdbType !== 'tv') return;
+        
+        // Get show details
+        const showDetails = await getContentDetails(tmdbId, contentType);
+        if (!showDetails) return;
+        
+        // Update content details UI
+        updateContentDetailsUI(showDetails, tmdbType);
+        
+        // Enhance episodes with TMDB data
+        const episodes = window.currentEpisodes || [];
+        await enhanceEpisodesWithTMDB(episodes);
+        
+        // Update episode list with TMDB data
+        updateEpisodesWithTMDBData(episodes);
+    } catch (error) {
+        console.error('Error enhancing with TMDB data:', error);
+    }
+}
+
+// Update episodes list with TMDB data
+function updateEpisodesWithTMDBData(episodes) {
+    const episodesContainer = document.getElementById('episodesContainer');
+    if (!episodesContainer) return;
+    
+    episodes.forEach((episode, index) => {
+        const episodeCard = episodesContainer.children[index];
+        if (!episodeCard) return;
+        
+        // Update episode info with TMDB data
+        const episodeInfo = episodeCard.querySelector('.episode-info');
+        if (episodeInfo) {
+            const formattedTitle = episode.episodeNumber ? 
+                `S${episode.seasonNumber}:E${episode.episodeNumber}` : 
+                '';
+            
+            episodeInfo.innerHTML = `
+                <div class="episode-header">
+                    ${formattedTitle ? `<span class="episode-number">${formattedTitle}</span>` : ''}
+                    <h3 class="episode-title">${episode.title}</h3>
+                </div>
+                ${episode.tmdbData ? `<div class="episode-rating"><i class="fas fa-star"></i> ${episode.vote_average?.toFixed(1) || 'N/A'}</div>` : ''}
+                <p class="episode-description">${episode.overview || episode.name}</p>
+            `;
+        }
+        
+        // Update thumbnail if TMDB still is available
+        if (episode.still_path) {
+            const thumbnailContainer = episodeCard.querySelector('.episode-thumbnail');
+            if (thumbnailContainer) {
+                const img = document.createElement('img');
+                img.src = getTMDBImageUrl(episode.still_path, CONFIG.TMDB_STILL_SIZE);
+                img.alt = episode.title;
+                img.loading = 'lazy';
+                img.onerror = () => {
+                    img.style.display = 'none';
+                    const placeholder = thumbnailContainer.querySelector('.thumbnail-placeholder');
+                    if (placeholder) placeholder.style.display = 'block';
+                };
+                
+                // Replace existing thumbnail
+                const existingImg = thumbnailContainer.querySelector('img');
+                if (existingImg) {
+                    thumbnailContainer.replaceChild(img, existingImg);
+                } else {
+                    const placeholder = thumbnailContainer.querySelector('.thumbnail-placeholder');
+                    if (placeholder) {
+                        thumbnailContainer.insertBefore(img, placeholder);
+                        placeholder.remove();
+                    }
+                }
+            }
+        }
+    });
 } 

@@ -781,4 +781,99 @@ header img {
 .thumbnail-placeholder i {
     font-size: 2rem;
     color: rgba(255, 255, 255, 0.5);
+}
+
+/* Optimized Loading States */
+.video-container.loading {
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-container.loading::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+}
+
+.episode-card.loading {
+    background-color: var(--lighter-dark);
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.episode-card.loading::before {
+    content: '';
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+}
+
+.episode-thumbnail.loading {
+    background-color: #333;
+    position: relative;
+}
+
+.episode-thumbnail.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+}
+
+/* Progressive Loading Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.episode-card {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.episode-thumbnail img {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Loading Placeholder Styles */
+.loading-placeholder {
+    background: linear-gradient(90deg, 
+        var(--lighter-dark) 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        var(--lighter-dark) 100%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.episode-title.loading-placeholder {
+    height: 1.2rem;
+    width: 80%;
+    margin-bottom: 0.5rem;
+}
+
+.episode-description.loading-placeholder {
+    height: 2.4rem;
+    width: 100%;
 } 
