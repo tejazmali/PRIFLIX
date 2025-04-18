@@ -320,7 +320,12 @@ const contentData = [
         type: "Series",
     },
 
-
+    {
+        title: "Duty After School",
+        image: "https://image.tmdb.org/t/p/w500/vtokuvfqLbfJaSCW6EWhWtrmz2s.jpg",
+        folderid: "17P3xdtVKELyBKegOfYnfixDddIGRgwOJ",
+        type: "Series",
+    },
 
     {
         title: "Mr. Robot",
