@@ -41,6 +41,14 @@ const contentData = [
         folderid: "1XlCp3canUS1QfNFq0X9YFZK_ZwCu4TLo",
         type: "Anime",
     },
+
+    {
+        title: "TsumaSho",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FaWXFAo8ua0T5fSVQNNU31g7cx2c.jpg",
+        folderid: "1kADORGlVwWrlIm3tWPUxhxcM3FSbUq4A",
+        type: "Anime",
+    },
+
     {
         title: "Shin-chan: Fierceness That Invites Storm!",
         image:
@@ -376,7 +384,12 @@ const contentData = [
         type: "Series",
     },
 
-    
+    {
+        title: "Call Me Bae",
+        image: "https://image.tmdb.org/t/p/w500/qdWoYn4KOiZNjR4EOHUsNjamzJ0.jpg",
+        folderid: "1FNaL902eU4HQ9lwWhdWh5junbC0GFfR3",
+        type: "Series",
+    },
 
     {
         title: "Hijack",

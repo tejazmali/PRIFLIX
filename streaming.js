@@ -271,6 +271,18 @@ function playVideo(fileId, title) {
     // Update episode title and info
     updateEpisodeInfo(fileId, title);
     
+    // Add download button below video container
+    const videoControls = document.querySelector('.video-controls');
+    if (videoControls) {
+        const params = getQueryParams();
+        const downloadBtn = document.createElement('a');
+        downloadBtn.href = getDriveFolderUrl(params.folderId);
+        downloadBtn.target = '_blank';
+        downloadBtn.className = 'download-btn';
+        downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download from Google Drive';
+        videoControls.appendChild(downloadBtn);
+    }
+    
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1049,6 +1061,18 @@ function updateContentDetailsUI(details, contentType) {
         });
     }
     
+    // Add download button to content actions
+    const contentActions = document.querySelector('.content-actions');
+    if (contentActions) {
+        const params = getQueryParams();
+        const downloadBtn = document.createElement('a');
+        downloadBtn.href = getDriveFolderUrl(params.folderId);
+        downloadBtn.target = '_blank';
+        downloadBtn.className = 'action-btn download-btn';
+        downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download';
+        contentActions.appendChild(downloadBtn);
+    }
+    
     // Only update cast section if not on mobile
     if (!isMobileDevice()) {
         updateCastSection(details.credits?.cast);
@@ -1306,6 +1330,11 @@ async function displayNextSeasonContent(params) {
                         <button class="play-btn" data-folderid="${content.folderid}">
                             <i class="fas fa-play"></i>
                         </button>
+                        <a href="${getDriveFolderUrl(content.folderid)}" 
+                           class="download-btn" 
+                           target="_blank">
+                            <i class="fas fa-download"></i>
+                        </a>
                     </div>
                 </div>
             `;
