@@ -1240,14 +1240,14 @@ header img {
     }
 }
 
-/* Video Controls Download Button */
-.video-controls .download-btn {
+/* Video Controls Folder Button */
+.video-controls .folder-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     padding: 0.8rem 1.5rem;
-    background-color: var(--primary-color);
+    background-color: #2c3e50;
     color: white;
     border-radius: 4px;
     text-decoration: none;
@@ -1258,37 +1258,37 @@ header img {
     transition: all 0.3s ease;
 }
 
-.video-controls .download-btn:hover {
-    background-color: var(--primary-hover);
+.video-controls .folder-btn:hover {
+    background-color: #34495e;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.video-controls .download-btn i {
+.video-controls .folder-btn i {
     font-size: 1rem;
 }
 
-/* Responsive Styles for Video Controls Download Button */
+/* Responsive Styles for Folder Button */
 @media screen and (max-width: 768px) {
-    .video-controls .download-btn {
+    .video-controls .folder-btn {
         padding: 0.6rem 1.2rem;
         font-size: 0.85rem;
         margin: 0.8rem auto;
     }
     
-    .video-controls .download-btn i {
+    .video-controls .folder-btn i {
         font-size: 0.9rem;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .video-controls .download-btn {
+    .video-controls .folder-btn {
         padding: 0.5rem 1rem;
         font-size: 0.8rem;
         margin: 0.6rem auto;
     }
     
-    .video-controls .download-btn i {
+    .video-controls .folder-btn i {
         font-size: 0.8rem;
     }
 } 

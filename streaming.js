@@ -271,16 +271,29 @@ function playVideo(fileId, title) {
     // Update episode title and info
     updateEpisodeInfo(fileId, title);
     
-    // Add download button below video container
+    // Add folder redirect button below video container
     const videoControls = document.querySelector('.video-controls');
     if (videoControls) {
+        // Remove existing folder button if it exists
+        const existingBtn = videoControls.querySelector('.folder-btn');
+        if (existingBtn) {
+            existingBtn.remove();
+        }
+        
         const params = getQueryParams();
-        const downloadBtn = document.createElement('a');
-        downloadBtn.href = getDriveFolderUrl(params.folderId);
-        downloadBtn.target = '_blank';
-        downloadBtn.className = 'download-btn';
-        downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download from Google Drive';
-        videoControls.appendChild(downloadBtn);
+        const folderBtn = document.createElement('a');
+        folderBtn.href = getDriveFolderUrl(params.folderId);
+        folderBtn.target = '_blank';
+        folderBtn.className = 'folder-btn';
+        folderBtn.innerHTML = '<i class="fas fa-folder-open"></i> Open in Google Drive';
+        
+        // Insert after episode info but before control buttons
+        const episodeInfo = videoControls.querySelector('.episode-info');
+        if (episodeInfo) {
+            episodeInfo.insertAdjacentElement('afterend', folderBtn);
+        } else {
+            videoControls.insertBefore(folderBtn, videoControls.firstChild);
+        }
     }
     
     // Scroll to top
