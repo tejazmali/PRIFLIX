@@ -394,6 +394,14 @@ const contentData = [
         folderid: "1TEXHFDJlUAzQm5wSik4gCTCFVeAJIInk",
         type: "Series",
     },
+
+    {
+        title: "Mrs",
+        image: "https://image.tmdb.org/t/p/w500/e2coys6g8PRqiP0sHEA2T6uLkEf.jpg",
+        folderid: "1Ks_RoZMeO1RsmTcDWqzPNYdyTj3qoB7f",
+        type: "Movie",
+    },
+
     {
         title: "Parasite",
         image: "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
