@@ -396,6 +396,20 @@ const contentData = [
     },
 
     {
+        title: "Bhoomi",
+        image: "https://image.tmdb.org/t/p/w500/zVh5RNjIcM3Wggp0Be3fGdLxz75.jpg",
+        folderid: "1hh4fjgfT9adznwkzozLm3oF-M8pt4DB6",
+        type: "Movie",
+    },
+
+    {
+        title: "Hasee Toh Phasee ",
+        image: "https://image.tmdb.org/t/p/w500/A6s9Nb0bfuH1KqXvnG22FCAgrP7.jpg",
+        folderid: "1e2bSqEP3XZHLFVANhvj0BolSb461PbJi",
+        type: "Movie",
+    },
+
+    {
         title: "Mrs",
         image: "https://image.tmdb.org/t/p/w500/e2coys6g8PRqiP0sHEA2T6uLkEf.jpg",
         folderid: "1Ks_RoZMeO1RsmTcDWqzPNYdyTj3qoB7f",
