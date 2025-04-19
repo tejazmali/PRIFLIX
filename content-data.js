@@ -43,7 +43,7 @@ const contentData = [
     },
 
     {
-        title: "Death Note - Special",
+        title: "Death Note",
         image: "https://image.tmdb.org/t/p/w500/tgdsW1yCVbyG2E3eORz0HdAvnmR.jpg",
         folderid: "1-v_wj3F8ee30XOQzKELWBtAeDEQjZl5n",
         type: "Anime",
