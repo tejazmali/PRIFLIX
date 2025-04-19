@@ -310,6 +310,12 @@ async function getSeasonalContent() {
     }
 }
 
+// Helper function to clean up titles by removing text in parentheses
+function cleanTitle(title) {
+    if (!title) return '';
+    return title.replace(/\s*\([^)]*\)\s*/g, '').trim();
+}
+
 // Export configuration
 window.CONFIG = CONFIG;
 window.getTMDBApiUrl = getTMDBApiUrl;

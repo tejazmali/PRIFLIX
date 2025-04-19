@@ -452,21 +452,33 @@ async function processEpisodes(files, folderId) {
 function processEpisodeFiles(files) {
     // Extract episode information
     const processedFiles = files.map(file => {
-        // Try to extract episode number from filename
-        const match = file.name.match(CONFIG.EPISODE_PATTERN);
-        const episodeNumber = match ? parseInt(match[1]) : null;
-        
+        // Try to extract episode number from filename using multiple patterns
+        let episodeNumber = null;
+        const patterns = [
+            /E(\d+)/i,                    // Matches E01, E1, etc.
+            /Episode\s*(\d+)/i,           // Matches Episode 1, Episode01, etc.
+            /\b(\d+)\b/                   // Matches any standalone number
+        ];
+
+        for (const pattern of patterns) {
+            const match = file.name.match(pattern);
+            if (match) {
+                episodeNumber = parseInt(match[1]);
+                break;
+            }
+        }
+
         // Try to extract season number if present
         const seasonMatch = file.name.match(/S(\d+)/i);
         const seasonNumber = seasonMatch ? parseInt(seasonMatch[1]) : 1; // Default to season 1
-        
+
         // Get content title from meta tags
         const contentTitleMeta = document.getElementById('title');
         const contentTitle = contentTitleMeta ? contentTitleMeta.content : '';
-        
+
         // Generate a clean episode title
         let episodeTitle = '';
-        
+
         // Remove extension and clean up filename for potential title
         const cleanName = file.name
             .replace(/\.[^.]+$/, '') // Remove file extension
@@ -479,12 +491,12 @@ function processEpisodeFiles(files) {
             .replace(/\b(ESub|mkvCinemas|RARBG|YIFY|YTS|SPARKS|GECKOS|FGT|AMZN|DSNP|NF)\b/ig, '')
             // Remove language indicators
             .replace(/\b(Hindi|English|Japanese|Korean|Tamil|Telugu|Dual Audio|Multi Audio)\b/ig, '')
-            .replace(/\[(.*?)\]/g, '') // Remove content in square brackets which often contains language info
-            .replace(/\((.*?)\)/g, '') // Remove content in parentheses which often contains language info
+            .replace(/\[(.*?)\]/g, '') // Remove content in square brackets
+            .replace(/\((.*?)\)/g, '') // Remove content in parentheses
             .replace(/[-_\.]/g, ' ') // Replace separators with spaces
             .replace(/\s{2,}/g, ' ') // Remove double spaces again after cleaning
             .trim();
-            
+
         // If there's meaningful text left after cleaning, use it as episode title
         if (cleanName && cleanName !== '') {
             episodeTitle = cleanName;
@@ -495,30 +507,44 @@ function processEpisodeFiles(files) {
             // Last resort: use filename without extension
             episodeTitle = file.name.replace(/\.[^.]+$/, '');
         }
-        
+
         // Ensure thumbnailLink is used if available
         const thumbnailLink = file.thumbnailLink || null;
-        
+
         return {
             id: file.id,
             name: file.name,
             seasonNumber,
             episodeNumber,
             title: episodeTitle,
-            still_path: null, // Will be filled from TMDB if available
-            overview: null, // Will be filled from TMDB if available
-            thumbnailLink: thumbnailLink, // Store Google Drive thumbnail link
-            duration: null // Will be filled with video duration if available
+            still_path: null,
+            overview: null,
+            thumbnailLink: thumbnailLink,
+            duration: null
         };
     });
-    
-    // Sort files by episode number if available
-    const sortedFiles = processedFiles
-        .filter(file => file.episodeNumber !== null)
-        .sort((a, b) => a.episodeNumber - b.episodeNumber);
-    
-    // If we couldn't extract episode numbers, use the original files
-    return sortedFiles.length > 0 ? sortedFiles : processedFiles;
+
+    // Sort files by season number first, then episode number
+    const sortedFiles = processedFiles.sort((a, b) => {
+        // First sort by season
+        if (a.seasonNumber !== b.seasonNumber) {
+            return a.seasonNumber - b.seasonNumber;
+        }
+        
+        // If episodes have numbers, sort by them
+        if (a.episodeNumber !== null && b.episodeNumber !== null) {
+            return a.episodeNumber - b.episodeNumber;
+        }
+        
+        // If one has episode number and other doesn't, prioritize the one with number
+        if (a.episodeNumber !== null) return -1;
+        if (b.episodeNumber !== null) return 1;
+        
+        // If no episode numbers, sort by name
+        return a.name.localeCompare(b.name);
+    });
+
+    return sortedFiles;
 }
 
 // Enhance episodes with TMDB data
@@ -545,6 +571,7 @@ async function enhanceEpisodesWithTMDB(episodes) {
         }
         
         const showName = showDetails.name || '';
+        const cleanedShowName = cleanTitle(showName);
         
         // Determine if we have a season structure
         const distinctSeasons = [...new Set(episodes.map(ep => ep.seasonNumber))];
@@ -578,6 +605,7 @@ async function enhanceEpisodesWithTMDB(episodes) {
                         .replace(/\.[^.]+$/, '') // Remove file extension
                         .replace(/\b(S\d+E\d+|Episode\s+\d+)\b/i, '') // Remove S01E01 or Episode 1 patterns
                         .replace(showName, '') // Remove show name
+                        .replace(cleanedShowName, '') // Remove cleaned show name
                         .replace(/^\s+|\s+$/g, '') // Trim whitespace
                         .replace(/[._-]/g, ' ') // Replace separators with spaces
                         .trim();
@@ -945,8 +973,11 @@ async function fetchEpisodesList(folderId, currentEpisodeId) {
 // Search TMDB and fetch details
 async function searchAndFetchTMDBDetails(title, contentType) {
     try {
-        // Search for the content on TMDB
-        const searchResult = await searchTMDB(title, contentType);
+        // Clean the title by removing text in parentheses
+        const cleanedTitle = cleanTitle(title);
+        
+        // Search for the content on TMDB using cleaned title
+        const searchResult = await searchTMDB(cleanedTitle, contentType);
         
         if (!searchResult) {
             // If TMDB API is disabled or no results, use basic content details

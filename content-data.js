@@ -50,6 +50,34 @@ const contentData = [
     },
 
     {
+        title: "Spy x Family",
+        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FnShEY0JnMOsvdhEnmYvL9mowIKz.jpg",
+        folderid: "1rFZBP0NVuPgKlOANS10UKYMdyQGY3v_3",
+        type: "Anime",
+    },
+
+    {
+        title: "Spy x Family",
+        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FnShEY0JnMOsvdhEnmYvL9mowIKz.jpg",
+        folderid: "1TyixfaRsHt2NQgwqf_NTgN7bG6o8hmNq",
+        type: "Anime",
+    },
+
+    {
+        title: "Spy x Family",
+        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F7NAvPYPAu7MeHwP8E9sn81PqsRh.jpg",
+        folderid: "15xqAS-1Kl-WAUdWEKZ0pHKv8sNPQoDRW",
+        type: "Anime",
+    },
+
+    {
+        title: "Spy x Family Code: White",
+        image: "https://image.tmdb.org/t/p/w500/xlIQf4y9eB14iYzNN142tROIWON.jpg",
+        folderid: "1LKAapZePbvFhovv9gwzMOFHkMVrhpZUZ",
+        type: "Anime",
+    },
+
+    {
         title: "Shin-chan: Fierceness That Invites Storm!",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FnfpPzlKiqkIGpI8HXpsrU6vnNdp.jpg",
