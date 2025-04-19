@@ -43,6 +43,13 @@ const contentData = [
     },
 
     {
+        title: "Death Note - Special",
+        image: "https://image.tmdb.org/t/p/w500/tgdsW1yCVbyG2E3eORz0HdAvnmR.jpg",
+        folderid: "1-v_wj3F8ee30XOQzKELWBtAeDEQjZl5n",
+        type: "Anime",
+    },
+
+    {
         title: "TsumaSho",
         image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FaWXFAo8ua0T5fSVQNNU31g7cx2c.jpg",
         folderid: "1kADORGlVwWrlIm3tWPUxhxcM3FSbUq4A",
