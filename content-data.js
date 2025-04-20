@@ -34,7 +34,7 @@ const contentData = [
     },
 
     {
-        title: "Your name",
+        title: "Your Name",
         image: "https://image.tmdb.org/t/p/w500/8GJsy7w7frGquw1cy9jasOGNNI1.jpg",
         folderid: "1ge6XbrBHX1tEeWbFAhf91P-XbGcbJZOT",
         type: "Anime",
