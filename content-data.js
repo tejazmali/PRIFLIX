@@ -313,6 +313,23 @@ const contentData = [
         folderid: "1JB3aP5C8FWvc18ahowXKaYAwxX4seYUE",
         type: "Movie",
     },
+
+    {
+        title: "Severance",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FlFf6LLrQjYldcZItzOkGmMMigP7.jpg",
+        folderid: "1CiLBNoCT_S-in58XbgILB8lHK7SmWNpA",
+        type: "Series",
+    },
+
+
+    {
+        title: "Severance",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FRb7sga832Cyqvafd7CqOzbwdK4.jpg",
+        folderid: "1EgK871BNFM6D3N60vVrrNJOxlv7mbSfU",
+        type: "Series",
+    },
+
+
     {
         title: "Stranger Things",
         image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FrbnuP7hlynAMLdqcQRCpZW9qDkV.jpg",
@@ -406,21 +423,7 @@ const contentData = [
 
     },
 
-    {
-        title: "Severance",
-        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FlFf6LLrQjYldcZItzOkGmMMigP7.jpg",
-        folderid: "1CiLBNoCT_S-in58XbgILB8lHK7SmWNpA",
-        type: "Series",
-    },
-
-
-    {
-        title: "Severance",
-        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FRb7sga832Cyqvafd7CqOzbwdK4.jpg",
-        folderid: "1EgK871BNFM6D3N60vVrrNJOxlv7mbSfU",
-        type: "Series",
-    },
-
+    
     {
         title: "Squid Game",
         image:
