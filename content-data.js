@@ -209,6 +209,12 @@ const contentData = [
         type: "Cartoon series",
     },
     {
+        title: "Doraemon",
+        image: "https://static.tvtropes.org/pmwiki/pub/images/doraemon_asd.png",
+        folderid: "1tUqIetFMyz6qqimaxqCpQQgvDuD3yaBK",
+        type: "Cartoon series",
+    },
+    {
         title: "CTRL",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Ff%2Fgracenote%2Ffadd5e899723cc47a343fbefb255fbff.jpg",
