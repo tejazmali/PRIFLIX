@@ -321,7 +321,7 @@ const contentData = [
     },
 
     {
-        title: "ADOLESCENCE",
+        title: "Adolescence",
         image: "https://image.tmdb.org/t/p/w500/tDHWWReefmOOjBCJZUck8cNwssk.jpg",
         folderid: "1UYOQmT0GPpVVQQVMySpDxBZ1XAorih2_",
         type: "Series",
