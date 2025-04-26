@@ -321,6 +321,13 @@ const contentData = [
     },
 
     {
+        title: "ADOLESCENCE",
+        image: "https://image.tmdb.org/t/p/w500/tDHWWReefmOOjBCJZUck8cNwssk.jpg",
+        folderid: "1UYOQmT0GPpVVQQVMySpDxBZ1XAorih2_",
+        type: "Series",
+    },
+
+    {
         title: "Severance",
         image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FlFf6LLrQjYldcZItzOkGmMMigP7.jpg",
         folderid: "1CiLBNoCT_S-in58XbgILB8lHK7SmWNpA",
