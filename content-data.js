@@ -214,6 +214,28 @@ const contentData = [
         folderid: "1tUqIetFMyz6qqimaxqCpQQgvDuD3yaBK",
         type: "Cartoon series",
     },
+
+    {
+        title: "The Notebook",
+        image: "https://image.tmdb.org/t/p/w500/rNzQyW4f8B8cQeg7Dgj3n6eT5k9.jpg",
+        folderid: "11JaMmqI_Nzhl9P_AQq4bpaQGn2Zh8qbw",
+        type: "Movie",
+    },
+
+    {
+        title: "Bridge to Terabithia",
+        image: "https://image.tmdb.org/t/p/w500/mgGXFILzosg9cwcVsE6X5gM9kyU.jpg",
+        folderid: "1adalCqDe6ZJTRRMwhRNVwNsekA5ZvJyh",
+        type: "Movie",
+    },
+
+    {
+        title: "soulmate",
+        image: "https://image.tmdb.org/t/p/w500/iL0jvWpSVW1uFn9aAoUh3UwzdYA.jpg",
+        folderid: "1shqiXcqMvm1iB7Zf1xqpXW1z-Kfw_2gf",
+        type: "Movie",
+    },
+
     {
         title: "CTRL",
         image:
