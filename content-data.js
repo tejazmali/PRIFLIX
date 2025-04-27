@@ -230,7 +230,7 @@ const contentData = [
     },
 
     {
-        title: "soulmate",
+        title: "Soulmate",
         image: "https://image.tmdb.org/t/p/w500/iL0jvWpSVW1uFn9aAoUh3UwzdYA.jpg",
         folderid: "1shqiXcqMvm1iB7Zf1xqpXW1z-Kfw_2gf",
         type: "Movie",
