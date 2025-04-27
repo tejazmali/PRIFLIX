@@ -237,6 +237,15 @@ const contentData = [
     },
 
     {
+        title: "The Wolf and the Lion ",
+        image: "https://image.tmdb.org/t/p/w500/x3JsrunysUwsIV9XS7hQtZG4knm.jpg",
+        folderid: "1mcsZvwoXDGt3wqi1Z4-RgYveeFXwLd4R",
+        type: "Movie",
+    },
+
+
+
+    {
         title: "CTRL",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Ff%2Fgracenote%2Ffadd5e899723cc47a343fbefb255fbff.jpg",
