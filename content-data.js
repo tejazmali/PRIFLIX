@@ -352,6 +352,13 @@ const contentData = [
     },
 
     {
+        title: "Death's Game",
+        image: "https://image.tmdb.org/t/p/w500/fS4i7HHi1NNksTdAT8Vrvz9O161.jpg",
+        folderid: "1lO3o-ffYKUfVFI307J0KbcNgWxvoep5L",
+        type: "Series",
+    },
+
+    {
         title: "Adolescence",
         image: "https://image.tmdb.org/t/p/w500/tDHWWReefmOOjBCJZUck8cNwssk.jpg",
         folderid: "1UYOQmT0GPpVVQQVMySpDxBZ1XAorih2_",
