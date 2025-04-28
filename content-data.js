@@ -34,6 +34,13 @@ const contentData = [
     },
 
     {
+        title: "I Want to Eat Your Pancreas",
+        image: "https://image.tmdb.org/t/p/w500/qDWA7fB4cZ4sBP6YgwlxvraDHi7.jpg",
+        folderid: "1-abJlfmoYCDBVC-9UrDBx90-BaZIVQlz",
+        type: "Anime",
+    },
+
+    {
         title: "Your Name",
         image: "https://image.tmdb.org/t/p/w500/8GJsy7w7frGquw1cy9jasOGNNI1.jpg",
         folderid: "1ge6XbrBHX1tEeWbFAhf91P-XbGcbJZOT",
