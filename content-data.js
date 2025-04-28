@@ -382,7 +382,7 @@ const contentData = [
 
     {
         title: "Breaking Bad",
-        image: "https://image.tmdb.org/t/p/w500/ineLOBPG8AZsluYwnkMpHRyu7L.jpg",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F1BP4xYv9ZG4ZVHkL7ocOziBbSYH.jpg",
         folderid: "1K985rM_dSV4M2QNkbN84-j-mbs3hDauE",
         type: "Series",
     },
