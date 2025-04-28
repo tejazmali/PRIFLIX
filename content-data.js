@@ -380,6 +380,34 @@ const contentData = [
         type: "Series",
     },
 
+    {
+        title: "Breaking Bad",
+        image: "https://image.tmdb.org/t/p/w500/ineLOBPG8AZsluYwnkMpHRyu7L.jpg",
+        folderid: "1K985rM_dSV4M2QNkbN84-j-mbs3hDauE",
+        type: "Series",
+    },
+
+    {
+        title: "Breaking Bad",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fe3oGYpoTUhOFK0BJfloru5ZmGV.jpg",
+        folderid: "1-JHg_zOWApz0PJI19bWhL7usHBVKbfh3",
+        type: "Series",
+    },
+
+    {
+        title: "Breaking Bad",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FffP8Q8ew048YofHRnFVM18B2fPG.jpg",
+        folderid: "1whdWxbrtNo0wOUHzFGeq6c7w8j0GDM66",
+        type: "Series",
+    },
+
+    {
+        title: "Breaking Bad",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F5ewrnKp4TboU4hTLT5cWO350mHj.jpg",
+        folderid: "1-y0nPD5CNMjNAuMIW9vPz0bJZ2-7E8V6",
+        type: "Series",
+    },
+
 
     {
         title: "Stranger Things",
