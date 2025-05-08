@@ -1,4 +1,4 @@
-const contentData = [
+const contentData = [//add content detail here
     {
         title: "Attack on Titan",
         image:
@@ -6,7 +6,6 @@ const contentData = [
 
         folderid: "1-5chzScNIAIbel5gb7VLByT3dz8sYBqZ",
         type: "Anime",
-
     },
     {
         title: "Attack on Titan",
@@ -363,6 +362,13 @@ const contentData = [
 
         folderid: "1JB3aP5C8FWvc18ahowXKaYAwxX4seYUE",
         type: "Movie",
+    },
+
+    {
+        title: "The King Eternal Monarch",
+        image: "https://image.tmdb.org/t/p/w500/7SLlbkzOJb8v9wXVYIcqozx2hxe.jpg",
+        folderid: "1HA_5yar9MfsvKTNWzhQjzZtWypxIG2m0",
+        type: "Series",
     },
 
     {
