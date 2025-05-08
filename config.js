@@ -9,7 +9,7 @@ const CONFIG = {
     TMDB_POSTER_SIZE: 'w500',
     TMDB_BACKDROP_SIZE: 'original',
     TMDB_PROFILE_SIZE: 'w185',
-    TMDB_STILL_SIZE: 'w300', // Added still size for episode images
+    TMDB_STILL_SIZE: 'w300', // Added still size for episode image
     
     // Google Drive API Configuration
     // Google Drive API Key (replace with your own from Google Cloud Console)
