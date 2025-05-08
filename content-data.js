@@ -93,7 +93,7 @@ const contentData = [//add content detail here
     {
         title: "Spy x Family Code: White",
         image: "https://image.tmdb.org/t/p/w500/xlIQf4y9eB14iYzNN142tROIWON.jpg",
-        folderid: "1LKAapZePbvFhovv9gwzMOFHkMVrhpZUZ",
+        folderid: "1qAERlmnnct7LiPe3oUz8Kpi_JttdYPIc",
         type: "Anime",
     },
 
