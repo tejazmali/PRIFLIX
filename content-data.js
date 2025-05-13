@@ -33,6 +33,13 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Attack On Titan",
+        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fno3dkH44ywREi0la8tw4TnA1GxN.jpg",
+        folderid: "1wwIQtZ0FUCXX_N9Yl7qBlRn3zGbOePea",
+        type: "Anime",
+    },
+
+    {
         title: "I Want to Eat Your Pancreas",
         image: "https://image.tmdb.org/t/p/w500/qDWA7fB4cZ4sBP6YgwlxvraDHi7.jpg",
         folderid: "1DeDgZzPS3lMXGyUH_OSNKu4EJ0HoTPAE",
