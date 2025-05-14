@@ -33,7 +33,7 @@ const contentData = [//add content detail here
     },
 
     {
-        title: "Attack On Titan Special",
+        title: "Attack On Titan Special OV",
         image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fno3dkH44ywREi0la8tw4TnA1GxN.jpg",
         folderid: "1wwIQtZ0FUCXX_N9Yl7qBlRn3zGbOePea",
         type: "Anime",
