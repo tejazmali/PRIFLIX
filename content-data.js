@@ -33,9 +33,17 @@ const contentData = [//add content detail here
     },
 
     {
-        title: "Attack On Titan Special OVA",
+        title: "Attack On Titan ODA",
         image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fno3dkH44ywREi0la8tw4TnA1GxN.jpg",
-        folderid: "1wwIQtZ0FUCXX_N9Yl7qBlRn3zGbOePea",
+        folderid: "1FdO6xz26nSmJeD57z0E161G1hV07y78E",
+        type: "Anime",
+    },
+
+
+    {
+        title: "Vinland Saga",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F9WZwylQ4VuLXaN45bMtxnztItUa.jpg",
+        folderid: "1N0Axf9OAjVYW3uNNEnMplOm-oepRB5s0",
         type: "Anime",
     },
 
