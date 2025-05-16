@@ -48,6 +48,13 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Spirited Away",
+        image: "https://image.tmdb.org/t/p/w500/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg",
+        folderid: "1U3iMoM2Z4uM2F8AzAKB30zzpinf_-32K",
+        type: "Anime",
+    },
+
+    {
         title: "I Want to Eat Your Pancreas",
         image: "https://image.tmdb.org/t/p/w500/qDWA7fB4cZ4sBP6YgwlxvraDHi7.jpg",
         folderid: "1DeDgZzPS3lMXGyUH_OSNKu4EJ0HoTPAE",
