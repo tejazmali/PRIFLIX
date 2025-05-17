@@ -154,6 +154,13 @@ const contentData = [//add content detail here
         type: "Anime",
     },
 
+      {
+        title: "Shin-chan Our Dinosaur Diary",
+        image: "https://image.tmdb.org/t/p/w500/n7YcOeqPOmvQ2PUatn4UqV5YStj.jpg",
+        folderid: "1L48xcFQS-sIhJdH8am_8t6obT351SkTT",
+        type: "Cartoon movies",
+    },
+
     {
         title: "Shin-chan: Fierceness That Invites Storm!",
         image:
@@ -220,12 +227,6 @@ const contentData = [//add content detail here
         type: "Cartoon series",
     },
 
-    {
-        title: "Shin-chan Our Dinosaur Diary",
-        image: "https://image.tmdb.org/t/p/w500/n7YcOeqPOmvQ2PUatn4UqV5YStj.jpg",
-        folderid: "1L48xcFQS-sIhJdH8am_8t6obT351SkTT",
-        type: "Cartoon movies",
-    },
 
     {
         title: "Ralph Breaks the Internet",
