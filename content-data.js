@@ -40,6 +40,34 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Demon Slayer",
+        image: "https://image.tmdb.org/t/p/w500/vJUDoYNNKvBqbEPUskgvzPXGEFz.jpg",
+        folderid: "1YBdwfPhNIrZ-rECPI7eNQ8bZMaTB5j0W",
+        type: "Anime",
+    },
+
+{
+        title: "Demon Slayer",
+        image: "https://image.tmdb.org/t/p/w500/h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg",
+        folderid: "1kOyrPbJ2KnKC98okOcMtskgA8dfBQgBH",
+        type: "Anime",
+    },
+
+    {
+        title: "Demon Slayer",
+        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FgbmhcOtre5SeBgwR9gvTpUra5kZ.jpg",
+        folderid: "1iFZk5R9dATNcc6jjE3uOgJ35nG0vXgJH",
+        type: "Anime",
+    },
+
+    {
+        title: "Demon Slayer",
+        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FaxI3BUZgTYz36IYtUtRhivtspUo.jpg",
+        folderid: "1DzlUKb2dyLjCa0aJV50r_6ajcCjvNxEK",
+        type: "Anime",
+    },
+
+    {
         title: "Solo Leveling",
         image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FgeCRueV3ElhRTr0xtJuEWJt6dJ1.jpg",
         folderid: "1-yaDLjplw5cOzBBqy4Sy63Uq7ljVyVfs",
