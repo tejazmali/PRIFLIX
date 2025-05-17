@@ -221,6 +221,13 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Shin-chan Our Dinosaur Diary",
+        image: "https://image.tmdb.org/t/p/w500/n7YcOeqPOmvQ2PUatn4UqV5YStj.jpg",
+        folderid: "1L48xcFQS-sIhJdH8am_8t6obT351SkTT",
+        type: "Cartoon movies",
+    },
+
+    {
         title: "Ralph Breaks the Internet",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fc%2Fgracenote%2Fc4e00199eaa2d5d48a3709e431812fd9.jpg",
@@ -277,6 +284,15 @@ const contentData = [//add content detail here
         folderid: "1tUqIetFMyz6qqimaxqCpQQgvDuD3yaBK",
         type: "Cartoon series",
     },
+
+    {
+        title: "The Life List",
+        image: "https://image.tmdb.org/t/p/w500/5fg98cVo7da7OIK45csdLSd4NaU.jpg",
+        folderid: "1QoaPgO4cwCeFHocmj5NokrDC0Bz_X6u7",
+        type: "Movie",
+    },
+
+
 
     {
         title: "Damsel",
