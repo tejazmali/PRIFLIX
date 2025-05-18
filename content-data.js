@@ -154,6 +154,13 @@ const contentData = [//add content detail here
         type: "Anime",
     },
 
+    {
+        title: "Frozen 2",
+        image: "https://image.tmdb.org/t/p/w500/mINJaa34MtknCYl5AjtNJzWj8cD.jpg",
+        folderid: "1KWBJcQeFiyU-sDg1B-lUaN29lmQgfIKb",
+        type: "Cartoon movies",
+    },
+
       {
         title: "Shin-chan Our Dinosaur Diary",
         image: "https://image.tmdb.org/t/p/w500/n7YcOeqPOmvQ2PUatn4UqV5YStj.jpg",
