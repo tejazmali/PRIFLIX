@@ -68,6 +68,20 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Haikyu!!",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F1Rfa9o5H6ZlXzbDVNlw4jULdXpi.jpg",
+        folderid: "17vTDG_mq4rEDZPRvo7OFVaZ-bKMXlkLL",
+        type: "Anime",
+    },
+
+    {
+        title: "Haikyu!!",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3TUUTiiuvjKg8BcnrGbuuj2Ov5L.jpg",
+        folderid: "1IhusteSyszWwgcKUEvmFkHFF_IkYg7hJ",
+        type: "Anime",
+    },
+
+    {
         title: "Solo Leveling",
         image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FgeCRueV3ElhRTr0xtJuEWJt6dJ1.jpg",
         folderid: "1-yaDLjplw5cOzBBqy4Sy63Uq7ljVyVfs",
@@ -724,6 +738,7 @@ const contentData = [//add content detail here
         type: "Movie",
     },
 ];
+
 
 
 
