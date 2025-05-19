@@ -676,6 +676,13 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Superboys of Malegaon",
+        image: "https://image.tmdb.org/t/p/w500/l5PDjfWpC9uY5HdF5cbsJ4wjqoq.jpg",
+        folderid: "10trx9MWu_SmD-PJv-nRxBs3g2wUhfhuV",
+        type: "Movie",
+    },
+
+    {
         title: "Bhoomi",
         image: "https://image.tmdb.org/t/p/w500/zVh5RNjIcM3Wggp0Be3fGdLxz75.jpg",
         folderid: "1hh4fjgfT9adznwkzozLm3oF-M8pt4DB6",
