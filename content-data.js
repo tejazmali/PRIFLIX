@@ -459,6 +459,13 @@ const contentData = [//add content detail here
         type: "Movie",
     },
 
+{
+        title: "The Devil Judge",
+        image: "https://image.tmdb.org/t/p/w500/41wc4n7juC0A4XNROYTDvlndi0E.jpg",
+        folderid: "133_benXrD24jcRD8AX9ld2VzdSDtaeuN",
+        type: "Series",
+    },
+
     {
         title: "The King Eternal Monarch",
         image: "https://image.tmdb.org/t/p/w500/7SLlbkzOJb8v9wXVYIcqozx2hxe.jpg",
