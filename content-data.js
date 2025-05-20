@@ -460,6 +460,15 @@ const contentData = [//add content detail here
         type: "Movie",
     },
 
+
+{
+        title: "The Last Of Us",
+        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FpMfG5XIlmvCL9bQQiJKdTvmF2FW.jpg",
+        folderid: "1uBhAfeBtbeQWrk5PpED3SAFKkUX3YV0r",
+        type: "Series",
+    },
+
+
 {
         title: "The Devil Judge",
         image: "https://image.tmdb.org/t/p/w500/41wc4n7juC0A4XNROYTDvlndi0E.jpg",
