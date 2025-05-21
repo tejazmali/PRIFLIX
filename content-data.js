@@ -83,6 +83,13 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Haikyu!!",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FdeFGQIm9cKYGr2xt136RUnA9sb5.jpg",
+        folderid: "1-948P5RePqrvL_4Zc_FLf_ZUzjrKnPkU",
+        type: "Anime",
+    },
+
+    {
         title: "Solo Leveling",
         image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FgeCRueV3ElhRTr0xtJuEWJt6dJ1.jpg",
         folderid: "1-yaDLjplw5cOzBBqy4Sy63Uq7ljVyVfs",
