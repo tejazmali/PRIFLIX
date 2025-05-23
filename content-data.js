@@ -322,6 +322,29 @@ const contentData = [//add content detail here
         type: "Cartoon series",
     },
 
+
+    {
+        title: "The Possession",
+        image: "https://image.tmdb.org/t/p/w500/loZYdcmgvnonHtH0XH0RI7rm8iA.jpg",
+        folderid: "1JtyD2j_wZuO5hcR9X1uCqyk-3AQ_wfhM",
+        type: "Movie",
+    },
+
+
+    {
+        title: "Padmaavat",
+        image: "https://image.tmdb.org/t/p/w500/5kk71s8Vmvt8XQOojevhTA5QcB0.jpg",
+        folderid: "11YWACCb9B8X9UTqWY63XBhhqaxMPBgKM",
+        type: "Movie",
+    },
+
+    {
+        title: "The Kerela Story",
+        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fmetadata-static.plex.tv%2F3%2Fgracenote%2F37b90ddd7c7b6f058eaf92030539b152.jpg",
+        folderid: "1PqfAelv6CFEOe8biP0To9QgBPMUn7q2z",
+        type: "Movie",
+    },
+
     {
         title: "The Life List",
         image: "https://image.tmdb.org/t/p/w500/5fg98cVo7da7OIK45csdLSd4NaU.jpg",
