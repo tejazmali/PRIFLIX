@@ -85,7 +85,7 @@ const contentData = [//add content detail here
     {
         title: "Haikyu!!",
         image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FdeFGQIm9cKYGr2xt136RUnA9sb5.jpg",
-        folderid: "1Z-3yahSC4_4FpMjH4kYrY1dBlMXAH5fy",
+        folderid: "1-948P5RePqrvL_4Zc_FLf_ZUzjrKnPkU",
         type: "Anime",
     },
 
