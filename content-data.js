@@ -329,6 +329,13 @@ const contentData = [//add content detail here
         type: "Cartoon series",
     },
 
+    {
+        title: "Legally Blonde",
+        image: "https://image.tmdb.org/t/p/w500/9ohlMrJHQqKhfUKh7Zr3JQqHNLZ.jpg",
+        folderid: "1B9vKNMaEmfPyDHGuIEgFqQYigp302GOW",
+        type: "Movie",
+    },
+
 
     {
         title: "The Possession",
