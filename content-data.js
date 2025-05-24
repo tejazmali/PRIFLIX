@@ -336,6 +336,13 @@ const contentData = [//add content detail here
         type: "Movie",
     },
 
+    {
+        title: "Legally Blonde ",
+        image: "https://image.tmdb.org/t/p/w500/4kC0UGTuJgFnlZq2ZM6OiY7nuY8.jpg",
+        folderid: "1s2ROUCSaLm2Zoflgh-MMytF5Xn8IS1eW",
+        type: "Movie",
+    },
+
 
     {
         title: "The Possession",
