@@ -518,8 +518,15 @@ const contentData = [//add content detail here
         type: "Movie",
     },
 
+    {
+        title: " All of Us Are Dead",
+        image: "https://image.tmdb.org/t/p/w500/pTEFqAjLd5YTsMD6NSUxV6Dq7A6.jpg",
+        folderid: "1IFRGva9f3QuvOvvVvL2kwN7H5OrskgZl",
+        type: "Series",
+    },
 
-{
+
+    {
         title: "The Last Of Us",
         image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FpMfG5XIlmvCL9bQQiJKdTvmF2FW.jpg",
         folderid: "1uBhAfeBtbeQWrk5PpED3SAFKkUX3YV0r",
