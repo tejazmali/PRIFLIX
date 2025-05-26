@@ -533,6 +533,13 @@ const contentData = [//add content detail here
         type: "Series",
     },
 
+    {
+        title: "The Last of Us",
+        image: "https://image.tmdb.org/t/p/w500/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg",
+        folderid: "1rKJUCa2A78KPtYw0IOipHfwnUYwEMef9",
+        type: "Series",
+    },
+
 
 {
         title: "The Devil Judge",
