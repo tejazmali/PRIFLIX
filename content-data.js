@@ -332,7 +332,7 @@ const contentData = [//add content detail here
     {
         title: "Prometheus ",
         image: "https://image.tmdb.org/t/p/w500/m7nZCtHJyDLncBUarfM5h5mrppx.jpg",
-        folderid: "Prometheus",
+        folderid: "1r5WIc7PHyTroXk9aCLbH7jn-5Zx_SkIC",
         type: "Movie",
     },
 
