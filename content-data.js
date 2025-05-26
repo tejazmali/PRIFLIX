@@ -330,6 +330,15 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Prometheus ",
+        image: "https://image.tmdb.org/t/p/w500/m7nZCtHJyDLncBUarfM5h5mrppx.jpg",
+        folderid: "Prometheus",
+        type: "Movie",
+    },
+
+
+
+    {
         title: "Legally Blonde",
         image: "https://image.tmdb.org/t/p/w500/9ohlMrJHQqKhfUKh7Zr3JQqHNLZ.jpg",
         folderid: "1B9vKNMaEmfPyDHGuIEgFqQYigp302GOW",
