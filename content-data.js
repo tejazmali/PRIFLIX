@@ -330,6 +330,41 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Final Destination",
+        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fd%2Fgracenote%2Fd2c7e83829339ee28562c6f0937da068.jpg",
+        folderid: "1lRV1ke7iap-Nbgj2rmYfpQNHZ4JO9c1D",
+        type: "Movie",
+    },
+
+    {
+        title: "Final Destination 2",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F1%2Fgracenote%2F19f6902b190b86ec73a3dbc948443483.jpg",
+        folderid: "1838jftqg7TVZ33breUXqPe_wxqu5jAAG",
+        type: "Movie",
+    },
+
+    {
+        title: "Final Destination 3",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F1%2Fgracenote%2F16839d2bf7a267f67e393006b524bad6.jpg",
+        folderid: "14SHTqcaAZu_cLOtLmb3Y8l0dS2t9cRCs",
+        type: "Movie",
+    },
+
+    {
+        title: "Final Destination 4",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fc%2Fgracenote%2Fc5b35deb8601fd7b0a37cc5a6ea2a38f.jpg",
+        folderid: "1trVeJmwJI1Ze8foeiyStdTcW50Vs26QD",
+        type: "Movie",
+    },
+
+    {
+        title: "Final Destination 5",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fb%2Fgracenote%2Fbbd879d4fbd85749fcef7c06df3f8bb7.jpg",
+        folderid: "1jcHd31KnogTyv2Za4bll0G7JZhWVymkI",
+        type: "Movie",
+    },
+
+    {
         title: "Prometheus ",
         image: "https://image.tmdb.org/t/p/w500/m7nZCtHJyDLncBUarfM5h5mrppx.jpg",
         folderid: "1r5WIc7PHyTroXk9aCLbH7jn-5Zx_SkIC",
@@ -346,7 +381,7 @@ const contentData = [//add content detail here
     },
 
     {
-        title: "Legally Blonde ",
+        title: "Legally Blonde 2: Red, White & Blonde",
         image: "https://image.tmdb.org/t/p/w500/4kC0UGTuJgFnlZq2ZM6OiY7nuY8.jpg",
         folderid: "1s2ROUCSaLm2Zoflgh-MMytF5Xn8IS1eW",
         type: "Movie",
@@ -819,7 +854,7 @@ const contentData = [//add content detail here
 
 
     {
-        title: "Enola Holmes",
+        title: "Enola Holmes 2",
         image:
             "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fd%2Fgracenote%2Fd551c377007710fc338b07569f745fca.jpg",
 
