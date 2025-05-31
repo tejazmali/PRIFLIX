@@ -563,6 +563,13 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "The Queen's Gambit",
+        image: "https://image.tmdb.org/t/p/w500/zU0htwkhNvBQdVSIKB9s6hgVeFK.jpg",
+        folderid: "1KlsrwnMROkCMBo1_TCcWnJmupbrUbScv",
+        type: "Series",
+    },
+
+    {
         title: " All of Us Are Dead",
         image: "https://image.tmdb.org/t/p/w500/pTEFqAjLd5YTsMD6NSUxV6Dq7A6.jpg",
         folderid: "1IFRGva9f3QuvOvvVvL2kwN7H5OrskgZl",
