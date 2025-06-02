@@ -330,6 +330,20 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Mean Girls",
+        image: "https://image.tmdb.org/t/p/w500/fbbj3viSUDEGT1fFFMNpHP1iUjw.jpg",
+        folderid: "14fcOy1gFEBmwycNcDyMVzM1Le3kZJPGW",
+        type: "Movie",
+    },
+
+    {
+        title: "13 Going on 30",
+        image: "https://image.tmdb.org/t/p/w500/iNZdSIfhSCMtRILDNyhLn8UKeSG.jpg",
+        folderid: "1hOyFlkYA9O0ZGAnS1-mPAE7Ciu5pXQA6",
+        type: "Movie",
+    },
+
+    {
         title: "Final Destination",
         image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fd%2Fgracenote%2Fd2c7e83829339ee28562c6f0937da068.jpg",
         folderid: "1lRV1ke7iap-Nbgj2rmYfpQNHZ4JO9c1D",
