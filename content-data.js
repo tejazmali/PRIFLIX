@@ -330,6 +330,13 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Grave of the Fireflies",
+        image: "https://image.tmdb.org/t/p/w500/k9tv1rXZbOhH7eiCk378x61kNQ1.jpg",
+        folderid: "1RT4l5niGGt91NpOheuI8x2Y5lZm5aKwT",
+        type: "Movie",
+    },
+
+    {
         title: "Mean Girls",
         image: "https://image.tmdb.org/t/p/w500/fbbj3viSUDEGT1fFFMNpHP1iUjw.jpg",
         folderid: "14fcOy1gFEBmwycNcDyMVzM1Le3kZJPGW",
