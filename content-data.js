@@ -584,6 +584,13 @@ const contentData = [//add content detail here
         folderid: "1JB3aP5C8FWvc18ahowXKaYAwxX4seYUE",
         type: "Movie",
     },
+    
+    {
+        title: "The Artful Dodger",
+        image: "https://image.tmdb.org/t/p/w500/g3y1v3c7nLGZBaxWSxv3i4yV9bc.jpg",
+        folderid: "1iV3gfSEtuq3BnHqq7zf5xS1-dJiXEQgV",
+        type: "Series",
+    },
 
     {
         title: "The Queen's Gambit",
