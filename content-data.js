@@ -335,7 +335,12 @@ const contentData = [//add content detail here
         folderid: "1tUqIetFMyz6qqimaxqCpQQgvDuD3yaBK",
         type: "Cartoon series",
     },
-
+{
+        title: "Ratsasan",
+        image: "https://image.tmdb.org/t/p/w500/mA0RseJsBNTUi00C1Bs0Wi9XOKQ.jpg",
+        folderid: "1vIx8MJS3deaDg8WxX8neIVL0B6O9IFEa",
+        type: "Movie",
+    },
    
 
     {
