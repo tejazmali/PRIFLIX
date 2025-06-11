@@ -335,6 +335,14 @@ const contentData = [//add content detail here
         folderid: "1tUqIetFMyz6qqimaxqCpQQgvDuD3yaBK",
         type: "Cartoon series",
     },
+
+    {
+        title: "The Maze Runner",
+        image: "https://image.tmdb.org/t/p/w500/ode14q7WtDugFDp78fo9lCsmay9.jpg",
+        folderid: "1rDHrGvxmOF6d1lTpC6vRqxMQgDqabNgO",
+        type: "Movie",
+    },
+    
 {
         title: "Ratsasan",
         image: "https://image.tmdb.org/t/p/w500/mA0RseJsBNTUi00C1Bs0Wi9XOKQ.jpg",
