@@ -349,6 +349,21 @@ const contentData = [//add content detail here
         folderid: "1rDHrGvxmOF6d1lTpC6vRqxMQgDqabNgO",
         type: "Movie",
     },
+
+    {
+        title: "Maze Runner The Scorch Trials ",
+        image: "https://image.tmdb.org/t/p/w500/mYw7ZyejqSCPFlrT2jHZOESZDU3.jpg",
+        folderid: "1K39jb6LRGLUMs7y1veuFodVSIVRdTso5",
+        type: "Movie",
+    },
+
+    {
+        title: "Maze Runner- The Death Cure ",
+        image: "https://image.tmdb.org/t/p/w500/drbERzlA4cuRWhsTXfFOY4mRR4f.jpg",
+        folderid: "1IAJfI4-Re1SD2-KIH8mhu10GKhy5T5yl",
+        type: "Movie",
+    },
+
     
 {
         title: "Ratsasan",
