@@ -211,6 +211,13 @@ const contentData = [//add content detail here
         type: "Cartoon movies",
     },
 
+{
+        title: "Shinchan The Adult Empire Strikes Back",
+        image: "https://image.tmdb.org/t/p/w500/heJkgOCx4pHqdooYA1h7B65ghvf.jpg",
+        folderid: "1YNUU4h9Thx-0u7NpgpZ2nAiS1hVSeY1e",
+        type: "Cartoon movies",
+    },
+
       {
         title: "Shin-chan Our Dinosaur Diary",
         image: "https://image.tmdb.org/t/p/w500/n7YcOeqPOmvQ2PUatn4UqV5YStj.jpg",
