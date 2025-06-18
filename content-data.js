@@ -626,6 +626,13 @@ const contentData = [//add content detail here
         folderid: "1JB3aP5C8FWvc18ahowXKaYAwxX4seYUE",
         type: "Movie",
     },
+
+    {
+        title: "The Traitors",
+        image: "https://image.tmdb.org/t/p/w500/82gKEb78UPkYAMjXLSswwVzpCbI.jpg",
+        folderid: "1or5vRAlkB7COLjg8GJ8a6TeZm09D-RpU",
+        type: "Series",
+    },
     
     {
         title: "The Artful Dodger",
