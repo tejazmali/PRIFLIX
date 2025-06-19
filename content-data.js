@@ -104,6 +104,13 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Suzume",
+        image: "https://image.tmdb.org/t/p/w500/yStW1TXF5s7Tbtu9KjIZEaWl6HL.jpg",
+        folderid: "1LuR5nA2Z5lUkbCw2YrC23eP6m0SZw8mc",
+        type: "Anime",
+    },
+
+    {
         title: "Chainsaw Man",
         image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsB2DASpJtfnTs7iK3RqkUMFVDEa.jpg",
         folderid: "1CWvtYeape06QkNlG6D6z1wC_MFU_JRjC",
