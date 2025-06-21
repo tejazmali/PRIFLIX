@@ -358,6 +358,20 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Fantastic Four Rise of the Silver Surfer",
+        image: "https://image.tmdb.org/t/p/w500/f3ldtPF7SESMcyAIyIJHBLlBBkr.jpg",
+        folderid: "1FR1QfqMckuNk_PPT7-U38P22_NodsBZM",
+        type: "Movie",
+    },
+
+    {
+        title: "Fantastic Four 2015",
+        image: "https://image.tmdb.org/t/p/w500/cDroz5qSlP8xZ6tOpeYoPkBvKyL.jpg",
+        folderid: "1n0YSN4i8sop4F-SKFLZ5fqYvc1Eezbo7",
+        type: "Movie",
+    },
+
+    {
         title: "The Maze Runner",
         image: "https://image.tmdb.org/t/p/w500/ode14q7WtDugFDp78fo9lCsmay9.jpg",
         folderid: "1rDHrGvxmOF6d1lTpC6vRqxMQgDqabNgO",
@@ -433,6 +447,13 @@ const contentData = [//add content detail here
         title: "Final Destination 5",
         image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2Fb%2Fgracenote%2Fbbd879d4fbd85749fcef7c06df3f8bb7.jpg",
         folderid: "1jcHd31KnogTyv2Za4bll0G7JZhWVymkI",
+        type: "Movie",
+    },
+
+    {
+        title: "Final Destination Bloodlines ",
+        image: "https://image.tmdb.org/t/p/w500/6WxhEvFsauuACfv8HyoVX6mZKFj.jpg",
+        folderid: "1IXAWULS7hP7PtIb4KvB-GrA5XIrGS_Rl",
         type: "Movie",
     },
 
