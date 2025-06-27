@@ -881,6 +881,22 @@ const contentData = [//add content detail here
         folderid: "1sb-6eFryvMf9mh7tNko_ZzIPuc4q0hUI",
         type: "Series",
     },
+
+  {
+        title: "Squid Game",
+        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FeaX4og886CWqsAMgHiCCveZNKsV.jpg",
+        folderid: "1-o_3Zs6Ko1hyHkCFJt5QKz3ZQswLLBi3",
+        type: "Series",
+    },
+
+      {
+        title: "Squid Game",
+        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FeaX4og886CWqsAMgHiCCveZNKsV.jpg",
+        folderid: "1PGNRpr0_MfAs9NU_dAI_1DfHcHytTwpI",
+        type: "Series",
+    },
+
+
     {
         title: "Alice in Borderland",
         image:
