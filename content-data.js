@@ -889,14 +889,6 @@ const contentData = [//add content detail here
         type: "Series",
     },
 
-      {
-        title: "Squid Game",
-        image: "https://images.plex.tv/photo?size=medium-240&scale=2&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FeaX4og886CWqsAMgHiCCveZNKsV.jpg",
-        folderid: "1PGNRpr0_MfAs9NU_dAI_1DfHcHytTwpI",
-        type: "Series",
-    },
-
-
     {
         title: "Alice in Borderland",
         image:
