@@ -356,6 +356,12 @@ const contentData = [//add content detail here
         folderid: "1tUqIetFMyz6qqimaxqCpQQgvDuD3yaBK",
         type: "Cartoon series",
     },
+{
+        title: "Sherlock Holmes ",
+        image: "https://image.tmdb.org/t/p/w500/fvnu6QHyR0gSV1JI6lMyXCny21a.jpg",
+        folderid: "1FDNizSve6RSu2fiuOe7MypFzulnSd24z",
+        type: "Movie",
+    },
 
     {
         title: "Fantastic Four Rise of the Silver Surfer",
