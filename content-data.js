@@ -356,6 +356,13 @@ const contentData = [//add content detail here
         folderid: "1tUqIetFMyz6qqimaxqCpQQgvDuD3yaBK",
         type: "Cartoon series",
     },
+
+    {
+        title: "Chhorii 2 ",
+        image: "https://image.tmdb.org/t/p/w500/mCgKANxZJW645pXdmJdBb4ysRPk.jpg",
+        folderid: "1hOzGDgIMPff1Tpd43Vf3EomEwklqvtCQ",
+        type: "Movie",
+    },
 {
         title: "Sherlock Holmes ",
         image: "https://image.tmdb.org/t/p/w500/fvnu6QHyR0gSV1JI6lMyXCny21a.jpg",
