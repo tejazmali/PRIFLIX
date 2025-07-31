@@ -358,6 +358,28 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "The Conjuring",
+        image: "https://image.tmdb.org/t/p/w500/wVYREutTvI2tmxr6ujrHT704wGF.jpg",
+        folderid: "1wCZ2gK_7-LUZgB-LGjod4Ror3y98tism",
+        type: "Movie",
+    },
+
+    {
+        title: "The Conjuring 2",
+        image: "https://image.tmdb.org/t/p/w500/zEqyD0SBt6HL7W9JQoWwtd5Do1T.jpg",
+        folderid: "14slX5fEQvSU5y4Dto32h4a0WkPFxhbFu",
+        type: "Movie",
+    },
+
+    {
+        title: "The Conjuring: The Devil Made Me Do It",
+        image: "https://image.tmdb.org/t/p/w500/xbSuFiJbbBWCkyCCKIMfuDCA4yV.jpg",
+        folderid: "12BH8SIczXQXaJ0_SCtAJXXAA_Bv8sWz0",
+        type: "Movie",
+    },
+
+
+    {
         title: "Chhorii 2 ",
         image: "https://image.tmdb.org/t/p/w500/mCgKANxZJW645pXdmJdBb4ysRPk.jpg",
         folderid: "1hOzGDgIMPff1Tpd43Vf3EomEwklqvtCQ",
