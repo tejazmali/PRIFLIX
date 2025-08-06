@@ -690,6 +690,13 @@ const contentData = [//add content detail here
         type: "Movie",
     },
 
+{
+        title: "Wednesday",
+        image: "https://image.tmdb.org/t/p/w500/kKwy8QiXyQocbDj4haUG0uD1SbF.jpg",
+        folderid: "1R2pkYSmJseZ1-8Oqf3TI9E_i5RmSg2X5",
+        type: "Series",
+    },
+
     {
         title: "MH370 The Plane That Disappeared",
         image: "https://image.tmdb.org/t/p/w500/n16M7juqhFpX7Ti3z1fHywjgmZk.jpg",
