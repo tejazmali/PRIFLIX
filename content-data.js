@@ -358,6 +358,13 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "The Substance",
+        image: "https://image.tmdb.org/t/p/w500/q6HjZlvyKxYmhlRhnnxeyudzK9A.jpg",
+        folderid: "18FIMOz-J77OBiwQZiOo6D08cH9JHbXRc",
+        type: "Movie",
+    },
+
+    {
         title: "The Conjuring",
         image: "https://image.tmdb.org/t/p/w500/wVYREutTvI2tmxr6ujrHT704wGF.jpg",
         folderid: "1wCZ2gK_7-LUZgB-LGjod4Ror3y98tism",
