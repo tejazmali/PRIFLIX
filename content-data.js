@@ -358,6 +358,13 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "Veronica",
+        image: "https://image.tmdb.org/t/p/w500/xHP6mYLQKbJY9pg99PGoGKmmBZX.jpg",
+        folderid: "1AiA7E2LT7901fnfBIPAcdYM9jV66YYs7",
+        type: "Movie",
+    },
+
+    {
         title: "The Substance",
         image: "https://image.tmdb.org/t/p/w500/q6HjZlvyKxYmhlRhnnxeyudzK9A.jpg",
         folderid: "18FIMOz-J77OBiwQZiOo6D08cH9JHbXRc",
