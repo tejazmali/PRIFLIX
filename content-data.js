@@ -704,7 +704,30 @@ const contentData = [//add content detail here
         type: "Movie",
     },
 
-{
+    {
+        title: "Gutur Gu",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FqaFl1gFFmN2q5EqqH2KLU11yuQV.jpg",
+        folderid: "1DfvAZZYep7ATIBTsCh7B5juUidSP6UJO",
+        type: "Series",
+    },
+
+    {
+        title: "Gutur Gu",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F61Q4Gg5PuY5QzIVYGK90FKFavGW.jpg",
+        folderid: "1p3k53AnW_LWUAzKjRne5FZOZ2WET5USC",
+        type: "Series",
+    },
+
+    {
+        title: "Gutur Gu",
+        image: "https://images.plex.tv/photo?size=medium-360&scale=1&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fki5i84HYWw78O5kaMHgRjzxmWVJ.jpg",
+        folderid: "1q0JswQvtR4-1KfuZSLc3jzxTHlY7EVex",
+        type: "Series",
+    },
+
+
+
+    {
         title: "Wednesday",
         image: "https://image.tmdb.org/t/p/w500/kKwy8QiXyQocbDj4haUG0uD1SbF.jpg",
         folderid: "1R2pkYSmJseZ1-8Oqf3TI9E_i5RmSg2X5",
