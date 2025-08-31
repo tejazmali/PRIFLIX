@@ -358,6 +358,20 @@ const contentData = [//add content detail here
     },
 
     {
+        title: "F1",
+        image: "https://image.tmdb.org/t/p/w500/tLMG65ZpCbC64aPaXGoCgPPLwb4.jpg",
+        folderid: "1XSOCQgnurtB-VPrrr_SNoOF2hAlrJYl4",
+        type: "Movie",
+    },
+
+    {
+        title: "Weapons",
+        image: "https://image.tmdb.org/t/p/w500/cpf7vsRZ0MYRQcnLWteD5jK9ymT.jpg",
+        folderid: "1XSOCQgnurtB-VPrrr_SNoOF2hAlrJYl4",
+        type: "Movie",
+    },
+
+    {
         title: "Veronica",
         image: "https://image.tmdb.org/t/p/w500/xHP6mYLQKbJY9pg99PGoGKmmBZX.jpg",
         folderid: "1AiA7E2LT7901fnfBIPAcdYM9jV66YYs7",
